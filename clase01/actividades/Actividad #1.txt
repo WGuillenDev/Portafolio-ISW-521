@@ -1,0 +1,95 @@
+Actividad #1
+
+Escenario: 
+La UTN San Carlos quiere lanzar un sistema de notas en línea. El Rector le dice al equipo de TI: "Pongan eso en Internet". El director de TI
+responde: "Técnicamente, lo pondríamos en la Web. Y necesitamos decidir si es WWW pública o no".
+}
+Pregunta Análisis: 
+1. ¿Es correcto lo que dijo el Rector? ¿Por qué la distinción del director de TI es técnicamente importante?
+Si es correcto, pero "podemos tener diferentes perspectivas con respeto lo que comentó el Rector, es decir internet se refiere a un concepto muy general(infraestructura), en cambio al referirse a "www" lo que es un servicio especifico de internet via web. Pero debemos considerar que un sistema de notas en línea tiene que ser seguro, ya que cualquier persona malintencionada puede obtener datos confidenciales a través  de una vulnerabilidad del sistema, entonces la verdadera pregunta puede ser ¿Sera web publica o privada?
+
+2.Si usan HTTP sobre Internet pero solo para usuarios internos de la UTN, ¿están usando Internet o la WWW, o ambos?
+Sí, están usando ambos porque en sí, en internet el protocolo http viaja por TCP/IP, los datos son transmitidos a través de la red global pero en cambio en la parte de la Web, "se utiliza el protocolo legítimo HTTP lo que define como funciona la web.
+
+3. ¿Qué organismo (W3C o IETF) define los estándares más relevantes para este sistema de notas? Justifica.
+Podemos decir que ambos, mirándolo en dos perspectivas IETF = HTTP/HTTPS, TLS, DNS, TCP/IP (sin esto no funciona), W3C = HTML, CSS, JavaScript, WCAG → Frontend (sin esto no se usa), en realidad, IETF tiene un mayor peso, porque sin él, el servidor no se comunica de manera segura, lo cual es un requerimiento clave en un sistema de notas.
+
+Actividad #2
+Caso: 
+La Municipalidad de Aguas Zarcas te contrata como consultor de TI. Tienen tres necesidades:
+(A) Un sitio de información pública con trámites para vecinos.
+(B) Un sistema interno de gestión de planillas para RRHH.
+(C) Un portal donde las empresas constructoras del cantón revisan permisos de construcción activos.
+
+Preguntas Análisis: 
+1. Para cada necesidad (A, B, C), decide qué topología implementar: Internet, Intranet o Extranet. Justifica en 2 líneas cada una.
+A: "Esta sería accesible para vecinos externos sin una cuenta previa, para información publica y tramites en línea
+B: Solo para RRHH interno, ya que son datos mas sensible de planillas, acceso por una VPN.
+C: En esta sección sería para un acceso con previa autenticación para aquellos constructores externos autorizados que contengan una relación formal ante la Municipalidad, como permisos etc.
+
+2.¿Cuál de los tres sistemas requiere más inversión en seguridad? ¿Por qué?
+Se puede decir que entre Extranet e Intranet,  ya que en Intranet: Son los datos sensibles protegidos como salarios de empleados, el riesgo es alto. Extranet expone información importante a tercero externos, igualmente es un gran riesgo, pero en cambio en internet, igual se requiere protección, pero el acceso no autorizado es menor, e igual son datos públicos.
+
+3. Podría un mismo servidor físico alojar los tres sistemas de forma segura? ¿Cómo lo lograrías conceptualmente?
+Si por medio de máquinas virtuales o contenedores pero con una segmentación de red y servicio aislado, pero no seria optimo porque si falla el servidor físico local todo se cae.
+
+Actividad #3
+
+Parte A: Analiza esta URL real y describe cada componente.
+https://api.github.com:443/repos/bryancs/isw521/issues?state=open&labels=semana1#comentarios
+
+Preguntas:
+¿Cuántos componentes identificás? Nómbralos con su valor exacto de esta URL.
+Protocolo: https
+Dominio: api.github.com
+Puerto: 443
+Ruta: /repos/bryancs/isw521/issues
+Query String: state=open&labels=semanal
+comentarios: comentarios
+Total: 6 componentes
+
+Página del curso ISW-521, cuatrimestre 2026-II, sede San Carlos
+https://cursos/isw521/2026-ii/san-carlos
+
+Perfil de un estudiante con carné 2022-0001:
+https://estudiantes/perfil/2022-0001
+
+Lista de materiales de la semana 3 del curso ISW-521:
+https://cursos/isw521/materiales/semana-7
+
+Actividad#4
+
+Preguntas: 
+1. Para cada URL: identifica el TLD, el SLD y el subdominio (si lo hay). ¿Cuáles son ccTLDs y cuáles gTLDs?
+URL                        TLD                      SLD                      Subdominio 
+
+campus.utn.ac.cr          .cr (país)               utn.ac                     campus
+
+www.netflix.com		  .com (genérico)	  Netflix		       www
+
+api.github.io	          .io (genérico de facto)  GitHub		       api
+
+app.maravilla.co.cr       .cr (país)               maravilla.co                app
+
+
+2.¿Quién administra el TLD .cr? ¿Y el .com? ¿Necesitás ICANN para registrar un subdominio?
+El TLD .cr lo administra NIC Costa Rica.
+El TLD .com lo administra VeriSign (empresa privada bajo supervisión ICANN).
+Para crear un subdominio (como estudiantesRegulares.utn.ac.cr), no se necesita pagar a nadie externo. Solo se configura el panel DNS de tu proveedor.
+
+3. Si la UTN quisiera crear un portal de egresados en egresados.utn.ac.cr, ¿necesita pagar a un registrar? ¿Por qué?
+No cuesta nada. La UTN ya tiene registrado utn.ac.cr. El subdominio egresados es una decisión interna que se configura en el servidor DNS sin pagar a un registrador.
+
+4. ¿Qué diferencia hay entre un registro A y un registro CNAME en DNS? (Investigación rápida si no lo sabés)
+Registro A: Conecta un nombre directamente a una dirección IP.
+Ejemplo: campus.utn.ac.cr → 192.168.1.100
+Registro CNAME: Crea un alias que apunta a otro nombre de dominio.
+Ejemplo: www.utn.ac.cr → utn.ac.cr 
+Como podemos ver el CNAME puede economizar direcciones IP y permite multiples nombres para un mismo servicio
+
+LINK REPOSITORIO DE GITHUB:https://github.com/WGuillenDev/Portafolio-ISW-521
+ESTUDIANTE: WILBERTH GUILLERMO GUILLEN AGUILAR
+GRUPO: 03
+
+
+
