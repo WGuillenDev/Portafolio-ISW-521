@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<!-- RESTRICCIÓN 9: lang="es" en <html> -->
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feria Nacional de Innovación Estudiantil 2025 — ITCR</title>
+    <style>
+        /* Estilos originales preservados + selectores renombrados para los nuevos elementos semánticos */
+        body        { font-family: Georgia, serif; margin: 0; padding: 0; background: #f5f5f0; color: #1a1a1a; }
+
+        /* RESTRICCIÓN 1: selectores actualizados al elemento semántico correspondiente */
+        header      { background: #1a472a; color: white; padding: 24px; text-align: center; }
+        header p    { margin: 4px 0; }
+
+        nav         { background: #2d6a4f; padding: 10px; }
+        nav a       { color: white; margin: 0 12px; text-decoration: none; }
+        nav a:hover,
+        nav a:focus { text-decoration: underline; outline: 2px solid #fff; outline-offset: 2px; }
+
+        main        { padding: 24px; max-width: 1100px; margin: auto; }
+
+        footer      { background: #1a472a; color: white; padding: 16px; text-align: center; }
+        footer p    { margin: 4px 0; }
+
+        /* Tarjeta: usada por section, article y div genérico donde aplica */
+        .tarjeta    { background: white; border: 1px solid #ccc; padding: 18px; margin: 14px 0; border-radius: 4px; }
+
+        /* Tabla */
+        table       { width: 100%; border-collapse: collapse; }
+        caption     { font-weight: bold; text-align: left; padding: 6px 0; color: #1a472a; }
+        td, th      { border: 1px solid #bbb; padding: 9px; }
+        th          { background: #2d6a4f; color: white; }
+        tfoot td    { font-weight: bold; background: #eef4ef; }
+
+        /* Formulario */
+        fieldset    { border: 1px solid #ccc; border-radius: 4px; padding: 14px 18px; margin: 14px 0; }
+        legend      { font-weight: bold; padding: 0 6px; color: #1a472a; }
+        label       { display: block; margin-top: 12px; margin-bottom: 2px; font-weight: bold; font-size: 0.92rem; }
+        input[type="text"],
+        input[type="email"],
+        input[type="tel"],
+        select,
+        textarea    { width: 100%; padding: 9px; margin: 4px 0 0 0; box-sizing: border-box;
+                      border: 1px solid #bbb; border-radius: 3px; font-family: inherit; font-size: 0.95rem; }
+        input[type="text"]:focus,
+        input[type="email"]:focus,
+        input[type="tel"]:focus,
+        select:focus,
+        textarea:focus { outline: 2px solid #2d6a4f; outline-offset: 1px; }
+
+        /* Checkboxes */
+        .campo-check        { display: flex; align-items: flex-start; gap: 8px; margin-top: 12px; }
+        .campo-check input  { width: auto; margin-top: 3px; flex-shrink: 0; }
+        .campo-check label  { font-weight: normal; margin: 0; }
+
+        /* Botón */
+        .boton      { background: #2d6a4f; color: white; padding: 10px 22px; border: none;
+                      cursor: pointer; border-radius: 3px; font-size: 1rem; margin-top: 16px; }
+        .boton:hover,
+        .boton:focus { background: #1a472a; outline: 2px solid #1a472a; outline-offset: 2px; }
+
+        /* Proyectos: lista sin estilo para los <article> */
+        .lista-proyectos     { list-style: none; padding: 0; margin: 0; }
+
+        /* Video */
+        video               { display: block; width: 100%; border-radius: 3px; }
+        .video-nota         { font-size: 0.88rem; color: #555; margin-top: 6px; }
+
+        /* iframe */
+        iframe              { display: block; border: 0; border-radius: 3px; margin-top: 12px; }
+
+        /* Contacto */
+        address             { font-style: normal; margin: 14px 0; }
+        address h3          { margin-top: 0; }
+    </style>
+</head>
+<body>
+
+    <!-- ═══════════════════════════════════════════════════════════════
+         RESTRICCIÓN 1 — <div class="encabezado"> → <header>
+    ═══════════════════════════════════════════════════════════════ -->
+    <header>
+        <!-- RESTRICCIÓN 10 — único <h1> del documento, nivel raíz -->
+        <h1>Feria Nacional de Innovación Estudiantil 2025</h1>
+        <p>ITCR Campus Cartago · 22, 23 y 24 de Octubre 2025</p>
+        <p>Creando soluciones para los retos del mañana</p>
+    </header>
+
+    <!-- RESTRICCIÓN 1 — <div class="menu"> → <nav> -->
+    <nav aria-label="Navegación principal">
+        <a href="#inicio">Inicio</a>
+        <a href="#proyectos">Proyectos</a>
+        <a href="#agenda">Agenda</a>
+        <a href="#inscripcion">Inscripción</a>
+        <a href="#sede">Sede</a>
+    </nav>
+
+    <!-- RESTRICCIÓN 1 — <div class="contenido"> → <main> -->
+    <main>
+
+        <!-- ── Sección: Acerca de la Feria ──────────────────────────
+             RESTRICCIÓN 1: <div id="inicio"> → <section>
+             RESTRICCIÓN 10: <h2> como título de sección (nivel 2)
+        ─────────────────────────────────────────────────────────── -->
+        <section id="inicio" class="tarjeta" aria-labelledby="h2-acerca">
+            <h2 id="h2-acerca">Acerca de la Feria</h2>
+            <p>
+                La Feria Nacional de Innovación Estudiantil es el espacio anual donde estudiantes
+                de todo el país presentan sus proyectos de investigación aplicada, prototipos tecnológicos
+                y propuestas de emprendimiento ante un jurado de expertos nacionales e internacionales.
+            </p>
+            <p>
+                Esta edición centra su atención en cuatro categorías: Robótica y Automatización,
+                Biotecnología, Ciudades Inteligentes y Economía Circular.
+            </p>
+        </section>
+
+        <!-- ── Sección: Video ────────────────────────────────────────
+             RESTRICCIÓN 1: <div> → <section>
+             RESTRICCIÓN 5: controls, poster, segunda fuente WebM
+             RESTRICCIÓN 10: <h2> de sección
+        ─────────────────────────────────────────────────────────── -->
+        <section class="tarjeta" aria-labelledby="h2-video">
+            <h2 id="h2-video">Video de Presentación</h2>
+
+            <!-- RESTRICCIÓN 5:
+                 - poster="img/portada-video.jpg"
+                 - atributo controls presente
+                 - <source> WebM añadida ANTES del cierre </video>
+                   (WebM primero: mejor compresión, soporte nativo en Chromium/Firefox)
+            -->
+            <video
+                controls
+                poster="img/portada-video.jpg"
+                width="100%"
+                aria-label="Video de presentación de la Feria Nacional de Innovación Estudiantil 2025">
+                <source src="video/feria_presentacion.webm" type="video/webm">
+                <source src="video/feria_presentacion.mp4"  type="video/mp4">
+                <p>Su navegador no soporta video HTML5.
+                   <a href="video/feria_presentacion.mp4">Descargue el video aquí</a>.
+                </p>
+            </video>
+            <p class="video-nota">Si el video no carga, verifique su conexión a internet.</p>
+        </section>
+
+        <!-- ── Sección: Proyectos Finalistas ────────────────────────
+             RESTRICCIÓN 1: <div id="proyectos"> → <section>
+             RESTRICCIÓN 1: cada proyecto → <article> dentro de <ul><li>
+             RESTRICCIÓN 10: títulos de proyecto → <h3> (sub-nivel de <h2>)
+        ─────────────────────────────────────────────────────────── -->
+        <section id="proyectos" class="tarjeta" aria-labelledby="h2-proyectos">
+            <h2 id="h2-proyectos">Proyectos Finalistas</h2>
+
+            <ul class="lista-proyectos">
+
+                <li>
+                    <!-- RESTRICCIÓN 1: <div class="tarjeta"> → <article> -->
+                    <article class="tarjeta">
+                        <!-- RESTRICCIÓN 10: <h3> subtítulo dentro de la sección <h2> -->
+                        <h3>EcoSensor Pro</h3>
+                        <p><strong>Equipo:</strong> Universidad de Costa Rica — Ingeniería Eléctrica</p>
+                        <p>
+                            Sistema de monitoreo ambiental de bajo costo para comunidades rurales,
+                            basado en microcontroladores ESP32 y red de sensores IoT.
+                        </p>
+                    </article>
+                </li>
+
+                <li>
+                    <article class="tarjeta">
+                        <h3>BioFiltro Urbano</h3>
+                        <p><strong>Equipo:</strong> TEC Campus San José — Ingeniería Ambiental</p>
+                        <p>
+                            Prototipo de filtro biológico modular para la recuperación de agua gris
+                            en edificios residenciales de alta densidad urbana.
+                        </p>
+                    </article>
+                </li>
+
+                <li>
+                    <article class="tarjeta">
+                        <h3>AgroBot CR</h3>
+                        <p><strong>Equipo:</strong> UNA Heredia — Agronomía e Informática</p>
+                        <p>
+                            Robot autónomo de bajo costo para detección temprana de enfermedades
+                            en cultivos de piña y banano usando visión computacional.
+                        </p>
+                    </article>
+                </li>
+
+            </ul>
+        </section>
+
+        <!-- ── Sección: Agenda ───────────────────────────────────────
+             RESTRICCIÓN 1: <div id="agenda"> → <section>
+             RESTRICCIÓN 8: <caption>, <thead>, <tbody>, <tfoot>, scope="col"
+             RESTRICCIÓN 10: <h2> de sección
+        ─────────────────────────────────────────────────────────── -->
+        <section id="agenda" class="tarjeta" aria-labelledby="h2-agenda">
+            <h2 id="h2-agenda">Agenda del Evento</h2>
+
+            <table>
+                <!-- RESTRICCIÓN 8: <caption> como primer hijo de <table> -->
+                <caption>Agenda de la Feria Nacional de Innovación Estudiantil 2025</caption>
+
+                <!-- RESTRICCIÓN 8: <thead> con scope="col" en todos los <th> -->
+                <thead>
+                    <tr>
+                        <th scope="col">Hora</th>
+                        <th scope="col">Miércoles 22 Oct</th>
+                        <th scope="col">Jueves 23 Oct</th>
+                        <th scope="col">Viernes 24 Oct</th>
+                    </tr>
+                </thead>
+
+                <!-- RESTRICCIÓN 8: filas de datos en <tbody> -->
+                <tbody>
+                    <tr>
+                        <td>7:30 - 8:30</td>
+                        <td>Registro y acreditación</td>
+                        <td>Apertura de sala</td>
+                        <td>Apertura de sala</td>
+                    </tr>
+                    <tr>
+                        <td>8:30 - 10:00</td>
+                        <td>Ceremonia inaugural</td>
+                        <td>Ronda de evaluación — Categoría A y B</td>
+                        <td>Ronda final — Proyectos seleccionados</td>
+                    </tr>
+                    <tr>
+                        <td>10:00 - 10:30</td>
+                        <td>Receso</td>
+                        <td>Receso</td>
+                        <td>Receso</td>
+                    </tr>
+                    <tr>
+                        <td>10:30 - 12:00</td>
+                        <td>Montaje de stands y exposición libre</td>
+                        <td>Ronda de evaluación — Categoría C y D</td>
+                        <td>Deliberación del jurado</td>
+                    </tr>
+                    <tr>
+                        <td>12:00 - 13:30</td>
+                        <td>Almuerzo</td>
+                        <td>Almuerzo</td>
+                        <td>Almuerzo de gala</td>
+                    </tr>
+                    <tr>
+                        <td>13:30 - 15:30</td>
+                        <td>Talleres de pitch y presentación</td>
+                        <td>Charlas de mentores e inversores</td>
+                        <td>Ceremonia de premiación</td>
+                    </tr>
+                    <tr>
+                        <td>15:30 - 17:00</td>
+                        <td>Sesión de networking</td>
+                        <td>Actividades culturales</td>
+                        <td>Cierre oficial</td>
+                    </tr>
+                </tbody>
+
+                <!-- RESTRICCIÓN 8: fila de totales en <tfoot>, no en <tbody> -->
+                <tfoot>
+                    <tr>
+                        <td>Total horas</td>
+                        <td>9 horas</td>
+                        <td>9 horas</td>
+                        <td>7 horas</td>
+                    </tr>
+                </tfoot>
+            </table>
+        </section>
+
+        <!-- ── Sección: Inscripción ──────────────────────────────────
+             RESTRICCIÓN 1: <div id="inscripcion"> → <section>
+             RESTRICCIÓN 2: exactamente 2 <fieldset>:
+                            "Datos del Equipo" y "Detalles del Proyecto"
+             RESTRICCIÓN 3: <label for="id"> vinculado a cada campo
+             RESTRICCIÓN 4: <select> carrera → <input list> + <datalist>
+             RESTRICCIÓN 9: type="submit" explícito en el botón
+             RESTRICCIÓN 10: <h2> de sección
+        ─────────────────────────────────────────────────────────── -->
+        <section id="inscripcion" class="tarjeta" aria-labelledby="h2-inscripcion">
+            <h2 id="h2-inscripcion">Formulario de Inscripción</h2>
+
+            <form action="#" method="post" novalidate>
+
+                <!-- RESTRICCIÓN 2 — Fieldset 1: Datos del Equipo
+                     Contiene: nombre proyecto, responsable, correo, teléfono -->
+                <fieldset>
+                    <legend>Datos del Equipo</legend>
+
+                    <!-- RESTRICCIÓN 3: for="nombre-proyecto" ↔ id="nombre-proyecto" -->
+                    <label for="nombre-proyecto">Nombre del equipo o proyecto</label>
+                    <input
+                        type="text"
+                        id="nombre-proyecto"
+                        name="nombre_proyecto"
+                        placeholder="Nombre oficial del proyecto"
+                        required
+                        autocomplete="organization">
+
+                    <!-- RESTRICCIÓN 3: for="responsable" ↔ id="responsable" -->
+                    <label for="responsable">Nombre del responsable principal</label>
+                    <input
+                        type="text"
+                        id="responsable"
+                        name="responsable"
+                        placeholder="Nombre y apellidos completos"
+                        required
+                        autocomplete="name">
+
+                    <!-- RESTRICCIÓN 3: for="correo" ↔ id="correo"
+                         type="email" en lugar de type="text" -->
+                    <label for="correo">Correo de contacto</label>
+                    <input
+                        type="email"
+                        id="correo"
+                        name="correo"
+                        placeholder="correo@institucion.ac.cr"
+                        required
+                        autocomplete="email">
+
+                    <!-- RESTRICCIÓN 3: for="telefono" ↔ id="telefono"
+                         type="tel" en lugar de type="text" -->
+                    <label for="telefono">Número de teléfono</label>
+                    <input
+                        type="tel"
+                        id="telefono"
+                        name="telefono"
+                        placeholder="XXXX-XXXX"
+                        pattern="\d{4}-\d{4}"
+                        autocomplete="tel">
+
+                </fieldset>
+
+                <!-- RESTRICCIÓN 2 — Fieldset 2: Detalles del Proyecto
+                     Contiene: institución, carrera, categoría, descripción, requerimientos -->
+                <fieldset>
+                    <legend>Detalles del Proyecto</legend>
+
+                    <!-- RESTRICCIÓN 3: for="institucion" ↔ id="institucion" -->
+                    <label for="institucion">Institución de procedencia</label>
+                    <select id="institucion" name="institucion" required>
+                        <option value="" disabled selected>Seleccione su institución</option>
+                        <option value="ucr">Universidad de Costa Rica (UCR)</option>
+                        <option value="tec">Instituto Tecnológico de CR (TEC)</option>
+                        <option value="una">Universidad Nacional (UNA)</option>
+                        <option value="utn">Universidad Técnica Nacional (UTN)</option>
+                        <option value="earth">Universidad EARTH</option>
+                        <option value="otra-publica">Otra institución pública</option>
+                        <option value="privada">Institución privada</option>
+                    </select>
+
+                    <!-- RESTRICCIÓN 3: for="carrera" ↔ id="carrera"
+                         RESTRICCIÓN 4: <select> eliminado → <input list> + <datalist id="lista-carreras">
+                         Las mismas opciones del <select> original se preservan como <option> en el datalist -->
+                    <label for="carrera">Carrera o programa académico</label>
+                    <input
+                        type="text"
+                        id="carrera"
+                        name="carrera"
+                        list="lista-carreras"
+                        placeholder="Escriba o seleccione su carrera"
+                        autocomplete="off">
+                    <datalist id="lista-carreras">
+                        <option value="Ingeniería en Computación">
+                        <option value="Ingeniería Eléctrica">
+                        <option value="Ingeniería Ambiental">
+                        <option value="Biotecnología">
+                        <option value="Diseño Industrial">
+                        <option value="Administración de Empresas">
+                        <option value="Agronomía">
+                        <option value="Arquitectura">
+                        <option value="Otra">
+                    </datalist>
+
+                    <!-- RESTRICCIÓN 3: for="categoria" ↔ id="categoria" -->
+                    <label for="categoria">Categoría de participación</label>
+                    <select id="categoria" name="categoria" required>
+                        <option value="" disabled selected>Seleccione una categoría</option>
+                        <option value="robotica">Robótica y Automatización</option>
+                        <option value="biotecnologia">Biotecnología</option>
+                        <option value="ciudades">Ciudades Inteligentes</option>
+                        <option value="economia">Economía Circular</option>
+                    </select>
+
+                    <!-- RESTRICCIÓN 3: for="descripcion" ↔ id="descripcion" -->
+                    <label for="descripcion">Descripción breve del proyecto</label>
+                    <textarea
+                        id="descripcion"
+                        name="descripcion"
+                        rows="4"
+                        placeholder="Describa en pocas líneas el problema que resuelve su proyecto..."
+                        required></textarea>
+
+                    <!-- RESTRICCIÓN 3: for="requerimientos" ↔ id="requerimientos" -->
+                    <label for="requerimientos">Requerimientos especiales para el stand</label>
+                    <textarea
+                        id="requerimientos"
+                        name="requerimientos"
+                        rows="2"
+                        placeholder="Electricidad, agua, internet, etc."></textarea>
+
+                </fieldset>
+
+                <!-- Declaraciones fuera de los dos fieldset obligatorios
+                     (la restricción 2 especifica exactamente 2 grupos con contenido definido)
+                     pero cada checkbox tiene su <label for> vinculado — RESTRICCIÓN 3 -->
+                <div class="campo-check">
+                    <input type="checkbox" id="originalidad" name="originalidad" required>
+                    <label for="originalidad">Confirmo que el proyecto es original y de nuestra autoría</label>
+                </div>
+
+                <div class="campo-check">
+                    <input type="checkbox" id="reglamento" name="reglamento" required>
+                    <label for="reglamento">Acepto el reglamento de la Feria Nacional de Innovación</label>
+                </div>
+
+                <!-- RESTRICCIÓN 9: type="submit" explícito -->
+                <button class="boton" type="submit">Enviar Inscripción</button>
+
+            </form>
+        </section>
+
+        <!-- ── Sección: Sede ─────────────────────────────────────────
+             RESTRICCIÓN 1: <div id="sede"> → <section>
+             RESTRICCIÓN 6: iframe con loading="lazy", sandbox, title exacto
+             RESTRICCIÓN 10: <h2> de sección
+        ─────────────────────────────────────────────────────────── -->
+        <section id="sede" class="tarjeta" aria-labelledby="h2-sede">
+            <h2 id="h2-sede">Sede del Evento</h2>
+            <address>
+                <p>ITCR Campus Central Cartago, Cartago, Costa Rica</p>
+                <p>Avenida 14, entre calles 5 y 7, frente al Estadio Fello Meza</p>
+            </address>
+
+            <!-- RESTRICCIÓN 6:
+                 - title="Mapa de ubicación del ITCR Campus Cartago"  (exacto)
+                 - loading="lazy"
+                 - sandbox="allow-scripts allow-same-origin"
+            -->
+            <iframe
+                title="Mapa de ubicación del ITCR Campus Cartago"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3929.4567891234!2d-83.9134567!3d9.8634567!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zOcKwNTEnNDguNCJOIDgzwrA1NCc0OC40Ilc!5e0!3m2!1ses!2scr!4v9876543210"
+                width="100%"
+                height="420"
+                loading="lazy"
+                sandbox="allow-scripts allow-same-origin"
+                referrerpolicy="no-referrer-when-downgrade"
+                allowfullscreen></iframe>
+        </section>
+
+        <!-- ── Sección: Contacto ─────────────────────────────────────
+             RESTRICCIÓN 1: <div> → <section>
+             RESTRICCIÓN 7: <span> que contenía bloques → <address>
+                            <a> que contenía <div> → reestructurado con inline
+             RESTRICCIÓN 10: <h2> de sección; <h3> subtítulo dentro de ella
+        ─────────────────────────────────────────────────────────── -->
+        <section class="tarjeta" aria-labelledby="h2-contacto">
+            <h2 id="h2-contacto">Contacto y Consultas</h2>
+            <p>Para consultas sobre inscripción, logística o alianzas estratégicas, comuníquese con la comisión organizadora:</p>
+
+            <!-- RESTRICCIÓN 7: <span> contenía <div> y <h3> (bloque en línea = ilegal)
+                 → reemplazado por <address> (elemento de bloque apropiado para contacto)
+                 RESTRICCIÓN 10: <h3> como subtítulo dentro de la sección <h2> -->
+            <address>
+                <h3>Secretaría de la Feria</h3>
+                <p><a href="mailto:feria.innovacion@itcr.ac.cr">feria.innovacion@itcr.ac.cr</a></p>
+                <p>Teléfono: <a href="tel:+506-2550-9000">2550-9000</a> ext. 3100</p>
+            </address>
+
+            <p>Síganos en redes sociales para actualizaciones en tiempo real:</p>
+
+            <!-- RESTRICCIÓN 7: <a> contenía <div> (bloque en línea = ilegal)
+                 → <a> ahora contiene únicamente contenido de línea (<strong> + <span>) -->
+            <p>
+                <a href="https://www.tec.ac.cr" target="_blank" rel="noopener noreferrer">
+                    <strong>Portal oficial del ITCR</strong> —
+                    <span>www.tec.ac.cr · Campus Cartago</span>
+                </a>
+            </p>
+
+        </section>
+
+    </main>
+
+    <!-- RESTRICCIÓN 1 — <div class="pie"> → <footer> -->
+    <footer>
+        <p>© 2025 Instituto Tecnológico de Costa Rica. Todos los derechos reservados.</p>
+        <p>Feria Nacional de Innovación Estudiantil</p>
+        <p>Organizado por la Vicerrectoría de Investigación y Extensión</p>
+    </footer>
+
+</body>
+</html>
