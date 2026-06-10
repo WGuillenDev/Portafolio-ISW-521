@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mini-proyecto Flexbox — ISW-521</title>
+  <style>
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      font-size: 14px;
+      background: #f5f5f5;
+      padding: 24px;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .layout-label {
+      font-size: 0.85rem;
+      color: #555;
+      margin-bottom: 8px;
+      align-self: flex-start;
+    }
+
+    /* Contenedor visual general */
+    .layout {
+      display: flex;
+      flex-direction: column;
+      width: 700px;
+      border: 2px solid #333;
+      background: #fff;
+    }
+
+    /* Cada bloque de layout */
+    .layout-block {
+      border: 2px solid #333;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      font-size: 0.85rem;
+      color: #222;
+      text-align: center;
+      padding: 8px;
+    }
+
+    /* ── NAVBAR ── */
+    nav.navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      border: 2px solid #333;
+      padding: 16px 24px;
+      height: 60px;
+      background: #fff;
+    }
+
+    .navbar__logo   { font-weight: bold; }
+    nav.navbar ul   { display: flex; gap: 20px; list-style: none; }
+    nav.navbar ul a { text-decoration: none; color: #222; }
+
+    .navbar__cta {
+      border: 2px solid #333;
+      background: #fff;
+      padding: 6px 16px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    /* ── BODY WRAPPER ── */
+    .body-wrapper {
+      display: flex;
+      flex-direction: row;
+      flex: 1;
+      min-height: 200px;
+    }
+
+    /* ── SIDEBAR flex:1 ── */
+    aside.sidebar {
+      flex: 1;
+      border: 2px solid #333;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+      text-align: center;
+    }
+
+    aside.sidebar p {
+      font-weight: bold;
+      font-size: 0.9rem;
+    }
+
+    aside.sidebar ul {
+      list-style: none;
+      margin-top: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      width: 100%;
+    }
+
+    aside.sidebar ul li {
+      font-size: 0.8rem;
+      padding: 4px 8px;
+      border: 1px solid #ccc;
+      border-radius: 3px;
+      text-align: left;
+    }
+
+    /* ── CONTENIDO flex:3 ── */
+    main.contenido {
+      flex: 3;
+      border: 2px solid #333;
+      padding: 20px 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    main.contenido h1 {
+      font-size: 0.9rem;
+      text-align: center;
+      font-weight: bold;
+    }
+
+    .articulos {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    article.entry {
+      border: 1px solid #ccc;
+      padding: 10px 12px;
+      font-size: 0.8rem;
+    }
+
+    article.entry h3 {
+      font-size: 0.8rem;
+      margin-bottom: 3px;
+    }
+
+    article.entry p { color: #555; }
+
+    /* ── PANEL flex:1 ── */
+    aside.panel {
+      flex: 1;
+      border: 2px solid #333;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+      text-align: center;
+    }
+
+    aside.panel p {
+      font-weight: bold;
+      font-size: 0.9rem;
+      margin-bottom: 12px;
+    }
+
+    aside.panel ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      width: 100%;
+    }
+
+    aside.panel ul li {
+      font-size: 0.75rem;
+      padding: 4px 8px;
+      border-bottom: 1px solid #ddd;
+      text-align: left;
+    }
+
+    /* ── FOOTER: 3 columnas flex:1 ── */
+    footer.footer {
+      display: flex;
+      border: 2px solid #333;
+      min-height: 70px;
+    }
+
+    .footer__col {
+      flex: 1;
+      border-right: 2px solid #333;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 12px;
+      text-align: center;
+      font-size: 0.8rem;
+    }
+
+    .footer__col:last-child { border-right: none; }
+
+    .footer__col strong {
+      font-size: 0.75rem;
+      display: block;
+      margin-bottom: 4px;
+    }
+
+  </style>
+</head>
+<body>
+
+  <p class="layout-label">Layout requerido:</p>
+
+  <div class="layout">
+
+    <!-- NAVBAR -->
+    <nav class="navbar" aria-label="Navegación principal">
+      <span class="navbar__logo">Logo</span>
+      <ul role="list">
+        <li><a href="#">Link 1</a></li>
+        <li><a href="#">Link 2</a></li>
+        <li><a href="#">Link 3</a></li>
+      </ul>
+      <button class="navbar__cta" type="button">Botón CTA</button>
+    </nav>
+
+    <!-- BODY WRAPPER -->
+    <div class="body-wrapper">
+
+      <!-- SIDEBAR flex:1 -->
+      <aside class="sidebar" aria-label="Sidebar">
+        <p>SIDEBAR<br>(flex:1)</p>
+        <ul role="list">
+          <li>Item 1</li>
+          <li>Item 2</li>
+          <li>Item 3</li>
+          <li>Item 4</li>
+        </ul>
+      </aside>
+
+      <!-- CONTENIDO flex:3 -->
+      <main class="contenido" id="contenido-principal">
+        <h1>CONTENIDO (flex:3)</h1>
+        <div class="articulos">
+          <article class="entry">
+            <h3>Actividad #1 — Flex vs Flujo Normal</h3>
+            <p>float, display:inline y margin collapsing son anulados en flex.</p>
+          </article>
+          <article class="entry">
+            <h3>Actividad #2 — Ejes en Flexbox</h3>
+            <p>justify-content y align-items actúan en ejes distintos.</p>
+          </article>
+          <article class="entry">
+            <h3>Actividad #3 — Bug de toolbar</h3>
+            <p>flex-direction:column invierte los ejes del contenedor.</p>
+          </article>
+          <article class="entry">
+            <h3>Actividad #4 — align-content</h3>
+            <p>align-content solo funciona con flex-wrap:wrap activo.</p>
+          </article>
+        </div>
+      </main>
+
+      <!-- PANEL flex:1 -->
+      <aside class="panel" aria-label="Panel">
+        <p>PANEL<br>(flex:1)</p>
+        <ul role="list">
+          <li>justify-content</li>
+          <li>align-items</li>
+          <li>align-content</li>
+          <li>flex-direction</li>
+          <li>flex-wrap</li>
+          <li>flex-basis</li>
+          <li>gap</li>
+        </ul>
+      </aside>
+
+    </div>
+
+    <!-- FOOTER: 3 columnas iguales -->
+    <footer class="footer" aria-label="Pie de página">
+      <div class="footer__col">
+        <strong>Columna 1</strong>
+        ISW-521 Web I<br>UTN San Carlos
+      </div>
+      <div class="footer__col">
+        <strong>Columna 2</strong>
+        Profesor
+      </div>
+      <div class="footer__col">
+        <strong>Columna 3</strong>
+        Estudiante
+      </div>
+    </footer>
+
+  </div>
+
+</body>
+</html>
