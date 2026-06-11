@@ -616,11 +616,11 @@ button {
     box-shadow: var(--sombra-lg);
 }
 
-.cobertura__mapa-imagen {
+.cobertura__mapa-iframe {
     width: 100%;
     height: 350px;
-    object-fit: cover;
-    object-position: center;
+    border-radius: var(--radio-xl);
+    display: block;
 }
 
 /* Pedidos */
