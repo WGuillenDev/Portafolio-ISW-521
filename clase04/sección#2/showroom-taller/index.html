@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Auto Style CR — Showroom Interactivo</title>
+  <meta name="description" content="Cotizador visual de servicios de pintura y enderezado para Toyota Corolla GR e Hilux 4x4 SR.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/palette.css">
+  <link rel="stylesheet" href="css/interactions.css">
+</head>
+
+<body>
+
+  <!--
+    Controles Radio Button Hack
+    REGLA ARQUITECTÓNICA: estos inputs deben ser hermanos directos del
+    .showroom-wrapper para que el selector CSS ~ funcione correctamente.
+    Nunca deben anidarse dentro de <form>, <header> ni <main>.
+  -->
+
+  <!-- Tema -->
+  <input class="radio-hidden" type="radio" name="app-theme" id="theme-dark" checked>
+  <input class="radio-hidden" type="radio" name="app-theme" id="theme-light" aria-label="Activar tema claro">
+
+  <!-- Modelo -->
+  <input class="radio-hidden" type="radio" name="car-model" id="model-corolla" checked>
+  <input class="radio-hidden" type="radio" name="car-model" id="model-hilux">
+
+  <!-- Ángulo -->
+  <input class="radio-hidden" type="radio" name="car-angle" id="angle-front" checked>
+  <input class="radio-hidden" type="radio" name="car-angle" id="angle-side">
+  <input class="radio-hidden" type="radio" name="car-angle" id="angle-rear">
+
+  <!-- Color -->
+  <input class="radio-hidden" type="radio" name="car-color" id="color-silver" checked>
+  <input class="radio-hidden" type="radio" name="car-color" id="color-red">
+  <input class="radio-hidden" type="radio" name="car-color" id="color-white">
+  <input class="radio-hidden" type="radio" name="car-color" id="color-black">
+  <input class="radio-hidden" type="radio" name="car-color" id="color-blue">
+  <input class="radio-hidden" type="radio" name="car-color" id="color-green">
+  <input class="radio-hidden" type="radio" name="car-color" id="color-orange">
+  <input class="radio-hidden" type="radio" name="car-color" id="color-gold">
+
+  <!-- Wrapper principal — receptor del tema vía selector ~ -->
+  <div class="showroom-wrapper">
+
+    <!-- Encabezado del sitio -->
+    <header class="site-header">
+      <div class="brand">
+        <div class="brand__icon" aria-hidden="true">🚗</div>
+        <h1 class="brand__name">
+          Auto <span class="brand__name--accent">Style</span> CR
+        </h1>
+      </div>
+
+      <div class="theme-toggle">
+        <!-- Label activo en modo oscuro → activa el tema claro -->
+        <label class="theme-toggle__label theme-toggle__label--to-light" for="theme-light">
+          <span class="theme-toggle__icon" aria-hidden="true">🌙</span>
+          <span class="theme-toggle__track">
+            <span class="theme-toggle__thumb"></span>
+          </span>
+          <span class="theme-toggle__text" aria-hidden="true">Oscuro</span>
+        </label>
+        <!-- Label activo en modo claro → regresa al tema oscuro -->
+        <label class="theme-toggle__label theme-toggle__label--to-dark" for="theme-dark">
+          <span class="theme-toggle__icon" aria-hidden="true">☀️</span>
+          <span class="theme-toggle__track">
+            <span class="theme-toggle__thumb"></span>
+          </span>
+          <span class="theme-toggle__text" aria-hidden="true">Claro</span>
+        </label>
+      </div>
+
+      <p class="site-header__tagline">Taller de Enderezado &amp; Pintura · San Carlos</p>
+    </header>
+
+    <!-- Showroom principal -->
+    <main class="showroom-grid">
+
+      <!-- Selector de modelo y ángulo -->
+      <aside class="zone-selector" aria-label="Selector de modelo y ángulo">
+
+        <section aria-labelledby="lbl-modelo">
+          <h2 class="selector__section-label" id="lbl-modelo">Modelo</h2>
+          <div class="selector__group" role="radiogroup" aria-labelledby="lbl-modelo">
+
+            <label class="model-btn model-btn--corolla" for="model-corolla">
+              <span class="model-btn__icon" aria-hidden="true">🚙</span>
+              <span>
+                <span class="model-btn__name">Corolla GR</span>
+                <span class="model-btn__sub">Sedán 2024</span>
+              </span>
+            </label>
+
+            <label class="model-btn model-btn--hilux" for="model-hilux">
+              <span class="model-btn__icon" aria-hidden="true">🛻</span>
+              <span>
+                <span class="model-btn__name">Hilux 4×4 SR</span>
+                <span class="model-btn__sub">Pickup 2024</span>
+              </span>
+            </label>
+
+          </div>
+        </section>
+
+        <section aria-labelledby="lbl-angulo">
+          <h2 class="selector__section-label" id="lbl-angulo">Ángulo de cámara</h2>
+          <div class="selector__group" role="radiogroup" aria-labelledby="lbl-angulo">
+
+            <label class="angle-btn angle-btn--front" for="angle-front">
+              <span class="angle-btn__icon" aria-hidden="true">⬆</span>
+              <span class="angle-btn__label">Frontal</span>
+            </label>
+
+            <label class="angle-btn angle-btn--side" for="angle-side">
+              <span class="angle-btn__icon" aria-hidden="true">➡</span>
+              <span class="angle-btn__label">Perfil lateral</span>
+            </label>
+
+            <label class="angle-btn angle-btn--rear" for="angle-rear">
+              <span class="angle-btn__icon" aria-hidden="true">⬇</span>
+              <span class="angle-btn__label">Trasera</span>
+            </label>
+
+          </div>
+        </section>
+
+      </aside>
+
+      <!-- Visualizador del vehículo -->
+      <section class="zone-vehicle" aria-label="Visualizador del vehículo">
+
+        <header class="vehicle-header">
+          <h2 class="vehicle-header__name">
+            <span class="sr-only">Modelo: </span>
+            <span class="vehicle-header__model-text"></span>
+          </h2>
+          <span class="vehicle-header__badge">
+            <span class="sr-only">Ángulo: </span>
+          </span>
+        </header>
+
+        <div class="vehicle-display">
+
+          <div class="vehicle-model--corolla">
+            <div class="vehicle-view vehicle-view--front">
+              <img
+                class="vehicle-img"
+                src="assets/img/corolla-front.png"
+                alt="Toyota Corolla GR 2024 — vista frontal"
+                width="900" height="506"
+                fetchpriority="high"
+                decoding="async"
+              >
+            </div>
+            <div class="vehicle-view vehicle-view--side">
+              <img
+                class="vehicle-img"
+                src="assets/img/corolla-side.png"
+                alt="Toyota Corolla GR 2024 — perfil lateral"
+                width="900" height="506"
+                loading="lazy"
+                decoding="async"
+              >
+            </div>
+            <div class="vehicle-view vehicle-view--rear">
+              <img
+                class="vehicle-img"
+                src="assets/img/corolla-rear.png"
+                alt="Toyota Corolla GR 2024 — vista trasera"
+                width="900" height="506"
+                loading="lazy"
+                decoding="async"
+              >
+            </div>
+          </div>
+
+          <div class="vehicle-model--hilux">
+            <div class="vehicle-view vehicle-view--front">
+              <img
+                class="vehicle-img"
+                src="assets/img/hilux-front.png"
+                alt="Toyota Hilux 4×4 SR 2024 — vista frontal"
+                width="900" height="506"
+                loading="lazy"
+                decoding="async"
+              >
+            </div>
+            <div class="vehicle-view vehicle-view--side">
+              <img
+                class="vehicle-img"
+                src="assets/img/hilux-side.png"
+                alt="Toyota Hilux 4×4 SR 2024 — perfil lateral"
+                width="900" height="506"
+                loading="lazy"
+                decoding="async"
+              >
+            </div>
+            <div class="vehicle-view vehicle-view--rear">
+              <img
+                class="vehicle-img"
+                src="assets/img/hilux-rear.png"
+                alt="Toyota Hilux 4×4 SR 2024 — vista trasera"
+                width="900" height="506"
+                loading="lazy"
+                decoding="async"
+              >
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- Panel de cotización -->
+      <aside class="zone-quote" aria-label="Resumen de cotización">
+
+        <h2 class="quote__title">Cotización estimada</h2>
+
+        <div class="quote__model-badge">
+          <p class="quote__model-label">Modelo seleccionado</p>
+          <p class="quote__model-name"></p>
+        </div>
+
+        <ul class="quote__items">
+          <li class="quote__item quote__item--corolla">
+            <span class="quote__item-label">Preparación de superficie</span>
+            <span class="quote__item-price">₡85,000</span>
+          </li>
+          <li class="quote__item quote__item--corolla">
+            <span class="quote__item-label">Pintura base (sedán)</span>
+            <span class="quote__item-price">₡120,000</span>
+          </li>
+          <li class="quote__item quote__item--corolla">
+            <span class="quote__item-label">Capa de barniz</span>
+            <span class="quote__item-price">₡45,000</span>
+          </li>
+          <li class="quote__item quote__item--corolla">
+            <span class="quote__item-label">Pulido y encerado</span>
+            <span class="quote__item-price">₡30,000</span>
+          </li>
+
+          <li class="quote__item quote__item--hilux">
+            <span class="quote__item-label">Preparación de superficie</span>
+            <span class="quote__item-price">₡110,000</span>
+          </li>
+          <li class="quote__item quote__item--hilux">
+            <span class="quote__item-label">Pintura base (pickup)</span>
+            <span class="quote__item-price">₡175,000</span>
+          </li>
+          <li class="quote__item quote__item--hilux">
+            <span class="quote__item-label">Capa de barniz</span>
+            <span class="quote__item-price">₡60,000</span>
+          </li>
+          <li class="quote__item quote__item--hilux">
+            <span class="quote__item-label">Pulido y encerado</span>
+            <span class="quote__item-price">₡40,000</span>
+          </li>
+        </ul>
+
+        <div class="quote__total quote__total--corolla" role="region" aria-label="Total Corolla GR">
+          <span class="quote__total-label">Total estimado</span>
+          <span class="quote__total-price">₡280,000</span>
+        </div>
+        <div class="quote__total quote__total--hilux" role="region" aria-label="Total Hilux 4×4 SR">
+          <span class="quote__total-label">Total estimado</span>
+          <span class="quote__total-price">₡385,000</span>
+        </div>
+
+        <p class="quote__note">
+          * Precios en colones costarricenses. El total final puede variar
+          según el estado real de la carrocería. Válido II Semestre 2025.
+        </p>
+
+      </aside>
+
+      <!-- Paleta de colores -->
+      <section class="zone-palette" aria-label="Paleta de colores de pintura">
+
+        <p class="palette__label" aria-hidden="true">Color de pintura</p>
+
+        <div class="palette__swatches" role="radiogroup" aria-label="Elegir color de pintura">
+
+          <label class="paint-swatch paint-swatch--silver" for="color-silver">
+            <span class="paint-swatch__circle paint-swatch__circle--silver"></span>
+            <span class="paint-swatch__name">Plata</span>
+          </label>
+          <label class="paint-swatch paint-swatch--red" for="color-red">
+            <span class="paint-swatch__circle paint-swatch__circle--red"></span>
+            <span class="paint-swatch__name">Rojo</span>
+          </label>
+          <label class="paint-swatch paint-swatch--white" for="color-white">
+            <span class="paint-swatch__circle paint-swatch__circle--white"></span>
+            <span class="paint-swatch__name">Blanco</span>
+          </label>
+          <label class="paint-swatch paint-swatch--black" for="color-black">
+            <span class="paint-swatch__circle paint-swatch__circle--black"></span>
+            <span class="paint-swatch__name">Negro</span>
+          </label>
+          <label class="paint-swatch paint-swatch--blue" for="color-blue">
+            <span class="paint-swatch__circle paint-swatch__circle--blue"></span>
+            <span class="paint-swatch__name">Azul</span>
+          </label>
+          <label class="paint-swatch paint-swatch--green" for="color-green">
+            <span class="paint-swatch__circle paint-swatch__circle--green"></span>
+            <span class="paint-swatch__name">Verde</span>
+          </label>
+          <label class="paint-swatch paint-swatch--orange" for="color-orange">
+            <span class="paint-swatch__circle paint-swatch__circle--orange"></span>
+            <span class="paint-swatch__name">Naranja</span>
+          </label>
+          <label class="paint-swatch paint-swatch--gold" for="color-gold">
+            <span class="paint-swatch__circle paint-swatch__circle--gold"></span>
+            <span class="paint-swatch__name">Dorado</span>
+          </label>
+
+        </div>
+
+      </section>
+
+    </main>
+
+    <!-- Pie de página -->
+    <footer class="site-footer">
+      <p class="site-footer__text">Desarrollado por</p>
+      <a
+        class="site-footer__link"
+        href="https://github.com/WGuillenDev"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Perfil de WGuillenDev en GitHub"
+      >⌨️ WGuillenDev</a>
+    </footer>
+
+  </div>
+
+</body>
+</html>

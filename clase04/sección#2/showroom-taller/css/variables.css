@@ -1,0 +1,177 @@
+
+
+/* Nivel 1 — Tokens primitivos */
+:root {
+  /* Grises */
+  --primitive-gray-950: #0C0C0F;
+  --primitive-gray-900: #111115;
+  --primitive-gray-800: #18181E;
+  --primitive-gray-700: #22222A;
+  --primitive-gray-600: #2E2E38;
+  --primitive-gray-500: #44444F;
+  --primitive-gray-400: #6A6A78;
+  --primitive-gray-300: #9A9AAA;
+  --primitive-gray-200: #C8C8D8;
+  --primitive-gray-100: #EAEAF2;
+
+  /* Ámbar — identidad de marca */
+  --primitive-amber-600: #B87010;
+  --primitive-amber-500: #D48820;
+  --primitive-amber-400: #E8A020;
+  --primitive-amber-300: #F0B840;
+  --primitive-amber-200: #F8D880;
+  --primitive-amber-100: #FDF2CC;
+
+  /* Paleta de pintura */
+  --primitive-paint-silver: #A8A8B0;
+  --primitive-paint-red:    #CC2233;
+  --primitive-paint-white:  #F2F2F0;
+  --primitive-paint-black:  #181818;
+  --primitive-paint-blue:   #1A4A8A;
+  --primitive-paint-green:  #1A6A2A;
+  --primitive-paint-orange: #CC5500;
+  --primitive-paint-gold:   #B8860B;
+
+  /* Familias tipográficas */
+  --primitive-font-display: 'Barlow Condensed', 'Arial Narrow', Arial, sans-serif;
+  --primitive-font-body:    'Inter', 'Segoe UI', system-ui, sans-serif;
+  --primitive-font-mono:    'JetBrains Mono', 'Consolas', monospace;
+}
+
+/* Nivel 2 — Tokens semánticos (tema oscuro por defecto) */
+:root {
+  /* Superficies */
+  --color-bg-page:        var(--primitive-gray-950);
+  --color-bg-panel:       var(--primitive-gray-900);
+  --color-bg-card:        var(--primitive-gray-800);
+  --color-bg-card-raised: var(--primitive-gray-700);
+
+  /* Bordes */
+  --color-border-subtle:  var(--primitive-gray-700);
+  --color-border-default: var(--primitive-gray-600);
+  --color-border-strong:  var(--primitive-gray-500);
+
+  /* Acento de marca */
+  --color-accent:        var(--primitive-amber-400);
+  --color-accent-hover:  var(--primitive-amber-300);
+  --color-accent-subtle: color-mix(in srgb, var(--primitive-amber-400) 15%, transparent);
+
+  /* Texto */
+  --color-text-primary:   var(--primitive-gray-100);
+  --color-text-secondary: var(--primitive-gray-300);
+  --color-text-muted:     var(--primitive-gray-400);
+  --color-text-disabled:  var(--primitive-gray-500);
+  --color-text-accent:    var(--primitive-amber-400);
+
+  /* Color dinámico del vehículo — modificado por Radio Button Hack */
+  --car-color: var(--primitive-paint-silver);
+
+  /* Colores de pintura */
+  --paint-silver: var(--primitive-paint-silver);
+  --paint-red:    var(--primitive-paint-red);
+  --paint-white:  var(--primitive-paint-white);
+  --paint-black:  var(--primitive-paint-black);
+  --paint-blue:   var(--primitive-paint-blue);
+  --paint-green:  var(--primitive-paint-green);
+  --paint-orange: var(--primitive-paint-orange);
+  --paint-gold:   var(--primitive-paint-gold);
+}
+
+/* Tema claro — activado via Radio Button Hack con #theme-light:checked */
+.theme--light {
+  --color-bg-page:        #F4F4F8;
+  --color-bg-panel:       #FFFFFF;
+  --color-bg-card:        #EAEAF0;
+  --color-bg-card-raised: #DDDDE8;
+
+  --color-border-subtle:  #DDDDE8;
+  --color-border-default: #C8C8D8;
+  --color-border-strong:  #A8A8B8;
+
+  --color-text-primary:   #0C0C0F;
+  --color-text-secondary: #2E2E38;
+  --color-text-muted:     #6A6A78;
+  --color-text-disabled:  #9A9AAA;
+  --color-text-accent:    var(--primitive-amber-600);
+
+  --color-accent:        var(--primitive-amber-500);
+  --color-accent-hover:  var(--primitive-amber-600);
+  --color-accent-subtle: color-mix(in srgb, var(--primitive-amber-500) 12%, transparent);
+
+  --shadow-glow: 0 0 28px color-mix(in srgb, var(--primitive-amber-500) 25%, transparent);
+}
+
+/* Nivel 3 — Tokens de escala */
+:root {
+  /* Espaciado — escala base 4px */
+  --space-1:  4px;
+  --space-2:  8px;
+  --space-3:  12px;
+  --space-4:  16px;
+  --space-5:  20px;
+  --space-6:  24px;
+  --space-8:  32px;
+  --space-10: 40px;
+
+  /* Radios de borde */
+  --radius-sm:   4px;
+  --radius-md:   8px;
+  --radius-lg:   14px;
+  --radius-xl:   20px;
+  --radius-full: 9999px;
+
+  /* Tipografía */
+  --font-family-display: var(--primitive-font-display);
+  --font-family-body:    var(--primitive-font-body);
+  --font-family-mono:    var(--primitive-font-mono);
+
+  --font-size-xs:   10px;
+  --font-size-sm:   12px;
+  --font-size-base: 14px;
+  --font-size-md:   16px;
+  --font-size-lg:   20px;
+  --font-size-xl:   24px;
+  --font-size-2xl:  32px;
+
+  --font-weight-normal:    400;
+  --font-weight-medium:    500;
+  --font-weight-semibold:  600;
+  --font-weight-bold:      700;
+  --font-weight-extrabold: 800;
+
+  --line-height-tight:  1.2;
+  --line-height-normal: 1.5;
+  --line-height-loose:  1.7;
+
+  --letter-spacing-tight:  -0.01em;
+  --letter-spacing-wide:    0.06em;
+  --letter-spacing-wider:   0.10em;
+  --letter-spacing-widest:  0.14em;
+
+  /* Transiciones */
+  --duration-fast:   150ms;
+  --duration-normal: 250ms;
+  --duration-slow:   400ms;
+  --easing-default:  ease;
+  --easing-spring:   cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  /* Sombras */
+  --shadow-sm:   0 1px 4px  rgba(0, 0, 0, 0.35);
+  --shadow-md:   0 4px 16px rgba(0, 0, 0, 0.45);
+  --shadow-lg:   0 8px 32px rgba(0, 0, 0, 0.55);
+  --shadow-glow: 0 0 28px   color-mix(in srgb, var(--color-accent) 20%, transparent);
+
+  /* Z-index */
+  --z-base:    0;
+  --z-raised:  10;
+  --z-overlay: 100;
+}
+
+/* Accesibilidad — respeta preferencia de movimiento reducido */
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --duration-fast:   0ms;
+    --duration-normal: 0ms;
+    --duration-slow:   0ms;
+  }
+}

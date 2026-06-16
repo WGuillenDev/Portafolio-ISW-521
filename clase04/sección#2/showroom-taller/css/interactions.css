@@ -1,0 +1,222 @@
+
+
+/* Bloque 1 — Cambio de color del vehículo */
+
+#color-silver:checked ~ .showroom-wrapper { --car-color: var(--paint-silver); }
+#color-red:checked    ~ .showroom-wrapper { --car-color: var(--paint-red);    }
+#color-white:checked  ~ .showroom-wrapper { --car-color: var(--paint-white);  }
+#color-black:checked  ~ .showroom-wrapper { --car-color: var(--paint-black);  }
+#color-blue:checked   ~ .showroom-wrapper { --car-color: var(--paint-blue);   }
+#color-green:checked  ~ .showroom-wrapper { --car-color: var(--paint-green);  }
+#color-orange:checked ~ .showroom-wrapper { --car-color: var(--paint-orange); }
+#color-gold:checked   ~ .showroom-wrapper { --car-color: var(--paint-gold);   }
+
+/* Estado visual del swatch activo */
+#color-silver:checked ~ .showroom-wrapper .paint-swatch--silver .paint-swatch__circle,
+#color-red:checked    ~ .showroom-wrapper .paint-swatch--red    .paint-swatch__circle,
+#color-white:checked  ~ .showroom-wrapper .paint-swatch--white  .paint-swatch__circle,
+#color-black:checked  ~ .showroom-wrapper .paint-swatch--black  .paint-swatch__circle,
+#color-blue:checked   ~ .showroom-wrapper .paint-swatch--blue   .paint-swatch__circle,
+#color-green:checked  ~ .showroom-wrapper .paint-swatch--green  .paint-swatch__circle,
+#color-orange:checked ~ .showroom-wrapper .paint-swatch--orange .paint-swatch__circle,
+#color-gold:checked   ~ .showroom-wrapper .paint-swatch--gold   .paint-swatch__circle {
+  transform: scale(1.18) translateY(-4px);
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-accent) 35%, transparent);
+  animation: activeGlow 2.2s ease-in-out infinite;
+}
+
+#color-silver:checked ~ .showroom-wrapper .paint-swatch--silver .paint-swatch__name,
+#color-red:checked    ~ .showroom-wrapper .paint-swatch--red    .paint-swatch__name,
+#color-white:checked  ~ .showroom-wrapper .paint-swatch--white  .paint-swatch__name,
+#color-black:checked  ~ .showroom-wrapper .paint-swatch--black  .paint-swatch__name,
+#color-blue:checked   ~ .showroom-wrapper .paint-swatch--blue   .paint-swatch__name,
+#color-green:checked  ~ .showroom-wrapper .paint-swatch--green  .paint-swatch__name,
+#color-orange:checked ~ .showroom-wrapper .paint-swatch--orange .paint-swatch__name,
+#color-gold:checked   ~ .showroom-wrapper .paint-swatch--gold   .paint-swatch__name {
+  color: var(--color-text-accent);
+}
+
+/* Bloque 2 — Control de ángulo (Grid Overlay) */
+
+#angle-front:checked ~ .showroom-wrapper .vehicle-view--front,
+#angle-side:checked  ~ .showroom-wrapper .vehicle-view--side,
+#angle-rear:checked  ~ .showroom-wrapper .vehicle-view--rear {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.vehicle-header__badge::after                                             { content: '—';             }
+#angle-front:checked ~ .showroom-wrapper .vehicle-header__badge::after   { content: 'Vista: Frontal'; }
+#angle-side:checked  ~ .showroom-wrapper .vehicle-header__badge::after   { content: 'Vista: lateral';  }
+#angle-rear:checked  ~ .showroom-wrapper .vehicle-header__badge::after   { content: 'Vista: Trasera'; }
+
+#angle-front:checked ~ .showroom-wrapper .angle-btn--front,
+#angle-side:checked  ~ .showroom-wrapper .angle-btn--side,
+#angle-rear:checked  ~ .showroom-wrapper .angle-btn--rear {
+  background-color: var(--color-bg-card-raised);
+  border-color: var(--color-border-default);
+}
+
+#angle-front:checked ~ .showroom-wrapper .angle-btn--front .angle-btn__icon,
+#angle-side:checked  ~ .showroom-wrapper .angle-btn--side  .angle-btn__icon,
+#angle-rear:checked  ~ .showroom-wrapper .angle-btn--rear  .angle-btn__icon {
+  color: var(--color-text-accent);
+}
+
+#angle-front:checked ~ .showroom-wrapper .angle-btn--front .angle-btn__label,
+#angle-side:checked  ~ .showroom-wrapper .angle-btn--side  .angle-btn__label,
+#angle-rear:checked  ~ .showroom-wrapper .angle-btn--rear  .angle-btn__label {
+  color: var(--color-text-primary);
+}
+
+/* Bloque 3 — Selección de modelo */
+
+.vehicle-model--corolla,
+.vehicle-model--hilux {
+  display: none;
+}
+
+/* display:grid en vez de contents para permitir animación slideIn
+   grid-area: 1/1 asegura que el wrapper ocupe la misma celda del overlay */
+#model-corolla:checked ~ .showroom-wrapper .vehicle-model--corolla {
+  display: grid;
+  grid-area: 1 / 1;
+  animation: slideInFromLeft 0.45s var(--easing-spring) both;
+}
+
+#model-hilux:checked ~ .showroom-wrapper .vehicle-model--hilux {
+  display: grid;
+  grid-area: 1 / 1;
+  animation: slideInFromRight 0.45s var(--easing-spring) both;
+}
+
+.vehicle-header__name::after                                             { content: '—';                  }
+#model-corolla:checked ~ .showroom-wrapper .vehicle-header__name::after { content: 'Toyota Corolla GR';   }
+#model-hilux:checked   ~ .showroom-wrapper .vehicle-header__name::after { content: 'Toyota Hilux 4×4 SR'; }
+
+.quote__model-name::after                                             { content: '—';                        }
+#model-corolla:checked ~ .showroom-wrapper .quote__model-name::after { content: 'Corolla GR · Sedán 2024';   }
+#model-hilux:checked   ~ .showroom-wrapper .quote__model-name::after { content: 'Hilux 4×4 SR · Pickup 2024'; }
+
+#model-corolla:checked ~ .showroom-wrapper .quote__item--corolla { display: flex; }
+#model-hilux:checked   ~ .showroom-wrapper .quote__item--hilux   { display: flex; }
+
+#model-corolla:checked ~ .showroom-wrapper .quote__total--corolla { display: flex; }
+#model-hilux:checked   ~ .showroom-wrapper .quote__total--hilux   { display: flex; }
+
+#model-corolla:checked ~ .showroom-wrapper .model-btn--corolla,
+#model-hilux:checked   ~ .showroom-wrapper .model-btn--hilux {
+  background-color: var(--color-accent-subtle);
+  border-color: color-mix(in srgb, var(--color-accent) 45%, transparent);
+}
+
+#model-corolla:checked ~ .showroom-wrapper .model-btn--corolla .model-btn__name,
+#model-hilux:checked   ~ .showroom-wrapper .model-btn--hilux   .model-btn__name {
+  color: var(--color-text-accent);
+}
+
+/* Bloque 4 — Cambio de color en imagen real (filter CSS) */
+
+.vehicle-img {
+  transition: filter 0.4s ease;
+}
+
+#color-silver:checked ~ .showroom-wrapper .vehicle-img { filter: none; }
+
+#color-red:checked    ~ .showroom-wrapper .vehicle-img {
+  filter: sepia(1) hue-rotate(310deg) saturate(600%) brightness(0.9);
+}
+#color-white:checked  ~ .showroom-wrapper .vehicle-img {
+  filter: brightness(1.5) saturate(0.1) contrast(0.85);
+}
+#color-black:checked  ~ .showroom-wrapper .vehicle-img {
+  filter: brightness(0.42) saturate(0.15) contrast(1.1);
+}
+#color-blue:checked   ~ .showroom-wrapper .vehicle-img {
+  filter: sepia(1) hue-rotate(180deg) saturate(450%) brightness(0.75);
+}
+#color-green:checked  ~ .showroom-wrapper .vehicle-img {
+  filter: sepia(1) hue-rotate(85deg) saturate(380%) brightness(0.72);
+}
+#color-orange:checked ~ .showroom-wrapper .vehicle-img {
+  filter: sepia(1) hue-rotate(330deg) saturate(700%) brightness(0.9);
+}
+#color-gold:checked   ~ .showroom-wrapper .vehicle-img {
+  filter: sepia(1) hue-rotate(15deg) saturate(380%) brightness(0.82);
+}
+
+/* Bloque 5 — Animación slideIn al cambiar modelo */
+
+@keyframes slideInFromRight {
+  from {
+    opacity: 0;
+    transform: translateX(60px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+}
+
+@keyframes slideInFromLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-60px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+}
+
+
+
+/* Bloque 6 — Toggle dark/light
+   El tema se aplica como clase sobre .showroom-wrapper.
+   Los tokens semánticos de variables.css hacen el cambio automáticamente. */
+
+#theme-light:checked ~ .showroom-wrapper {
+  --color-bg-page:        #F4F4F8;
+  --color-bg-panel:       #FFFFFF;
+  --color-bg-card:        #EAEAF0;
+  --color-bg-card-raised: #DDDDE8;
+  --color-border-subtle:  #DDDDE8;
+  --color-border-default: #C8C8D8;
+  --color-border-strong:  #A8A8B8;
+  --color-text-primary:   #0C0C0F;
+  --color-text-secondary: #2E2E38;
+  --color-text-muted:     #6A6A78;
+  --color-text-disabled:  #9A9AAA;
+  --color-text-accent:    #B87010;
+  --color-accent:         #D48820;
+  --color-accent-hover:   #B87010;
+  --color-accent-subtle:  color-mix(in srgb, #D48820 12%, transparent);
+  --shadow-glow:          0 0 28px color-mix(in srgb, #D48820 25%, transparent);
+  background-color: #F4F4F8;
+}
+
+/* Thumb del toggle — estado claro */
+#theme-light:checked ~ .showroom-wrapper .theme-toggle__track {
+  background-color: var(--primitive-amber-400);
+}
+
+#theme-light:checked ~ .showroom-wrapper .theme-toggle__thumb {
+  transform: translateX(16px);
+  background-color: #FFFFFF;
+}
+
+/* Ícono del toggle — cambia según estado */
+#theme-dark:checked  ~ .showroom-wrapper .theme-toggle__label { --toggle-icon: '🌙'; }
+#theme-light:checked ~ .showroom-wrapper .theme-toggle__label { --toggle-icon: '☀️'; }
+
+
+/* Bloque 7 — Visibilidad del toggle según tema activo
+   Solo se muestra el label que lleva al estado opuesto.
+   En oscuro → se ve el label que activa claro (y viceversa). */
+
+.theme-toggle__label--to-dark  { display: none; }
+.theme-toggle__label--to-light { display: flex;  }
+
+#theme-light:checked ~ .showroom-wrapper .theme-toggle__label--to-light { display: none; }
+#theme-light:checked ~ .showroom-wrapper .theme-toggle__label--to-dark  { display: flex; }
