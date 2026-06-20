@@ -1,4 +1,4 @@
-// Pastelería Maná | main.js | WGuillenDev | ISW-521 | UTN | 2026
+// Pastelería Maná | main.js | WGuillenDev 
 
 // Dark mode
 const CLAVE_TEMA = "tema";
