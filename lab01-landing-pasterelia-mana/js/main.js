@@ -74,8 +74,3 @@ document.addEventListener("DOMContentLoaded", function () {
   iniciarDarkMode();
   iniciarMenuMovil();
 });
-
-
-
-
-
