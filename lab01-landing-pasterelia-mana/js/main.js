@@ -1,5 +1,3 @@
-// Pastelería Maná | main.js | WGuillenDev 
-
 // Dark mode
 const CLAVE_TEMA = "tema";
 const VALOR_OSCURO = "oscuro";
