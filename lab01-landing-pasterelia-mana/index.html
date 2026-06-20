@@ -50,7 +50,18 @@
     <main>
 
         <!-- Hero -->
-        <section class="hero" id="hero" aria-labelledby="hero-titulo">
+       <section class="hero" id="hero" aria-labelledby="hero-titulo">
+            <video
+                class="hero__video"
+                autoplay
+                muted
+                loop
+                playsinline
+                aria-hidden="true">
+                <source src="video/hero-bg.webm" type="video/webm">
+                <source src="video/hero-bg.mp4" type="video/mp4">
+            </video>
+            <div class="hero__overlay" aria-hidden="true"></div>
             <div class="hero__contenido">
                 <p class="hero__badge">Desde 2006 — Río Cuarto, Alajuela</p>
                 <h1 class="hero__titulo" id="hero-titulo">
@@ -66,15 +77,6 @@
                     <a href="#productos" class="btn btn--secundario">Ver productos</a>
                 </div>
             </div>
-            <figure class="hero__imagen">
-                <img
-                    src="img/queque-personalizado-1.webp"
-                    alt="Queque personalizado de Pastelería Maná, diseño One Piece para celebración de 18 años"
-                    class="hero__foto"
-                    width="600"
-                    height="500"
-                >
-            </figure>
         </section>
 
         <!-- Stats -->
