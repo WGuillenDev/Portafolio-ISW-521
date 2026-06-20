@@ -390,12 +390,6 @@ button {
     margin-top: var(--espacio-sm);
 }
 
-@media (prefers-reduced-motion: reduce) {
-    .hero__video {
-        display: none;
-    }
-}
-
 /* Stats */
 .stats {
     background-color: var(--color-cafe);
@@ -866,5 +860,9 @@ button {
         animation-iteration-count: 1 !important;
         transition-duration: 0.01ms !important;
         scroll-behavior: auto !important;
+    }
+
+    .hero__video {
+        display: none;
     }
 }
