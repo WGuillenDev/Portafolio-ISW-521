@@ -18,6 +18,8 @@
 
 <body>
 
+    <a href="#main" class="skip-link">Saltar al contenido principal</a>
+
     <!-- Header -->
     <header class="header">
         <nav class="header__nav" aria-label="Menú principal">
@@ -34,7 +36,7 @@
                     <span class="header__logo-subtitulo">Pastelería Artesanal</span>
                 </div>
             </div>
-            <ul class="header__links">
+            <ul class="header__links" id="menuLinks">
                 <li><a href="#nosotros"  class="header__link">Nosotros</a></li>
                 <li><a href="#productos" class="header__link">Productos</a></li>
                 <li><a href="#cobertura" class="header__link">Cobertura</a></li>
@@ -49,6 +51,7 @@
             <button class="header__menu-movil"
                     id="menuMovil"
                     aria-label="Abrir menú de navegación"
+                    aria-controls="menuLinks"
                     aria-expanded="false">
                 ☰
             </button>
@@ -56,7 +59,7 @@
     </header>
 
     <!-- Main -->
-    <main>
+    <main id="main">
 
         <!-- Hero -->
        <section class="hero" id="hero" aria-labelledby="hero-titulo">

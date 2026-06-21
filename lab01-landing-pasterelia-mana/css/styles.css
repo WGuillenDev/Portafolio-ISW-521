@@ -113,6 +113,24 @@ button {
     border: 0;
 }
 
+.skip-link {
+    position: absolute;
+    top: -100px;
+    left: var(--espacio-md);
+    z-index: 200;
+    background-color: var(--color-dorado);
+    color: var(--color-cafe);
+    font-size: var(--texto-sm);
+    font-weight: 700;
+    padding: var(--espacio-sm) var(--espacio-lg);
+    border-radius: var(--radio-md);
+    transition: top var(--transicion-rapida);
+}
+
+.skip-link:focus-visible {
+    top: var(--espacio-md);
+}
+
 /* Componentes globales */
 .btn {
     display: inline-flex;
