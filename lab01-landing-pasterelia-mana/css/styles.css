@@ -169,13 +169,13 @@ button {
 
 .btn--secundario {
     background-color: transparent;
-    color: var(--color-cafe);
-    border: 2px solid var(--color-cafe);
+    color: var(--color-crema);
+    border: 2px solid var(--color-crema);
 }
 
 .btn--secundario:hover {
-    background-color: var(--color-cafe);
-    color: var(--color-crema);
+    background-color: var(--color-crema);
+    color: var(--color-cafe);
 }
 
 .btn--whatsapp {
