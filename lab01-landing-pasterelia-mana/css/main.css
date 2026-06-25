@@ -524,6 +524,16 @@ button {
   display: flex;
   gap: var(--espacio-md);
   align-items: flex-start;
+  padding: var(--espacio-md);
+  border-radius: var(--radio-lg);
+  transition:
+    transform var(--transicion-normal),
+    box-shadow var(--transicion-normal);
+}
+
+.nosotros__valor:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--sombra-md);
 }
 
 .nosotros__valor-icono {
@@ -671,6 +681,16 @@ button {
   display: flex;
   gap: var(--espacio-md);
   align-items: flex-start;
+  padding: var(--espacio-md);
+  border-radius: var(--radio-lg);
+  transition:
+    transform var(--transicion-normal),
+    box-shadow var(--transicion-normal);
+}
+
+.cobertura__punto:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--sombra-md);
 }
 
 .cobertura__punto-icono {
