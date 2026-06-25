@@ -1,0 +1,58 @@
+/* css/tokens.css — Variables de diseño */
+:root {
+  --color-cafe: #2c1a0e;
+  --color-cafe-medio: #4a2810;
+  --color-dorado: #c8973a;
+  --color-dorado-oscuro: #a67c28;
+  --color-crema: #fdf0e8;
+  --color-crema-oscura: #f5e0d0;
+  --color-blanco: #ffffff;
+  --color-whatsapp: #25d366;
+  --color-whatsapp-hover: #1da851;
+
+  --color-texto: #2c1a0e;
+  --color-texto-suave: #4a2810;
+  --color-fondo: #fdf0e8;
+  --color-fondo-alterno: #f5e0d0;
+  --color-borde: #d4a882;
+  --color-sombra: rgba(44, 26, 14, 0.14);
+
+  --fuente-display: "Georgia", "Times New Roman", serif;
+  --fuente-cuerpo: system-ui, -apple-system, "Segoe UI", sans-serif;
+
+  --texto-xs: 0.75rem;
+  --texto-sm: 0.875rem;
+  --texto-base: 1rem;
+  --texto-lg: 1.125rem;
+  --texto-xl: 1.25rem;
+  --texto-2xl: 1.5rem;
+  --texto-3xl: 1.875rem;
+  --texto-4xl: 2.25rem;
+  --texto-5xl: 3rem;
+
+  --espacio-xs: 0.25rem;
+  --espacio-sm: 0.5rem;
+  --espacio-md: 1rem;
+  --espacio-lg: 1.5rem;
+  --espacio-xl: 2rem;
+  --espacio-2xl: 3rem;
+  --espacio-3xl: 4rem;
+  --espacio-4xl: 6rem;
+
+  --radio-sm: 0.25rem;
+  --radio-md: 0.5rem;
+  --radio-lg: 1rem;
+  --radio-xl: 1.5rem;
+  --radio-full: 9999px;
+
+  --sombra-sm: 0 1px 3px var(--color-sombra);
+  --sombra-md: 0 4px 12px var(--color-sombra);
+  --sombra-lg: 0 8px 24px var(--color-sombra);
+
+  --transicion-rapida: 150ms ease;
+  --transicion-normal: 300ms ease;
+  --transicion-lenta: 500ms ease;
+
+  --ancho-maximo: 1200px;
+  --padding-seccion: var(--espacio-3xl) var(--espacio-md);
+}

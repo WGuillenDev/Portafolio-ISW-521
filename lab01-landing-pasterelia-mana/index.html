@@ -7,6 +7,7 @@
       name="description"
       content="Pastelería Maná — Queques artesanales desde 2006 en Río Cuarto, Alajuela. Presentes en 30 puntos de venta en Zona Norte y Sarapiquí.">
     <title>Pastelería Maná | Queques Artesanales — Río Cuarto</title>
+    <!-- Script anti-flash: aplica el tema y tamaño de fuente guardados antes del primer render, para evitar parpadeo visual -->
     <script>
       (function () {
         var tema = localStorage.getItem("tema");
@@ -19,17 +20,19 @@
         }
       })();
     </script>
-    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/tokens.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/animations.css">
   </head>
 
   <body>
     <a href="#main" class="skip-link">Saltar al contenido principal</a>
 
-    <!-- Header -->
+   <!-- Header: navegación principal con Flexbox -->
     <header class="header">
       <nav class="header__nav" aria-label="Menú principal">
         <div class="header__logo">
-          <img src="img/logo.webp" alt="Logo de Pastelería Maná" class="header__logo-imagen" width="48" height="48">
+          <img src="assets/icons/logo.webp" alt="Logo de Pastelería Maná" class="header__logo-imagen" width="48" height="48">
           <div class="header__logo-texto">
             <span class="header__logo-nombre">Maná</span>
             <span class="header__logo-subtitulo">Pastelería Artesanal</span>
@@ -69,7 +72,7 @@
         </div>
       </section>
 
-      <!-- Stats -->
+      <!-- Stats: cifras destacadas con Flexbox -->
       <section class="stats" aria-label="Estadísticas de Pastelería Maná">
         <div class="stats__grid">
           <div class="stats__item"><span class="stats__numero">20</span><span class="stats__label">Años de experiencia</span></div>
@@ -79,10 +82,10 @@
         </div>
       </section>
 
-      <!-- Nosotros -->
+      <!-- Nosotros: layout de dos columnas con CSS Grid -->
       <section class="nosotros" id="nosotros" aria-labelledby="nosotros-titulo">
         <div class="nosotros__grid">
-          <figure class="nosotros__imagen"><img src="img/local.webp" alt="Local de Pastelería Maná en Río Cuarto, Alajuela" class="nosotros__foto" width="500" height="400"></figure>
+          <figure class="nosotros__imagen"><img src="assets/images/local.webp" alt="Local de Pastelería Maná en Río Cuarto, Alajuela" class="nosotros__foto" width="500" height="400"></figure>
           <div class="nosotros__contenido">
             <p class="seccion__etiqueta">Nuestra historia</p>
             <h2 class="seccion__titulo" id="nosotros-titulo">Pastelería Maná</h2>
@@ -96,19 +99,19 @@
         </div>
       </section>
 
-      <!-- Productos -->
+      <!-- Productos: cuadrícula de tarjetas con CSS Grid -->
       <section class="productos" id="productos" aria-labelledby="productos-titulo">
         <p class="seccion__etiqueta">Lo que hacemos</p>
         <h2 class="seccion__titulo" id="productos-titulo">Nuestros productos</h2>
         <div class="productos__grid">
-          <article class="productos__card" aria-label="Queque húmedo"><figure class="productos__card-imagen"><img src="img/queque-humedo.webp" alt="Queque húmedo de Pastelería Maná, el más vendido" class="productos__foto" width="300" height="200"></figure><div class="productos__card-cuerpo"><p class="productos__badge">Más vendido</p><h3 class="productos__nombre">Queque húmedo</h3><p class="productos__descripcion">El favorito de nuestros clientes, jugoso y con sabor inigualable.</p></div></article>
-          <article class="productos__card" aria-label="Queque seco"><figure class="productos__card-imagen"><img src="img/queque-seco.webp" alt="Queque seco de Pastelería Maná, ideal para celebraciones" class="productos__foto" width="300" height="200"></figure><div class="productos__card-cuerpo"><h3 class="productos__nombre">Queque seco</h3><p class="productos__descripcion">Textura perfecta, ideal para celebraciones y reuniones familiares.</p></div></article>
-          <article class="productos__card" aria-label="Queque personalizado"><figure class="productos__card-imagen"><img src="img/queque-personalizado-1.webp" alt="Queque personalizado de Pastelería Maná con decoración a gusto del cliente" class="productos__foto" width="300" height="200"></figure><div class="productos__card-cuerpo"><p class="productos__badge productos__badge--encargo">Por encargo</p><h3 class="productos__nombre">Queque personalizado</h3><p class="productos__descripcion">Diseño y decoración a tu gusto. Pedido con anticipación, retiro en punto de venta.</p></div></article>
-          <article class="productos__card" aria-label="Queque personalizado primera comunión"><figure class="productos__card-imagen"><img src="img/queque-personalizado-2.webp" alt="Queque personalizado de Pastelería Maná para primera comunión con decoración religiosa" class="productos__foto" width="300" height="200"></figure><div class="productos__card-cuerpo"><p class="productos__badge productos__badge--encargo">Por encargo</p><h3 class="productos__nombre">Queque primera comunión</h3><p class="productos__descripcion">Decoración especial para ocasiones religiosas y familiares inolvidables.</p></div></article>
+          <article class="productos__card" aria-label="Queque húmedo"><figure class="productos__card-imagen"><img src="assets/images/queque-humedo.webp" alt="Queque húmedo de Pastelería Maná, el más vendido" class="productos__foto" width="300" height="200"></figure><div class="productos__card-cuerpo"><p class="productos__badge">Más vendido</p><h3 class="productos__nombre">Queque húmedo</h3><p class="productos__descripcion">El favorito de nuestros clientes, jugoso y con sabor inigualable.</p></div></article>
+          <article class="productos__card" aria-label="Queque seco"><figure class="productos__card-imagen"><img src="assets/images/queque-seco.webp" alt="Queque seco de Pastelería Maná, ideal para celebraciones" class="productos__foto" width="300" height="200"></figure><div class="productos__card-cuerpo"><h3 class="productos__nombre">Queque seco</h3><p class="productos__descripcion">Textura perfecta, ideal para celebraciones y reuniones familiares.</p></div></article>
+          <article class="productos__card" aria-label="Queque personalizado"><figure class="productos__card-imagen"><img src="assets/images/queque-personalizado-1.webp" alt="Queque personalizado de Pastelería Maná con decoración a gusto del cliente" class="productos__foto" width="300" height="200"></figure><div class="productos__card-cuerpo"><p class="productos__badge productos__badge--encargo">Por encargo</p><h3 class="productos__nombre">Queque personalizado</h3><p class="productos__descripcion">Diseño y decoración a tu gusto. Pedido con anticipación, retiro en punto de venta.</p></div></article>
+          <article class="productos__card" aria-label="Queque personalizado primera comunión"><figure class="productos__card-imagen"><img src="assets/images/queque-personalizado-2.webp" alt="Queque personalizado de Pastelería Maná para primera comunión con decoración religiosa" class="productos__foto" width="300" height="200"></figure><div class="productos__card-cuerpo"><p class="productos__badge productos__badge--encargo">Por encargo</p><h3 class="productos__nombre">Queque primera comunión</h3><p class="productos__descripcion">Decoración especial para ocasiones religiosas y familiares inolvidables.</p></div></article>
         </div>
       </section>
 
-      <!-- Cobertura -->
+     <!-- Cobertura: información y mapa con CSS Grid -->
       <section class="cobertura" id="cobertura" aria-labelledby="cobertura-titulo">
         <div class="cobertura__grid">
           <div class="cobertura__info">
@@ -137,10 +140,10 @@
         </address>
       </section>
 
-      <!-- Accesibilidad -->
+      <!-- Panel de accesibilidad: segunda funcionalidad de Web Storage (tamaño de fuente) -->
       <div class="accesibilidad">
         <button class="accesibilidad__boton" id="botonAccesibilidad" aria-label="Abrir opciones de accesibilidad" aria-expanded="false" aria-controls="panelAccesibilidad">
-          <img src="img/icono-accesibilidad.png" alt="" aria-hidden="true" class="accesibilidad__icono">
+          <img src="assets/icons/icono-accesibilidad.webp" alt="" aria-hidden="true" class="accesibilidad__icono" width="24" height="24">
         </button>
         <div class="accesibilidad__panel" id="panelAccesibilidad" role="group" aria-label="Ajustar tamaño de texto" hidden>
           <p class="accesibilidad__titulo">Tamaño de texto</p>
@@ -152,7 +155,7 @@
       </div>
     </main>
 
-    <!-- Footer -->
+    <!-- Footer: tres columnas con CSS Grid -->
     <footer class="footer">
       <h2 class="sr-only">Información del negocio</h2>
       <div class="footer__grid">

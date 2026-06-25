@@ -1,60 +1,4 @@
-/* Variables y tokens de diseño */
-:root {
-  --color-cafe: #2c1a0e;
-  --color-cafe-medio: #4a2810;
-  --color-dorado: #c8973a;
-  --color-dorado-oscuro: #a67c28;
-  --color-crema: #fdf0e8;
-  --color-crema-oscura: #f5e0d0;
-  --color-blanco: #ffffff;
-  --color-texto: #2c1a0e;
-  --color-texto-suave: #4a2810;
-  --color-fondo: #fdf0e8;
-  --color-fondo-alterno: #f5e0d0;
-  --color-borde: #d4a882;
-  --color-sombra: rgba(44, 26, 14, 0.14);
-  --color-whatsapp: #25d366;
-  --color-whatsapp-hover: #1da851;
-
-  --fuente-display: "Georgia", "Times New Roman", serif;
-  --fuente-cuerpo: system-ui, -apple-system, "Segoe UI", sans-serif;
-
-  --texto-xs: 0.75rem;
-  --texto-sm: 0.875rem;
-  --texto-base: 1rem;
-  --texto-lg: 1.125rem;
-  --texto-xl: 1.25rem;
-  --texto-2xl: 1.5rem;
-  --texto-3xl: 1.875rem;
-  --texto-4xl: 2.25rem;
-  --texto-5xl: 3rem;
-
-  --espacio-xs: 0.25rem;
-  --espacio-sm: 0.5rem;
-  --espacio-md: 1rem;
-  --espacio-lg: 1.5rem;
-  --espacio-xl: 2rem;
-  --espacio-2xl: 3rem;
-  --espacio-3xl: 4rem;
-  --espacio-4xl: 6rem;
-
-  --radio-sm: 0.25rem;
-  --radio-md: 0.5rem;
-  --radio-lg: 1rem;
-  --radio-xl: 1.5rem;
-  --radio-full: 9999px;
-
-  --sombra-sm: 0 1px 3px var(--color-sombra);
-  --sombra-md: 0 4px 12px var(--color-sombra);
-  --sombra-lg: 0 8px 24px var(--color-sombra);
-
-  --transicion-rapida: 150ms ease;
-  --transicion-normal: 300ms ease;
-  --transicion-lenta: 500ms ease;
-
-  --ancho-maximo: 1200px;
-  --padding-seccion: var(--espacio-3xl) var(--espacio-md);
-}
+/* css/main.css — Reset, utilidades y componentes de layout */
 
 /* Reset */
 *,
@@ -113,6 +57,7 @@ button {
   border: 0;
 }
 
+/* Skip link */
 .skip-link {
   position: absolute;
   top: -100px;
@@ -131,7 +76,7 @@ button {
   top: var(--espacio-md);
 }
 
-/* Componentes globales */
+/* Botones */
 .btn {
   display: inline-flex;
   align-items: center;
@@ -546,6 +491,20 @@ button {
   height: 300px;
   object-fit: cover;
   object-position: center top;
+  transition: transform var(--transicion-lenta);
+}
+
+.nosotros__imagen:hover .nosotros__foto {
+  transform: scale(1.04);
+}
+
+.nosotros__pie-foto {
+  padding: var(--espacio-sm) var(--espacio-md);
+  font-size: var(--texto-sm);
+  font-style: italic;
+  color: var(--color-texto-suave);
+  background-color: var(--color-blanco);
+  border-top: 1px solid var(--color-borde);
 }
 
 .nosotros__texto {
@@ -980,7 +939,7 @@ button {
   }
 }
 
-/* Accesibilidad — Focus y Reduced motion */
+/* Accesibilidad */
 :focus-visible {
   outline: 3px solid var(--color-dorado);
   outline-offset: 3px;
@@ -991,19 +950,4 @@ button {
 .pedidos :focus-visible,
 .footer :focus-visible {
   outline-color: var(--color-crema);
-}
-
-@media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
-  }
-
-  .hero__video {
-    display: none;
-  }
 }
