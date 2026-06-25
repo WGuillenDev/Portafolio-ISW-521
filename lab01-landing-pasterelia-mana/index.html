@@ -7,7 +7,6 @@
       name="description"
       content="Pastelería Maná — Queques artesanales desde 2006 en Río Cuarto, Alajuela. Presentes en 30 puntos de venta en Zona Norte y Sarapiquí.">
     <title>Pastelería Maná | Queques Artesanales — Río Cuarto</title>
-    <!-- Script anti-flash: aplica el tema y tamaño de fuente guardados antes del primer render, para evitar parpadeo visual -->
     <script>
       (function () {
         var tema = localStorage.getItem("tema");
@@ -28,7 +27,7 @@
   <body>
     <a href="#main" class="skip-link">Saltar al contenido principal</a>
 
-   <!-- Header: navegación principal con Flexbox -->
+    <!-- Header — Flexbox: distribuye logo, enlaces y botones en una sola fila -->
     <header class="header">
       <nav class="header__nav" aria-label="Menú principal">
         <div class="header__logo">
@@ -72,7 +71,7 @@
         </div>
       </section>
 
-      <!-- Stats: cifras destacadas con Flexbox -->
+      <!-- Stats — Flexbox: reparte las cifras en una sola fila horizontal -->
       <section class="stats" aria-label="Estadísticas de Pastelería Maná">
         <div class="stats__grid">
           <div class="stats__item"><span class="stats__numero">20</span><span class="stats__label">Años de experiencia</span></div>
@@ -82,10 +81,13 @@
         </div>
       </section>
 
-      <!-- Nosotros: layout de dos columnas con CSS Grid -->
+      <!-- Nosotros — CSS Grid: alinea imagen y texto en filas y columnas a la vez -->
       <section class="nosotros" id="nosotros" aria-labelledby="nosotros-titulo">
         <div class="nosotros__grid">
-          <figure class="nosotros__imagen"><img src="assets/images/local.webp" alt="Local de Pastelería Maná en Río Cuarto, Alajuela" class="nosotros__foto" width="500" height="400"></figure>
+          <figure class="nosotros__imagen">
+            <img src="assets/images/local.webp" alt="Local de Pastelería Maná en Río Cuarto, Alajuela" class="nosotros__foto" width="500" height="400">
+            <figcaption class="nosotros__pie-foto">Nuestro local en Río Cuarto, Alajuela</figcaption>
+          </figure>
           <div class="nosotros__contenido">
             <p class="seccion__etiqueta">Nuestra historia</p>
             <h2 class="seccion__titulo" id="nosotros-titulo">Pastelería Maná</h2>
@@ -99,7 +101,7 @@
         </div>
       </section>
 
-      <!-- Productos: cuadrícula de tarjetas con CSS Grid -->
+      <!-- Productos — CSS Grid: cuadrícula de tarjetas que cambia de columnas por breakpoint -->
       <section class="productos" id="productos" aria-labelledby="productos-titulo">
         <p class="seccion__etiqueta">Lo que hacemos</p>
         <h2 class="seccion__titulo" id="productos-titulo">Nuestros productos</h2>
@@ -111,7 +113,7 @@
         </div>
       </section>
 
-     <!-- Cobertura: información y mapa con CSS Grid -->
+      <!-- Cobertura — CSS Grid: alinea texto y mapa en filas y columnas a la vez -->
       <section class="cobertura" id="cobertura" aria-labelledby="cobertura-titulo">
         <div class="cobertura__grid">
           <div class="cobertura__info">
@@ -140,7 +142,7 @@
         </address>
       </section>
 
-      <!-- Panel de accesibilidad: segunda funcionalidad de Web Storage (tamaño de fuente) -->
+      <!-- Accesibilidad -->
       <div class="accesibilidad">
         <button class="accesibilidad__boton" id="botonAccesibilidad" aria-label="Abrir opciones de accesibilidad" aria-expanded="false" aria-controls="panelAccesibilidad">
           <img src="assets/icons/icono-accesibilidad.webp" alt="" aria-hidden="true" class="accesibilidad__icono" width="24" height="24">
@@ -155,7 +157,7 @@
       </div>
     </main>
 
-    <!-- Footer: tres columnas con CSS Grid -->
+    <!-- Footer — CSS Grid: tres columnas que colapsan a una sola en móvil -->
     <footer class="footer">
       <h2 class="sr-only">Información del negocio</h2>
       <div class="footer__grid">
