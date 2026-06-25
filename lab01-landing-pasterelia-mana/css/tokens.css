@@ -30,7 +30,7 @@
   --texto-4xl: 2.25rem;
   --texto-5xl: 3rem;
   /*Texto fluido (clamp)*/
-  --texto-hero: clamp(2.2rem, 5vw + 1rem, 4rem);
+  --texto-hero: clamp(2.5rem, 6vw + 1rem, 4.5rem);
 
   --espacio-xs: 0.25rem;
   --espacio-sm: 0.5rem;
