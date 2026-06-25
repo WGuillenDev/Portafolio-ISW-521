@@ -356,7 +356,7 @@ button {
 .hero {
   position: relative;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   min-height: 480px;
   overflow: hidden;
   background-color: var(--color-cafe);
@@ -383,7 +383,7 @@ button {
   display: flex;
   flex-direction: column;
   gap: var(--espacio-md);
-  padding: var(--espacio-3xl) var(--espacio-md);
+  padding: var(--espacio-xl) var(--espacio-md) var(--espacio-3xl);
   max-width: var(--ancho-maximo);
   margin-inline: auto;
   width: 100%;
@@ -402,7 +402,7 @@ button {
 
 .hero__titulo {
   font-family: var(--fuente-display);
-  font-size: var(--texto-4xl);
+  font-size: var(--texto-hero);
   font-weight: 700;
   color: var(--color-crema);
   line-height: 1.15;
@@ -883,10 +883,6 @@ button {
     min-height: 600px;
   }
 
-  .hero__titulo {
-    font-size: var(--texto-5xl);
-  }
-
   .stats__grid {
     flex-wrap: nowrap;
     justify-content: space-around;
@@ -921,10 +917,7 @@ button {
   .hero {
     min-height: 700px;
   }
-  .hero__titulo {
-    font-size: var(--texto-5xl);
-  }
-
+ 
   .productos__grid {
     grid-template-columns: repeat(4, 1fr);
   }
