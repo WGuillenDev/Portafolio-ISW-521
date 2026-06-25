@@ -25,7 +25,7 @@
   </head>
 
   <body>
-    <a href="#main" class="skip-link">Saltar al contenido principal</a>
+    <a href="#contenido-principal" class="skip-link">Saltar al contenido principal</a>
 
     <!-- Header — Flexbox: distribuye logo, enlaces y botones en una sola fila -->
     <header class="header">
@@ -40,6 +40,7 @@
         <ul class="header__links" id="menuLinks">
           <li><a href="#nosotros" class="header__link">Nosotros</a></li>
           <li><a href="#productos" class="header__link">Productos</a></li>
+          <li><a href="#testimonios" class="header__link">Testimonios</a></li>
           <li><a href="#cobertura" class="header__link">Cobertura</a></li>
           <li><a href="#pedidos" class="header__link">Pedidos</a></li>
         </ul>
@@ -56,7 +57,6 @@
       <!-- Hero -->
       <section class="hero" id="hero" aria-labelledby="hero-titulo">
         <video class="hero__video" autoplay muted loop playsinline aria-hidden="true">
-          <source src="video/hero-bg.webm" type="video/webm">
           <source src="video/hero-bg.mp4" type="video/mp4">
         </video>
         <div class="hero__overlay" aria-hidden="true"></div>
@@ -113,6 +113,34 @@
         </div>
       </section>
 
+      <!-- Testimonios — Flexbox: distribuye las citas en una sola fila -->
+      <section class="testimonios" id="testimonios" aria-labelledby="testimonios-titulo">
+        <div class="testimonios__contenedor">
+          <p class="seccion__etiqueta">Lo que dicen nuestros clientes</p>
+          <h2 class="seccion__titulo" id="testimonios-titulo">Testimonios</h2>
+          <div class="testimonios__lista" role="list">
+            <article class="testimonios__item">
+              <blockquote class="testimonios__cita" cite="https://www.facebook.com/Jazpl13">
+                <p>Sin absolutamente deliciosos los pasteles, el tres leches todooo!! Recomiendo 100% por precio y calidad son la mejor opción.</p>
+              </blockquote>
+              <footer><cite><a href="https://www.facebook.com/Jazpl13" target="_blank" rel="noopener noreferrer" class="testimonios__autor-link" aria-label="Ver perfil de Facebook de Jazmín Picado">Jazmín Picado</a></cite></footer>
+            </article>
+            <article class="testimonios__item">
+              <blockquote class="testimonios__cita" cite="https://www.facebook.com/yodana.cambroneroarce">
+                <p>Son los mejores pasteles, puedo decir que del mundo y eso que he viajado muchos gracias a Dios por mi trabajo, he encontrado de todos los platillos de Costa Rica tradicionales, pero pasteles como estos no.</p>
+              </blockquote>
+              <footer><cite><a href="https://www.facebook.com/yodana.cambroneroarce" target="_blank" rel="noopener noreferrer" class="testimonios__autor-link" aria-label="Ver perfil de Facebook de Yodana Cambronero Arce">Yodana Cambronero Arce</a></cite></footer>
+            </article>
+            <article class="testimonios__item">
+              <blockquote class="testimonios__cita" cite="https://www.facebook.com/ericka.sanchezguerrero">
+                <p>Podría asegurar que son los mejores queques de CR!!! Un aplauso para Pastelería Maná!</p>
+              </blockquote>
+              <footer><cite><a href="https://www.facebook.com/ericka.sanchezguerrero" target="_blank" rel="noopener noreferrer" class="testimonios__autor-link" aria-label="Ver perfil de Facebook de Ericka Sánchez Guerrero">Ericka Sánchez Guerrero</a></cite></footer>
+            </article>
+          </div>
+        </div>
+      </section>
+
       <!-- Cobertura — CSS Grid: alinea texto y mapa en filas y columnas a la vez -->
       <section class="cobertura" id="cobertura" aria-labelledby="cobertura-titulo">
         <div class="cobertura__grid">
@@ -127,7 +155,7 @@
             </ul>
           </div>
           <div class="cobertura__mapa">
-            <iframe class="cobertura__mapa-iframe" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3924.983938740886!2d-84.2172137248892!3d10.343169031564406!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8fa088e2aa2fffff%3A0x2cc5c6fbcedf0385!2zUGFzdGVsZXLDrWEgTWFuw6E!5e0!3m2!1ses-419!2scr!4v1781148334732!5m2!1ses-419!2scr" title="Ubicación de Pastelería Maná en Río Cuarto, Alajuela, Costa Rica" width="600" height="450" style="border: 0" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            <iframe class="cobertura__mapa-iframe" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3924.983938740886!2d-84.2172137248892!3d10.343169031564406!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8fa088e2aa2fffff%3A0x2cc5c6fbcedf0385!2zUGFzdGVsZXLDrWEgTWFuw6E!5e0!3m2!1ses-419!2scr!4v1781148334732!5m2!1ses-419!2scr" title="Ubicación de Pastelería Maná en Río Cuarto, Alajuela, Costa Rica" width="600" height="450" style="border: 0" allowfullscreen="" referrerpolicy="no-referrer-when-downgrade"></iframe>
           </div>
         </div>
       </section>
@@ -147,33 +175,56 @@
     <footer class="footer">
       <h2 class="sr-only">Información del negocio</h2>
       <div class="footer__grid">
-        <div class="footer__columna"><h3 class="footer__titulo">Maná Pastelería</h3><p class="footer__texto">Río Cuarto, Alajuela, Costa Rica</p><p class="footer__texto">Fundada en 2006</p><p class="footer__texto">Recetas propias con amor</p></div>
+        <div class="footer__columna">
+          <h3 class="footer__titulo">Maná Pastelería</h3>
+          <p class="footer__texto">Río Cuarto, Alajuela, Costa Rica</p>
+          <p class="footer__texto">Fundada en 2006</p>
+          <p class="footer__texto">Recetas propias con amor</p>
+          <dl class="footer__horario">
+            <dt>Lunes a Sábado</dt>
+            <dd><time datetime="08:00">8:00 am</time> – <time datetime="18:30">6:30 pm</time></dd>
+            <dt>Domingos</dt>
+            <dd><time datetime="08:00">8:00 am</time> – <time datetime="13:30">1:30 pm</time></dd>
+          </dl>
+        </div>
         <div class="footer__columna"><h3 class="footer__titulo">Contacto</h3><address class="footer__contacto"><a href="tel:+50688214221" class="footer__link" aria-label="Llamar a Pastelería Maná">📞 8821-4221</a><a href="https://www.facebook.com/ReposteriaMana" class="footer__link footer__link--con-icono" target="_blank" rel="noopener noreferrer" aria-label="Visitar Facebook de Repostería Maná"><img src="assets/icons/icon-facebook.svg" alt="" aria-hidden="true" class="footer__link-icono" width="18" height="18"> Facebook: Repostería Maná</a><p class="footer__texto">📍 Río Cuarto centro</p></address></div>
-        <div class="footer__columna"><h3 class="footer__titulo">Navegación</h3><nav aria-label="Navegación del pie de página"><a href="#nosotros" class="footer__link">Nosotros</a><a href="#productos" class="footer__link">Productos</a><a href="#cobertura" class="footer__link">Cobertura</a><a href="#pedidos" class="footer__link">Pedidos</a></nav></div>
+        <div class="footer__columna">
+          <h3 class="footer__titulo">Navegación</h3>
+          <nav aria-label="Navegación del pie de página">
+            <ul role="list">
+              <li><a href="#nosotros" class="footer__link">Nosotros</a></li>
+              <li><a href="#productos" class="footer__link">Productos</a></li>
+              <li><a href="#testimonios" class="footer__link">Testimonios</a></li>
+              <li><a href="#cobertura" class="footer__link">Cobertura</a></li>
+              <li><a href="#pedidos" class="footer__link">Pedidos</a></li>
+            </ul>
+          </nav>
+        </div>
       </div>
       <div class="footer__fondo"><p class="footer__creditos">© 2026 Pastelería Maná — Río Cuarto, Alajuela, Costa Rica. Todos los derechos reservados. | Desarrollado por <a href="https://github.com/WGuillenDev" class="footer__link-github" target="_blank" rel="noopener noreferrer" aria-label="Ver perfil de GitHub del desarrollador WGuillenDev">WGuillenDev</a></p></div>
     </footer>
 
     <!-- WhatsApp flotante -->
-      <div class="whatsapp-flotante">
-        <a href="https://wa.me/50688214221" class="whatsapp-flotante__boton" target="_blank" rel="noopener noreferrer" aria-label="Contactar a Pastelería Maná por WhatsApp">
-          <img src="assets/icons/whatsapp.svg" alt="" aria-hidden="true" class="whatsapp-flotante__icono" width="20" height="20">
-        </a>
-      </div>
+    <div class="whatsapp-flotante">
+      <a href="https://wa.me/50688214221" class="whatsapp-flotante__boton" target="_blank" rel="noopener noreferrer" aria-label="Contactar a Pastelería Maná por WhatsApp">
+        <img src="assets/icons/whatsapp.svg" alt="" aria-hidden="true" class="whatsapp-flotante__icono" width="20" height="20">
+      </a>
+    </div>
 
-      <!-- Accesibilidad -->
-      <div class="accesibilidad">
-        <button class="accesibilidad__boton" id="botonAccesibilidad" aria-label="Abrir opciones de accesibilidad" aria-expanded="false" aria-controls="panelAccesibilidad">
-          <img src="assets/icons/icono-accesibilidad.webp" alt="" aria-hidden="true" class="accesibilidad__icono" width="24" height="24">
-        </button>
-        <div class="accesibilidad__panel" id="panelAccesibilidad" role="group" aria-label="Ajustar tamaño de texto" hidden>
-          <p class="accesibilidad__titulo">Tamaño de texto</p>
-          <div class="accesibilidad__controles">
-            <button class="accesibilidad__btn" id="fuenteMenos" aria-label="Reducir tamaño de texto">A−</button>
-            <button class="accesibilidad__btn" id="fuenteMas" aria-label="Aumentar tamaño de texto">A+</button>
-          </div>
+    <!-- Accesibilidad -->
+    <div class="accesibilidad">
+      <button class="accesibilidad__boton" id="botonAccesibilidad" aria-label="Abrir opciones de accesibilidad" aria-expanded="false" aria-controls="panelAccesibilidad">
+        <img src="assets/icons/icono-accesibilidad.webp" alt="" aria-hidden="true" class="accesibilidad__icono" width="24" height="24">
+      </button>
+      <div class="accesibilidad__panel" id="panelAccesibilidad" role="group" aria-label="Ajustar tamaño de texto" hidden>
+        <p class="accesibilidad__titulo">Tamaño de texto</p>
+        <div class="accesibilidad__controles">
+          <button class="accesibilidad__btn" id="fuenteMenos" aria-label="Reducir tamaño de texto">A−</button>
+          <button class="accesibilidad__btn" id="fuenteMas" aria-label="Aumentar tamaño de texto">A+</button>
         </div>
       </div>
+    </div>
+
     <script src="js/main.js"></script>
   </body>
 </html>

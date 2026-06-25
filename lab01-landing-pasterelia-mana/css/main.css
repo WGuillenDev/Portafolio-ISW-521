@@ -414,7 +414,7 @@ button {
 }
 
 .hero__descripcion {
-  font-size: var(--texto-x1);
+  font-size: var(--texto-xl);
   color: var(--color-crema-oscura);
   max-width: 50ch;
   line-height: 1.7;
@@ -654,6 +654,70 @@ button {
   line-height: 1.6;
 }
 
+/* Testimonios */
+.testimonios {
+  background-color: var(--color-cafe);
+  padding: var(--padding-seccion);
+  text-align: center;
+}
+
+.testimonios__contenedor {
+  max-width: var(--ancho-maximo);
+  margin-inline: auto;
+}
+
+.testimonios .seccion__etiqueta {
+  color: var(--color-dorado);
+  text-align: center;
+  display: block;
+}
+
+.testimonios .seccion__titulo {
+  color: var(--color-crema);
+  text-align: center;
+  display: block;
+}
+
+.testimonios__lista {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--espacio-2xl);
+  margin-top: var(--espacio-xl);
+}
+
+.testimonios__item {
+  flex: 1 1 280px;
+  max-width: 320px;
+  margin: 0;
+}
+
+.testimonios__cita {
+  margin: 0;
+}
+
+.testimonios__cita p {
+  font-style: italic;
+  color: var(--color-crema-oscura);
+  line-height: 1.7;
+}
+
+.testimonios__item footer {
+  margin-top: var(--espacio-sm);
+}
+
+.testimonios__autor-link {
+  font-weight: 700;
+  color: var(--color-dorado);
+  text-decoration: underline;
+  text-decoration-color: transparent;
+  transition: text-decoration-color var(--transicion-rapida);
+}
+
+.testimonios__autor-link:hover {
+  text-decoration-color: var(--color-dorado);
+}
+
 /* Cobertura */
 .cobertura {
   padding: var(--padding-seccion);
@@ -793,11 +857,35 @@ button {
   color: var(--color-dorado);
   margin-bottom: var(--espacio-md);
 }
+.footer__titulo--separado {
+  margin-top: var(--espacio-lg);
+  margin-bottom: var(--espacio-xs);
+}
 
 .footer__texto {
   font-size: var(--texto-sm);
   color: var(--color-crema-oscura);
   line-height: 1.8;
+}
+.footer__texto {
+  font-size: var(--texto-sm);
+  color: var(--color-crema-oscura);
+  line-height: 1.8;
+}
+
+.footer__horario {
+  font-size: var(--texto-sm);
+}
+
+.footer__horario dt {
+  color: var(--color-dorado);
+  font-weight: 700;
+  margin-top: var(--espacio-sm);
+}
+
+.footer__horario dd {
+  color: var(--color-crema-oscura);
+  margin-left: 0;
 }
 
 .footer__contacto {
@@ -832,7 +920,7 @@ button {
   color: var(--color-dorado);
 }
 
-.footer__columna nav {
+.footer__columna nav ul {
   display: flex;
   flex-direction: column;
 }
