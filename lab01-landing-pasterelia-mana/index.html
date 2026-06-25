@@ -1,230 +1,352 @@
 <!doctype html>
-<html lang="es">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta
-      name="description"
-      content="Pastelería Maná — Queques artesanales desde 2006 en Río Cuarto, Alajuela. Presentes en 30 puntos de venta en Zona Norte y Sarapiquí.">
-    <title>Pastelería Maná | Queques Artesanales — Río Cuarto</title>
-    <script>
-      (function () {
-        var tema = localStorage.getItem("tema");
-        if (tema === "oscuro") {
-          document.documentElement.classList.add("tema-oscuro");
-        }
-        var fuente = localStorage.getItem("tamanoFuente");
-        if (fuente) {
-          document.documentElement.style.fontSize = fuente + "%";
-        }
-      })();
-    </script>
-    <link rel="stylesheet" href="css/tokens.css">
-    <link rel="stylesheet" href="css/main.css">
-    <link rel="stylesheet" href="css/animations.css">
-  </head>
+<html lang="es-CR">
 
-  <body>
-    <a href="#contenido-principal" class="skip-link">Saltar al contenido principal</a>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description"
+    content="Pastelería Maná — Queques artesanales desde 2006 en Río Cuarto, Alajuela. Presentes en 30 puntos de venta en Zona Norte y Sarapiquí.">
+  <title>Pastelería Maná | Queques Artesanales — Río Cuarto</title>
+  <meta name="author" content="Pastelería Maná">
 
-    <!-- Header — Flexbox: distribuye logo, enlaces y botones en una sola fila -->
-    <header class="header">
-      <nav class="header__nav" aria-label="Menú principal">
-        <div class="header__logo">
-          <img src="assets/icons/logo.webp" alt="Logo de Pastelería Maná" class="header__logo-imagen" width="56" height="56">
-          <div class="header__logo-texto">
-            <span class="header__logo-nombre">Maná</span>
-            <span class="header__logo-subtitulo">Pastelería Artesanal</span>
-          </div>
-        </div>
-        <ul class="header__links" id="menuLinks">
-          <li><a href="#nosotros" class="header__link">Nosotros</a></li>
-          <li><a href="#productos" class="header__link">Productos</a></li>
-          <li><a href="#testimonios" class="header__link">Testimonios</a></li>
-          <li><a href="#cobertura" class="header__link">Cobertura</a></li>
-          <li><a href="#pedidos" class="header__link">Pedidos</a></li>
-        </ul>
-        <button class="header__toggle-tema" id="toggleTema" aria-label="Cambiar tema claro u oscuro">
-          <span class="header__toggle-icono" aria-hidden="true"></span>
-          <span class="header__toggle-texto">Modo oscuro</span>
-        </button>
-        <button class="header__menu-movil" id="menuMovil" aria-label="Abrir menú de navegación" aria-controls="menuLinks" aria-expanded="false">☰</button>
-      </nav>
-    </header>
+  <!-- Open Graph / SEO Social -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Pastelería Maná — Río Cuarto, Alajuela">
+  <meta property="og:description"
+    content="Queques artesanales con recetas propias desde 2006. Presentes en 30 puntos de venta en Zona Norte y Sarapiquí, Costa Rica.">
+  <meta property="og:locale" content="es_CR">
+  
+  <script>
+    (function () {
+      var tema = localStorage.getItem("tema");
+      if (tema === "oscuro") {
+        document.documentElement.classList.add("tema-oscuro");
+      }
+      var fuente = localStorage.getItem("tamanoFuente");
+      if (fuente) {
+        document.documentElement.style.fontSize = fuente + "%";
+      }
+    })();
+  </script>
+  <link rel="stylesheet" href="css/tokens.css">
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/animations.css">
+</head>
 
-    <!-- Main -->
-    <main id="contenido-principal" tabindex="-1">
-      <!-- Hero -->
-      <section class="hero" id="hero" aria-labelledby="hero-titulo">
-        <video class="hero__video" autoplay muted loop playsinline aria-hidden="true">
-          <source src="video/hero-bg.mp4" type="video/mp4">
-        </video>
-        <div class="hero__overlay" aria-hidden="true"></div>
-        <div class="hero__contenido">
-          <p class="hero__badge">Desde 2006 — Río Cuarto, Alajuela</p>
-          <h1 class="hero__titulo" id="hero-titulo">Cada queque,<br><span class="hero__titulo-acento">una historia.</span></h1>
-          <p class="hero__descripcion">Recetas propias, ingredientes de calidad y 20 años de amor artesanal. Presentes en 30 puntos de venta en Zona Norte y Sarapiquí.</p>
-          <div class="hero__botones">
-            <a href="#pedidos" class="btn btn--primario">Hacer un pedido</a>
-            <a href="#productos" class="btn btn--secundario">Ver productos</a>
-          </div>
-        </div>
-      </section>
+<body>
+  <a href="#contenido-principal" class="skip-link">Saltar al contenido principal</a>
 
-      <!-- Stats — Flexbox: reparte las cifras en una sola fila horizontal -->
-      <section class="stats" aria-label="Estadísticas de Pastelería Maná">
-        <div class="stats__grid">
-          <div class="stats__item"><span class="stats__numero">20</span><span class="stats__label">Años de experiencia</span></div>
-          <div class="stats__item"><span class="stats__numero">30</span><span class="stats__label">Puntos de venta</span></div>
-          <div class="stats__item"><span class="stats__numero">100%</span><span class="stats__label">Recetas propias</span></div>
-          <div class="stats__item"><span class="stats__numero">2</span><span class="stats__label">Zonas cubiertas</span></div>
-        </div>
-      </section>
-
-      <!-- Nosotros — CSS Grid: alinea imagen y texto en filas y columnas a la vez -->
-      <section class="nosotros" id="nosotros" aria-labelledby="nosotros-titulo">
-        <div class="nosotros__grid">
-          <figure class="nosotros__imagen">
-            <img src="assets/images/local.webp" alt="Local de Pastelería Maná en Río Cuarto, Alajuela" class="nosotros__foto" width="500" height="400">
-            <figcaption class="nosotros__pie-foto">Nuestro local en Río Cuarto, Alajuela</figcaption>
-          </figure>
-          <div class="nosotros__contenido">
-            <p class="seccion__etiqueta">Nuestra historia</p>
-            <h2 class="seccion__titulo" id="nosotros-titulo">Pastelería Maná</h2>
-            <p class="nosotros__texto">Fundada en 2006 en Río Cuarto, Alajuela. Nos dedicamos tiempo y amor a cada pastel, cuidando los colores y el sabor con recetas propias que nos hacen únicos en la región.</p>
-            <ul class="nosotros__valores">
-              <li class="nosotros__valor"><span class="nosotros__valor-icono" aria-hidden="true">❤️</span><div class="nosotros__valor-cuerpo"><h3 class="nosotros__valor-titulo">Misión</h3><p class="nosotros__valor-texto">Que cada cumpleaños sea mágico e inolvidable en sabor y decoración.</p></div></li>
-              <li class="nosotros__valor"><span class="nosotros__valor-icono" aria-hidden="true">⭐</span><div class="nosotros__valor-cuerpo"><h3 class="nosotros__valor-titulo">Visión</h3><p class="nosotros__valor-texto">Estar en cada celebración familiar de la Zona Norte.</p></div></li>
-              <li class="nosotros__valor"><span class="nosotros__valor-icono" aria-hidden="true">🏆</span><div class="nosotros__valor-cuerpo"><h3 class="nosotros__valor-titulo">Valores</h3><p class="nosotros__valor-texto">Humildad y amor genuino hacia cada cliente.</p></div></li>
-            </ul>
-          </div>
-        </div>
-      </section>
-
-      <!-- Productos — CSS Grid: cuadrícula de tarjetas que cambia de columnas por breakpoint -->
-      <section class="productos" id="productos" aria-labelledby="productos-titulo">
-        <p class="seccion__etiqueta">Lo que hacemos</p>
-        <h2 class="seccion__titulo" id="productos-titulo">Nuestros productos</h2>
-        <div class="productos__grid">
-          <article class="productos__card" aria-label="Queque húmedo"><figure class="productos__card-imagen"><img src="assets/images/queque-humedo.webp" alt="Queque húmedo de Pastelería Maná, el más vendido" class="productos__foto" width="300" height="200"></figure><div class="productos__card-cuerpo"><p class="productos__badge">Más vendido</p><h3 class="productos__nombre">Queque húmedo</h3><p class="productos__descripcion">El favorito de nuestros clientes, jugoso y con sabor inigualable.</p></div></article>
-          <article class="productos__card" aria-label="Queque seco"><figure class="productos__card-imagen"><img src="assets/images/queque-seco.webp" alt="Queque seco de Pastelería Maná, ideal para celebraciones" class="productos__foto" width="300" height="200"></figure><div class="productos__card-cuerpo"><h3 class="productos__nombre">Queque seco</h3><p class="productos__descripcion">Textura perfecta, ideal para celebraciones y reuniones familiares.</p></div></article>
-          <article class="productos__card" aria-label="Queque personalizado"><figure class="productos__card-imagen"><img src="assets/images/queque-personalizado-1.webp" alt="Queque personalizado de Pastelería Maná con decoración a gusto del cliente" class="productos__foto" width="300" height="200"></figure><div class="productos__card-cuerpo"><p class="productos__badge productos__badge--encargo">Por encargo</p><h3 class="productos__nombre">Queque personalizado</h3><p class="productos__descripcion">Diseño y decoración a tu gusto. Pedido con anticipación, retiro en punto de venta.</p></div></article>
-          <article class="productos__card" aria-label="Queque personalizado primera comunión"><figure class="productos__card-imagen"><img src="assets/images/queque-personalizado-2.webp" alt="Queque personalizado de Pastelería Maná para primera comunión con decoración religiosa" class="productos__foto" width="300" height="200"></figure><div class="productos__card-cuerpo"><p class="productos__badge productos__badge--encargo">Por encargo</p><h3 class="productos__nombre">Queque primera comunión</h3><p class="productos__descripcion">Decoración especial para ocasiones religiosas y familiares inolvidables.</p></div></article>
-        </div>
-      </section>
-
-      <!-- Testimonios — Flexbox: distribuye las citas en una sola fila -->
-      <section class="testimonios" id="testimonios" aria-labelledby="testimonios-titulo">
-        <div class="testimonios__contenedor">
-          <p class="seccion__etiqueta">Lo que dicen nuestros clientes</p>
-          <h2 class="seccion__titulo" id="testimonios-titulo">Testimonios</h2>
-          <div class="testimonios__lista" role="list">
-            <article class="testimonios__item">
-              <blockquote class="testimonios__cita" cite="https://www.facebook.com/Jazpl13">
-                <p>Sin absolutamente deliciosos los pasteles, el tres leches todooo!! Recomiendo 100% por precio y calidad son la mejor opción.</p>
-              </blockquote>
-              <footer><cite><a href="https://www.facebook.com/Jazpl13" target="_blank" rel="noopener noreferrer" class="testimonios__autor-link" aria-label="Ver perfil de Facebook de Jazmín Picado">Jazmín Picado</a></cite></footer>
-            </article>
-            <article class="testimonios__item">
-              <blockquote class="testimonios__cita" cite="https://www.facebook.com/yodana.cambroneroarce">
-                <p>Son los mejores pasteles, puedo decir que del mundo y eso que he viajado muchos gracias a Dios por mi trabajo, he encontrado de todos los platillos de Costa Rica tradicionales, pero pasteles como estos no.</p>
-              </blockquote>
-              <footer><cite><a href="https://www.facebook.com/yodana.cambroneroarce" target="_blank" rel="noopener noreferrer" class="testimonios__autor-link" aria-label="Ver perfil de Facebook de Yodana Cambronero Arce">Yodana Cambronero Arce</a></cite></footer>
-            </article>
-            <article class="testimonios__item">
-              <blockquote class="testimonios__cita" cite="https://www.facebook.com/ericka.sanchezguerrero">
-                <p>Podría asegurar que son los mejores queques de CR!!! Un aplauso para Pastelería Maná!</p>
-              </blockquote>
-              <footer><cite><a href="https://www.facebook.com/ericka.sanchezguerrero" target="_blank" rel="noopener noreferrer" class="testimonios__autor-link" aria-label="Ver perfil de Facebook de Ericka Sánchez Guerrero">Ericka Sánchez Guerrero</a></cite></footer>
-            </article>
-          </div>
-        </div>
-      </section>
-
-      <!-- Cobertura — CSS Grid: alinea texto y mapa en filas y columnas a la vez -->
-      <section class="cobertura" id="cobertura" aria-labelledby="cobertura-titulo">
-        <div class="cobertura__grid">
-          <div class="cobertura__info">
-            <p class="seccion__etiqueta">Dónde nos encontrás</p>
-            <h2 class="seccion__titulo" id="cobertura-titulo">Cobertura regional</h2>
-            <p class="cobertura__texto">Comenzamos en Río Cuarto y hoy llegamos a toda la Zona Norte y Sarapiquí con 30 puntos de venta distribuidos estratégicamente.</p>
-            <ul class="cobertura__puntos">
-              <li class="cobertura__punto"><span class="cobertura__punto-icono" aria-hidden="true">📍</span><div class="cobertura__punto-cuerpo"><h3 class="cobertura__punto-titulo">Punto principal</h3><p class="cobertura__punto-texto">Río Cuarto centro, contiguo a la Fuerza Pública</p></div></li>
-              <li class="cobertura__punto"><span class="cobertura__punto-icono" aria-hidden="true">🏪</span><div class="cobertura__punto-cuerpo"><h3 class="cobertura__punto-titulo">30 puntos de venta</h3><p class="cobertura__punto-texto">Distribuidos en Zona Norte y Sarapiquí</p></div></li>
-              <li class="cobertura__punto"><span class="cobertura__punto-icono" aria-hidden="true">🕐</span><div class="cobertura__punto-cuerpo"><h3 class="cobertura__punto-titulo">Pedidos personalizados</h3><p class="cobertura__punto-texto">Con anticipación — retiro en punto de venta</p></div></li>
-            </ul>
-          </div>
-          <div class="cobertura__mapa">
-            <iframe class="cobertura__mapa-iframe" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3924.983938740886!2d-84.2172137248892!3d10.343169031564406!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8fa088e2aa2fffff%3A0x2cc5c6fbcedf0385!2zUGFzdGVsZXLDrWEgTWFuw6E!5e0!3m2!1ses-419!2scr!4v1781148334732!5m2!1ses-419!2scr" title="Ubicación de Pastelería Maná en Río Cuarto, Alajuela, Costa Rica" width="600" height="450" style="border: 0" allowfullscreen="" referrerpolicy="no-referrer-when-downgrade"></iframe>
-          </div>
-        </div>
-      </section>
-
-      <!-- Pedidos -->
-      <section class="pedidos" id="pedidos" aria-labelledby="pedidos-titulo">
-        <p class="seccion__etiqueta">Hacé tu pedido</p>
-        <h2 class="seccion__titulo" id="pedidos-titulo">Contactanos</h2>
-        <p class="pedidos__texto">Escribinos directamente por WhatsApp y te respondemos a la brevedad para coordinar tu pedido personalizado.</p>
-        <address class="pedidos__contacto">
-          <a href="https://wa.me/50688214221" class="btn btn--whatsapp" target="_blank" rel="noopener noreferrer" aria-label="Contactar a Pastelería Maná por WhatsApp al 8821-4221">📱 WhatsApp: 8821-4221</a>
-        </address>
-      </section>
-    </main>
-
-    <!-- Footer — CSS Grid: tres columnas que colapsan a una sola en móvil -->
-    <footer class="footer">
-      <h2 class="sr-only">Información del negocio</h2>
-      <div class="footer__grid">
-        <div class="footer__columna">
-          <h3 class="footer__titulo">Maná Pastelería</h3>
-          <p class="footer__texto">Río Cuarto, Alajuela, Costa Rica</p>
-          <p class="footer__texto">Fundada en 2006</p>
-          <p class="footer__texto">Recetas propias con amor</p>
-          <dl class="footer__horario">
-            <dt>Lunes a Sábado</dt>
-            <dd><time datetime="08:00">8:00 am</time> – <time datetime="18:30">6:30 pm</time></dd>
-            <dt>Domingos</dt>
-            <dd><time datetime="08:00">8:00 am</time> – <time datetime="13:30">1:30 pm</time></dd>
-          </dl>
-        </div>
-        <div class="footer__columna"><h3 class="footer__titulo">Contacto</h3><address class="footer__contacto"><a href="tel:+50688214221" class="footer__link" aria-label="Llamar a Pastelería Maná">📞 8821-4221</a><a href="https://www.facebook.com/ReposteriaMana" class="footer__link footer__link--con-icono" target="_blank" rel="noopener noreferrer" aria-label="Visitar Facebook de Repostería Maná"><img src="assets/icons/icon-facebook.svg" alt="" aria-hidden="true" class="footer__link-icono" width="18" height="18"> Facebook: Repostería Maná</a><p class="footer__texto">📍 Río Cuarto centro</p></address></div>
-        <div class="footer__columna">
-          <h3 class="footer__titulo">Navegación</h3>
-          <nav aria-label="Navegación del pie de página">
-            <ul role="list">
-              <li><a href="#nosotros" class="footer__link">Nosotros</a></li>
-              <li><a href="#productos" class="footer__link">Productos</a></li>
-              <li><a href="#testimonios" class="footer__link">Testimonios</a></li>
-              <li><a href="#cobertura" class="footer__link">Cobertura</a></li>
-              <li><a href="#pedidos" class="footer__link">Pedidos</a></li>
-            </ul>
-          </nav>
+  <!-- Header — Flexbox: distribuye logo, enlaces y botones en una sola fila -->
+  <header class="header">
+    <nav class="header__nav" aria-label="Menú principal">
+      <div class="header__logo">
+        <img src="assets/icons/logo.webp" alt="Logo de Pastelería Maná" class="header__logo-imagen" width="56"
+          height="56">
+        <div class="header__logo-texto">
+          <span class="header__logo-nombre">Maná</span>
+          <span class="header__logo-subtitulo">Pastelería Artesanal</span>
         </div>
       </div>
-      <div class="footer__fondo"><p class="footer__creditos">© 2026 Pastelería Maná — Río Cuarto, Alajuela, Costa Rica. Todos los derechos reservados. | Desarrollado por <a href="https://github.com/WGuillenDev" class="footer__link-github" target="_blank" rel="noopener noreferrer" aria-label="Ver perfil de GitHub del desarrollador WGuillenDev">WGuillenDev</a></p></div>
-    </footer>
-
-    <!-- WhatsApp flotante -->
-    <div class="whatsapp-flotante">
-      <a href="https://wa.me/50688214221" class="whatsapp-flotante__boton" target="_blank" rel="noopener noreferrer" aria-label="Contactar a Pastelería Maná por WhatsApp">
-        <img src="assets/icons/whatsapp.svg" alt="" aria-hidden="true" class="whatsapp-flotante__icono" width="20" height="20">
-      </a>
-    </div>
-
-    <!-- Accesibilidad -->
-    <div class="accesibilidad">
-      <button class="accesibilidad__boton" id="botonAccesibilidad" aria-label="Abrir opciones de accesibilidad" aria-expanded="false" aria-controls="panelAccesibilidad">
-        <img src="assets/icons/icono-accesibilidad.webp" alt="" aria-hidden="true" class="accesibilidad__icono" width="24" height="24">
+      <ul class="header__links" id="menuLinks">
+        <li><a href="#nosotros" class="header__link">Nosotros</a></li>
+        <li><a href="#productos" class="header__link">Productos</a></li>
+        <li><a href="#testimonios" class="header__link">Testimonios</a></li>
+        <li><a href="#cobertura" class="header__link">Cobertura</a></li>
+        <li><a href="#pedidos" class="header__link">Pedidos</a></li>
+      </ul>
+      <button class="header__toggle-tema" id="toggleTema" aria-label="Cambiar tema claro u oscuro">
+        <span class="header__toggle-icono" aria-hidden="true"></span>
+        <span class="header__toggle-texto">Modo oscuro</span>
       </button>
-      <div class="accesibilidad__panel" id="panelAccesibilidad" role="group" aria-label="Ajustar tamaño de texto" hidden>
-        <p class="accesibilidad__titulo">Tamaño de texto</p>
-        <div class="accesibilidad__controles">
-          <button class="accesibilidad__btn" id="fuenteMenos" aria-label="Reducir tamaño de texto">A−</button>
-          <button class="accesibilidad__btn" id="fuenteMas" aria-label="Aumentar tamaño de texto">A+</button>
+      <button class="header__menu-movil" id="menuMovil" aria-label="Abrir menú de navegación" aria-controls="menuLinks"
+        aria-expanded="false">☰</button>
+    </nav>
+  </header>
+
+  <!-- Main -->
+  <main id="contenido-principal" tabindex="-1">
+    <!-- Hero -->
+    <section class="hero" id="hero" aria-labelledby="hero-titulo">
+      <video class="hero__video" autoplay muted loop playsinline aria-hidden="true">
+        <source src="video/hero-bg.mp4" type="video/mp4">
+      </video>
+      <div class="hero__overlay" aria-hidden="true"></div>
+      <div class="hero__contenido">
+        <p class="hero__badge">Desde 2006 — Río Cuarto, Alajuela</p>
+        <h1 class="hero__titulo" id="hero-titulo">Cada queque,<br><span class="hero__titulo-acento">una historia.</span>
+        </h1>
+        <p class="hero__descripcion">Recetas propias, ingredientes de calidad y 20 años de amor artesanal. Presentes en
+          30 puntos de venta en Zona Norte y Sarapiquí.</p>
+        <div class="hero__botones">
+          <a href="#pedidos" class="btn btn--primario">Hacer un pedido</a>
+          <a href="#productos" class="btn btn--secundario">Ver productos</a>
         </div>
       </div>
-    </div>
+    </section>
 
-    <script src="js/main.js"></script>
-  </body>
+    <!-- Stats — Flexbox: reparte las cifras en una sola fila horizontal -->
+    <section class="stats" aria-label="Estadísticas de Pastelería Maná">
+      <div class="stats__grid">
+        <div class="stats__item"><span class="stats__numero">20</span><span class="stats__label">Años de
+            experiencia</span></div>
+        <div class="stats__item"><span class="stats__numero">30</span><span class="stats__label">Puntos de venta</span>
+        </div>
+        <div class="stats__item"><span class="stats__numero">100%</span><span class="stats__label">Recetas
+            propias</span></div>
+        <div class="stats__item"><span class="stats__numero">2</span><span class="stats__label">Zonas cubiertas</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Nosotros — CSS Grid: alinea imagen y texto en filas y columnas a la vez -->
+    <section class="nosotros" id="nosotros" aria-labelledby="nosotros-titulo">
+      <div class="nosotros__grid">
+        <figure class="nosotros__imagen">
+          <img src="assets/images/local.webp" alt="Local de Pastelería Maná en Río Cuarto, Alajuela"
+            class="nosotros__foto" width="500" height="400">
+          <figcaption class="nosotros__pie-foto">Nuestro local en Río Cuarto, Alajuela</figcaption>
+        </figure>
+        <div class="nosotros__contenido">
+          <p class="seccion__etiqueta">Nuestra historia</p>
+          <h2 class="seccion__titulo" id="nosotros-titulo">Pastelería Maná</h2>
+          <p class="nosotros__texto">Fundada en 2006 en Río Cuarto, Alajuela. Nos dedicamos tiempo y amor a cada pastel,
+            cuidando los colores y el sabor con recetas propias que nos hacen únicos en la región.</p>
+          <ul class="nosotros__valores">
+            <li class="nosotros__valor"><span class="nosotros__valor-icono" aria-hidden="true">❤️</span>
+              <div class="nosotros__valor-cuerpo">
+                <h3 class="nosotros__valor-titulo">Misión</h3>
+                <p class="nosotros__valor-texto">Que cada cumpleaños sea mágico e inolvidable en sabor y decoración.</p>
+              </div>
+            </li>
+            <li class="nosotros__valor"><span class="nosotros__valor-icono" aria-hidden="true">⭐</span>
+              <div class="nosotros__valor-cuerpo">
+                <h3 class="nosotros__valor-titulo">Visión</h3>
+                <p class="nosotros__valor-texto">Estar en cada celebración familiar de la Zona Norte.</p>
+              </div>
+            </li>
+            <li class="nosotros__valor"><span class="nosotros__valor-icono" aria-hidden="true">🏆</span>
+              <div class="nosotros__valor-cuerpo">
+                <h3 class="nosotros__valor-titulo">Valores</h3>
+                <p class="nosotros__valor-texto">Humildad y amor genuino hacia cada cliente.</p>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Productos — CSS Grid: cuadrícula de tarjetas que cambia de columnas por breakpoint -->
+    <section class="productos" id="productos" aria-labelledby="productos-titulo">
+      <p class="seccion__etiqueta">Lo que hacemos</p>
+      <h2 class="seccion__titulo" id="productos-titulo">Nuestros productos</h2>
+      <div class="productos__grid">
+        <article class="productos__card" aria-label="Queque húmedo">
+          <figure class="productos__card-imagen"><img src="assets/images/queque-humedo.webp"
+              alt="Queque húmedo de Pastelería Maná, el más vendido" class="productos__foto" width="300" height="200">
+          </figure>
+          <div class="productos__card-cuerpo">
+            <p class="productos__badge">Más vendido</p>
+            <h3 class="productos__nombre">Queque húmedo</h3>
+            <p class="productos__descripcion">El favorito de nuestros clientes, jugoso y con sabor inigualable.</p>
+          </div>
+        </article>
+        <article class="productos__card" aria-label="Queque seco">
+          <figure class="productos__card-imagen"><img src="assets/images/queque-seco.webp"
+              alt="Queque seco de Pastelería Maná, ideal para celebraciones" class="productos__foto" width="300"
+              height="200"></figure>
+          <div class="productos__card-cuerpo">
+            <h3 class="productos__nombre">Queque seco</h3>
+            <p class="productos__descripcion">Textura perfecta, ideal para celebraciones y reuniones familiares.</p>
+          </div>
+        </article>
+        <article class="productos__card" aria-label="Queque personalizado">
+          <figure class="productos__card-imagen"><img src="assets/images/queque-personalizado-1.webp"
+              alt="Queque personalizado de Pastelería Maná con decoración a gusto del cliente" class="productos__foto"
+              width="300" height="200"></figure>
+          <div class="productos__card-cuerpo">
+            <p class="productos__badge productos__badge--encargo">Por encargo</p>
+            <h3 class="productos__nombre">Queque personalizado</h3>
+            <p class="productos__descripcion">Diseño y decoración a tu gusto. Pedido con anticipación, retiro en punto
+              de venta.</p>
+          </div>
+        </article>
+        <article class="productos__card" aria-label="Queque personalizado primera comunión">
+          <figure class="productos__card-imagen"><img src="assets/images/queque-personalizado-2.webp"
+              alt="Queque personalizado de Pastelería Maná para primera comunión con decoración religiosa"
+              class="productos__foto" width="300" height="200"></figure>
+          <div class="productos__card-cuerpo">
+            <p class="productos__badge productos__badge--encargo">Por encargo</p>
+            <h3 class="productos__nombre">Queque primera comunión</h3>
+            <p class="productos__descripcion">Decoración especial para ocasiones religiosas y familiares inolvidables.
+            </p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- Testimonios — Flexbox: distribuye las citas en una sola fila -->
+    <section class="testimonios" id="testimonios" aria-labelledby="testimonios-titulo">
+      <div class="testimonios__contenedor">
+        <p class="seccion__etiqueta">Lo que dicen nuestros clientes</p>
+        <h2 class="seccion__titulo" id="testimonios-titulo">Testimonios</h2>
+        <div class="testimonios__lista" role="list">
+          <article class="testimonios__item">
+            <blockquote class="testimonios__cita" cite="https://www.facebook.com/Jazpl13">
+              <p>Sin absolutamente deliciosos los pasteles, el tres leches todooo!! Recomiendo 100% por precio y calidad
+                son la mejor opción.</p>
+            </blockquote>
+            <footer><cite><a href="https://www.facebook.com/Jazpl13" target="_blank" rel="noopener noreferrer"
+                  class="testimonios__autor-link" aria-label="Ver perfil de Facebook de Jazmín Picado">Jazmín
+                  Picado</a></cite></footer>
+          </article>
+          <article class="testimonios__item">
+            <blockquote class="testimonios__cita" cite="https://www.facebook.com/yodana.cambroneroarce">
+              <p>Son los mejores pasteles, puedo decir que del mundo y eso que he viajado muchos gracias a Dios por mi
+                trabajo, he encontrado de todos los platillos de Costa Rica tradicionales, pero pasteles como estos no.
+              </p>
+            </blockquote>
+            <footer><cite><a href="https://www.facebook.com/yodana.cambroneroarce" target="_blank"
+                  rel="noopener noreferrer" class="testimonios__autor-link"
+                  aria-label="Ver perfil de Facebook de Yodana Cambronero Arce">Yodana Cambronero Arce</a></cite>
+            </footer>
+          </article>
+          <article class="testimonios__item">
+            <blockquote class="testimonios__cita" cite="https://www.facebook.com/ericka.sanchezguerrero">
+              <p>Podría asegurar que son los mejores queques de CR!!! Un aplauso para Pastelería Maná!</p>
+            </blockquote>
+            <footer><cite><a href="https://www.facebook.com/ericka.sanchezguerrero" target="_blank"
+                  rel="noopener noreferrer" class="testimonios__autor-link"
+                  aria-label="Ver perfil de Facebook de Ericka Sánchez Guerrero">Ericka Sánchez Guerrero</a></cite>
+            </footer>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Cobertura — CSS Grid: alinea texto y mapa en filas y columnas a la vez -->
+    <section class="cobertura" id="cobertura" aria-labelledby="cobertura-titulo">
+      <div class="cobertura__grid">
+        <div class="cobertura__info">
+          <p class="seccion__etiqueta">Dónde nos encontrás</p>
+          <h2 class="seccion__titulo" id="cobertura-titulo">Cobertura regional</h2>
+          <p class="cobertura__texto">Comenzamos en Río Cuarto y hoy llegamos a toda la Zona Norte y Sarapiquí con 30
+            puntos de venta distribuidos estratégicamente.</p>
+          <ul class="cobertura__puntos">
+            <li class="cobertura__punto"><span class="cobertura__punto-icono" aria-hidden="true">📍</span>
+              <div class="cobertura__punto-cuerpo">
+                <h3 class="cobertura__punto-titulo">Punto principal</h3>
+                <p class="cobertura__punto-texto">Río Cuarto centro, contiguo a la Fuerza Pública</p>
+              </div>
+            </li>
+            <li class="cobertura__punto"><span class="cobertura__punto-icono" aria-hidden="true">🏪</span>
+              <div class="cobertura__punto-cuerpo">
+                <h3 class="cobertura__punto-titulo">30 puntos de venta</h3>
+                <p class="cobertura__punto-texto">Distribuidos en Zona Norte y Sarapiquí</p>
+              </div>
+            </li>
+            <li class="cobertura__punto"><span class="cobertura__punto-icono" aria-hidden="true">🕐</span>
+              <div class="cobertura__punto-cuerpo">
+                <h3 class="cobertura__punto-titulo">Pedidos personalizados</h3>
+                <p class="cobertura__punto-texto">Con anticipación — retiro en punto de venta</p>
+              </div>
+            </li>
+          </ul>
+        </div>
+        <div class="cobertura__mapa">
+          <iframe class="cobertura__mapa-iframe"
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3924.983938740886!2d-84.2172137248892!3d10.343169031564406!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8fa088e2aa2fffff%3A0x2cc5c6fbcedf0385!2zUGFzdGVsZXLDrWEgTWFuw6E!5e0!3m2!1ses-419!2scr!4v1781148334732!5m2!1ses-419!2scr"
+            title="Ubicación de Pastelería Maná en Río Cuarto, Alajuela, Costa Rica" width="600" height="450"
+            style="border: 0" allowfullscreen="" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- Pedidos -->
+    <section class="pedidos" id="pedidos" aria-labelledby="pedidos-titulo">
+      <p class="seccion__etiqueta">Hacé tu pedido</p>
+      <h2 class="seccion__titulo" id="pedidos-titulo">Contactanos</h2>
+      <p class="pedidos__texto">Escribinos directamente por WhatsApp y te respondemos a la brevedad para coordinar tu
+        pedido personalizado.</p>
+      <address class="pedidos__contacto">
+        <a href="https://wa.me/50688214221" class="btn btn--whatsapp" target="_blank" rel="noopener noreferrer"
+          aria-label="Contactar a Pastelería Maná por WhatsApp al 8821-4221">📱 WhatsApp: 8821-4221</a>
+      </address>
+    </section>
+  </main>
+
+  <!-- Footer — CSS Grid: tres columnas que colapsan a una sola en móvil -->
+  <footer class="footer">
+    <h2 class="sr-only">Información del negocio</h2>
+    <div class="footer__grid">
+      <div class="footer__columna">
+        <h3 class="footer__titulo">Maná Pastelería</h3>
+        <p class="footer__texto">Río Cuarto, Alajuela, Costa Rica</p>
+        <p class="footer__texto">Fundada en 2006</p>
+        <p class="footer__texto">Recetas propias con amor</p>
+        <dl class="footer__horario">
+          <dt>Lunes a Sábado</dt>
+          <dd><time datetime="08:00">8:00 am</time> – <time datetime="18:30">6:30 pm</time></dd>
+          <dt>Domingos</dt>
+          <dd><time datetime="08:00">8:00 am</time> – <time datetime="13:30">1:30 pm</time></dd>
+        </dl>
+      </div>
+      <div class="footer__columna">
+        <h3 class="footer__titulo">Contacto</h3>
+        <address class="footer__contacto"><a href="tel:+50688214221" class="footer__link"
+            aria-label="Llamar a Pastelería Maná">📞 8821-4221</a><a href="https://www.facebook.com/ReposteriaMana"
+            class="footer__link footer__link--con-icono" target="_blank" rel="noopener noreferrer"
+            aria-label="Visitar Facebook de Repostería Maná"><img src="assets/icons/icon-facebook.svg" alt=""
+              aria-hidden="true" class="footer__link-icono" width="18" height="18"> Facebook: Repostería Maná</a>
+          <p class="footer__texto">📍 Río Cuarto centro</p>
+        </address>
+      </div>
+      <div class="footer__columna">
+        <h3 class="footer__titulo">Navegación</h3>
+        <nav aria-label="Navegación del pie de página">
+          <ul role="list">
+            <li><a href="#nosotros" class="footer__link">Nosotros</a></li>
+            <li><a href="#productos" class="footer__link">Productos</a></li>
+            <li><a href="#testimonios" class="footer__link">Testimonios</a></li>
+            <li><a href="#cobertura" class="footer__link">Cobertura</a></li>
+            <li><a href="#pedidos" class="footer__link">Pedidos</a></li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+    <div class="footer__fondo">
+      <p class="footer__creditos">© 2026 Pastelería Maná — Río Cuarto, Alajuela, Costa Rica. Todos los derechos
+        reservados. | Desarrollado por <a href="https://github.com/WGuillenDev" class="footer__link-github"
+          target="_blank" rel="noopener noreferrer"
+          aria-label="Ver perfil de GitHub del desarrollador WGuillenDev">WGuillenDev</a></p>
+    </div>
+  </footer>
+
+  <!-- WhatsApp flotante -->
+  <div class="whatsapp-flotante">
+    <a href="https://wa.me/50688214221" class="whatsapp-flotante__boton" target="_blank" rel="noopener noreferrer"
+      aria-label="Contactar a Pastelería Maná por WhatsApp">
+      <img src="assets/icons/whatsapp.svg" alt="" aria-hidden="true" class="whatsapp-flotante__icono" width="20"
+        height="20">
+    </a>
+  </div>
+
+  <!-- Accesibilidad -->
+  <div class="accesibilidad">
+    <button class="accesibilidad__boton" id="botonAccesibilidad" aria-label="Abrir opciones de accesibilidad"
+      aria-expanded="false" aria-controls="panelAccesibilidad">
+      <img src="assets/icons/icono-accesibilidad.webp" alt="" aria-hidden="true" class="accesibilidad__icono" width="24"
+        height="24">
+    </button>
+    <div class="accesibilidad__panel" id="panelAccesibilidad" role="group" aria-label="Ajustar tamaño de texto" hidden>
+      <p class="accesibilidad__titulo">Tamaño de texto</p>
+      <div class="accesibilidad__controles">
+        <button class="accesibilidad__btn" id="fuenteMenos" aria-label="Reducir tamaño de texto">A−</button>
+        <button class="accesibilidad__btn" id="fuenteMas" aria-label="Aumentar tamaño de texto">A+</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/main.js"></script>
+</body>
+
 </html>
