@@ -1,5 +1,54 @@
-/* css/animations.css */
+/* Animación de entrada: aparece desplazándose desde abajo hacia su posición */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
 
+/* Animación de entrada: aparece desplazándose desde arriba hacia su posición */
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Entrada del header al cargar la página */
+.header {
+  animation: fadeInDown 600ms ease-out 0ms both;
+}
+
+/* Entrada secuencial del contenido del hero: cada elemento aparece
+   con un pequeño retraso respecto al anterior, creando un efecto
+   de cascada*/
+.hero__badge {
+  animation: fadeInUp 800ms ease-out 200ms both;
+}
+
+.hero__titulo {
+  animation: fadeInUp 800ms ease-out 400ms both;
+}
+
+.hero__descripcion {
+  animation: fadeInUp 600ms ease-out 600ms both;
+}
+
+.hero__botones {
+  animation: fadeInUp 600ms ease-out 800ms both;
+}
+
+/* prefers-reduced-motion: respeta la preferencia del sistema operativo
+   y desactiva animaciones, transiciones y scroll suave para personas
+   sensibles al movimiento */
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,

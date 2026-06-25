@@ -438,7 +438,7 @@ button {
   flex-wrap: wrap;
   justify-content: center;
   gap: var(--espacio-xl);
-  max-width: var(--ancho-maximo);
+  max-width: 800px;
   margin-inline: auto;
 }
 
@@ -886,7 +886,7 @@ button {
 
   .stats__grid {
     flex-wrap: nowrap;
-    justify-content: space-around;
+    justify-content: center;
   }
 
   .nosotros__grid {
