@@ -192,8 +192,8 @@ button {
 }
 
 .header__logo-imagen {
-  width: 48px;
-  height: 48px;
+  width: 56px;
+  height: 56px;
   border-radius: var(--radio-full);
   object-fit: cover;
   flex-shrink: 0;
