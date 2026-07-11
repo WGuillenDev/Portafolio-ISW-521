@@ -1,6 +1,5 @@
 <!doctype html>
 <html lang="es-CR">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,19 +14,8 @@
   <meta property="og:description"
     content="Queques artesanales con recetas propias desde 2006. Presentes en 30 puntos de venta en Zona Norte y Sarapiquí, Costa Rica.">
   <meta property="og:locale" content="es_CR">
-  
-  <script>
-    (function () {
-      var tema = localStorage.getItem("tema");
-      if (tema === "oscuro") {
-        document.documentElement.classList.add("tema-oscuro");
-      }
-      var fuente = localStorage.getItem("tamanoFuente");
-      if (fuente) {
-        document.documentElement.style.fontSize = fuente + "%";
-      }
-    })();
-  </script>
+
+ 
   <link rel="stylesheet" href="css/tokens.css">
   <link rel="stylesheet" href="css/main.css">
   <link rel="stylesheet" href="css/animations.css">
@@ -345,6 +333,19 @@
       </div>
     </div>
   </div>
+
+   <script>
+    (function () {
+      var tema = localStorage.getItem("tema");
+      if (tema === "oscuro") {
+        document.documentElement.classList.add("tema-oscuro");
+      }
+      var fuente = localStorage.getItem("tamanoFuente");
+      if (fuente) {
+        document.documentElement.style.fontSize = fuente + "%";
+      }
+    })();
+  </script>
 
   <script src="js/main.js"></script>
 </body>
