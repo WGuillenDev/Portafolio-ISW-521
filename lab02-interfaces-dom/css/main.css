@@ -1,0 +1,705 @@
+/* Estilos principales del proyecto*/
+/*Reset y base*/
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-family: var(--fuente-principal);
+  font-size: var(--fuente-size-base);
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--superficie-fondo);
+  color: var(--texto-principal);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/*Skip link — accesibilidad por teclado*/
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: auto;
+  background: var(--color-primario);
+  color: var(--texto-inverso);
+  padding: var(--espacio-sm) var(--espacio-md);
+  border-radius: var(--radio-md);
+  font-size: var(--fuente-size-sm);
+  text-decoration: none;
+  z-index: 9999;
+}
+
+.skip-link:focus {
+  left: var(--espacio-md);
+  top: var(--espacio-md);
+}
+
+/*Header — Flexbox: logo, nav, controles en una sola fila*/
+.header {
+  background: var(--header-fondo);
+  height: var(--header-altura);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  border-bottom: 1px solid var(--color-dorado);
+}
+
+.header__nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+  padding: 0 var(--espacio-lg);
+  gap: var(--espacio-md);
+}
+
+.header__logo {
+  display: flex;
+  align-items: center;
+  gap: var(--espacio-sm);
+  flex-shrink: 0;
+}
+
+.header__logo-imagen {
+  width: 44px;
+  height: 44px;
+  object-fit: contain;
+}
+
+.header__logo-nombre {
+  font-size: var(--fuente-size-sm);
+  font-weight: 600;
+  color: var(--header-texto);
+  white-space: nowrap;
+}
+
+.header__links {
+  display: flex;
+  gap: var(--espacio-xs);
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.header__link {
+  color: var(--header-texto-muted);
+  text-decoration: none;
+  font-size: var(--fuente-size-sm);
+  padding: var(--espacio-sm) var(--espacio-md);
+  border-radius: var(--radio-md);
+  transition: all var(--transicion-rapida);
+}
+
+.header__link:hover {
+  color: var(--header-texto);
+  background: var(--header-btn-fondo);
+}
+
+.header__controles {
+  display: flex;
+  align-items: center;
+  gap: var(--espacio-sm);
+  flex-shrink: 0;
+}
+
+.header__btn-idioma,
+.header__btn-tema {
+  display: flex;
+  align-items: center;
+  gap: var(--espacio-xs);
+  background: var(--header-btn-fondo);
+  color: var(--header-texto);
+  border: 1px solid var(--header-btn-borde);
+  border-radius: var(--radio-md);
+  padding: var(--espacio-xs) var(--espacio-md);
+  font-size: var(--fuente-size-sm);
+  cursor: pointer;
+  transition: all var(--transicion-rapida);
+  white-space: nowrap;
+}
+
+.header__btn-idioma:hover,
+.header__btn-tema:hover {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: var(--color-dorado);
+}
+
+.header__menu-movil {
+  display: none;
+  background: var(--header-btn-fondo);
+  color: var(--header-texto);
+  border: 1px solid var(--header-btn-borde);
+  border-radius: var(--radio-md);
+  padding: var(--espacio-xs) var(--espacio-sm);
+  font-size: 20px;
+  cursor: pointer;
+  transition: all var(--transicion-rapida);
+}
+
+/*Banners — cache y countdown */
+.banner {
+  display: flex;
+  align-items: center;
+  gap: var(--espacio-sm);
+  padding: var(--espacio-sm) var(--espacio-lg);
+  font-size: var(--fuente-size-sm);
+}
+
+.banner--cache {
+  background: var(--banner-cache-fondo);
+  border-bottom: 1px solid var(--banner-cache-borde);
+  color: var(--banner-cache-texto);
+}
+
+.banner--countdown {
+  background: var(--banner-countdown-fondo);
+  border-bottom: 1px solid var(--banner-countdown-borde);
+  color: var(--banner-countdown-texto);
+}
+
+.banner__icono {
+  font-size: 14px;
+  flex-shrink: 0;
+}
+
+.banner__texto strong {
+  margin: 0 var(--espacio-xs);
+  font-weight: 700;
+}
+
+/*Modal sesión expirada — error 401 */
+.modal-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: var(--modal-overlay);
+  z-index: 1000;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-overlay.visible {
+  display: flex;
+}
+
+.modal__contenido {
+  background: var(--modal-fondo);
+  border: 1px solid var(--modal-borde);
+  border-radius: var(--radio-lg);
+  padding: var(--espacio-xl);
+  width: 100%;
+  max-width: 360px;
+  text-align: center;
+}
+
+.modal__icono {
+  font-size: 40px;
+  color: var(--color-dorado);
+  display: block;
+  margin-bottom: var(--espacio-md);
+}
+
+.modal__titulo {
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--texto-principal);
+  margin-bottom: var(--espacio-sm);
+}
+
+.modal__texto {
+  font-size: var(--fuente-size-sm);
+  color: var(--texto-secundario);
+  margin-bottom: var(--espacio-lg);
+  line-height: 1.5;
+}
+
+.modal__btn {
+  width: 100%;
+  background: var(--color-primario);
+  color: var(--texto-inverso);
+  border: none;
+  border-radius: var(--radio-md);
+  padding: var(--espacio-md);
+  font-size: var(--fuente-size-sm);
+  font-weight: 600;
+  cursor: pointer;
+  transition: background var(--transicion-rapida);
+}
+
+.modal__btn:hover {
+  background: var(--color-dorado);
+  color: var(--color-primario);
+}
+
+/*Layout principal — CSS Grid: dos columnas */
+.tour__layout {
+  display: grid;
+  grid-template-columns: var(--panel-sedes-ancho) 1fr;
+  min-height: calc(100vh - var(--header-altura));
+}
+
+/*Panel izquierdo — sedes*/
+.panel-sedes {
+  background: var(--superficie-panel);
+  border-right: 1px solid var(--superficie-borde);
+  padding: var(--espacio-lg);
+  overflow-y: auto;
+  max-height: calc(100vh - var(--header-altura));
+  position: sticky;
+  top: var(--header-altura);
+}
+
+.panel-sedes__titulo {
+  display: flex;
+  align-items: center;
+  gap: var(--espacio-sm);
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--texto-principal);
+  margin-bottom: var(--espacio-md);
+  padding-bottom: var(--espacio-sm);
+  border-bottom: 2px solid var(--color-dorado);
+}
+
+/*Grupos de países*/
+.pais-grupo {
+  margin-bottom: var(--espacio-lg);
+}
+
+.pais-grupo__header {
+  display: flex;
+  align-items: center;
+  gap: var(--espacio-sm);
+  margin-bottom: var(--espacio-sm);
+}
+
+.pais-grupo__nombre {
+  font-size: var(--fuente-size-xs);
+  font-weight: 700;
+  color: var(--texto-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.pais-grupo__cantidad {
+  font-size: var(--fuente-size-xs);
+  color: var(--texto-muted);
+  margin-left: auto;
+}
+
+/*Grid de tarjetas de sedes*/
+.sedes-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--espacio-sm);
+}
+
+.sedes-grid--dos-col {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+/*Tarjetas de sedes — botones clicables*/
+.sede-btn {
+  border: none;
+  border-radius: var(--radio-lg);
+  padding: var(--espacio-md) var(--espacio-sm);
+  cursor: pointer;
+  color: var(--texto-inverso);
+  font-size: var(--fuente-size-xs);
+  font-weight: 600;
+  text-align: center;
+  line-height: 1.3;
+  transition: all var(--transicion-rapida);
+  position: relative;
+  width: 100%;
+  min-height: 70px;
+}
+
+.sede-btn:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.1);
+}
+
+.sede-btn:focus-visible {
+  outline: 3px solid var(--color-dorado);
+  outline-offset: 2px;
+}
+
+.sede-btn.activa {
+  outline: 3px solid var(--color-dorado);
+  outline-offset: 2px;
+  transform: translateY(-2px);
+}
+
+.sede-btn.activa::after {
+  content: "✓";
+  position: absolute;
+  top: 6px;
+  right: 8px;
+  font-size: 11px;
+  color: var(--color-dorado);
+}
+
+.sede-btn__nombre {
+  display: block;
+  font-weight: 600;
+  font-size: var(--fuente-size-xs);
+}
+
+.sede-btn__ciudad {
+  display: block;
+  font-weight: 400;
+  font-size: 10px;
+  opacity: 0.85;
+  margin-top: 2px;
+}
+
+/* Colores oficiales de sedes */
+.sede-mx-guadalajara { background: var(--sede-mx-guadalajara); }
+.sede-mx-ciudaddemexico { background: var(--sede-mx-ciudaddemexico); }
+.sede-mx-monterrey { background: var(--sede-mx-monterrey); }
+
+.sede-us-atlanta { background: var(--sede-us-atlanta); }
+.sede-us-boston { background: var(--sede-us-boston); }
+.sede-us-dallas { background: var(--sede-us-dallas); }
+.sede-us-houston { background: var(--sede-us-houston); }
+.sede-us-kansascity { background: var(--sede-us-kansascity); }
+.sede-us-losangeles { background: var(--sede-us-losangeles); }
+.sede-us-miami { background: var(--sede-us-miami); }
+.sede-us-nuevayork { background: var(--sede-us-nuevayork); }
+.sede-us-filadelfia { background: var(--sede-us-filadelfia); }
+.sede-us-sanfrancisco { background: var(--sede-us-sanfrancisco); }
+.sede-us-seattle { background: var(--sede-us-seattle); }
+
+.sede-ca-toronto { background: var(--sede-ca-toronto); }
+.sede-ca-vancouver { background: var(--sede-ca-vancouver); }
+
+/*Panel derecho — partidos */
+.panel-partidos {
+  background: var(--superficie-panel-alt);
+  padding: var(--espacio-lg);
+  overflow-y: auto;
+}
+
+.panel-partidos__titulo {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--texto-principal);
+  margin-bottom: var(--espacio-sm);
+}
+
+.panel-partidos__sede-activa {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--espacio-xs);
+  background: var(--color-primario);
+  color: var(--color-dorado);
+  padding: var(--espacio-xs) var(--espacio-md);
+  border-radius: var(--radio-pill);
+  font-size: var(--fuente-size-xs);
+  margin-bottom: var(--espacio-lg);
+}
+
+.panel-partidos__lista {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espacio-sm);
+}
+
+/*Tarjetas de partidos */
+.partido-card {
+  background: var(--superficie-panel);
+  border: 1px solid var(--superficie-borde);
+  border-radius: var(--radio-lg);
+  padding: var(--espacio-md);
+  transition: border-color var(--transicion-rapida);
+}
+
+.partido-card:hover {
+  border-color: var(--color-dorado);
+}
+
+.partido-card__fecha {
+  display: flex;
+  align-items: center;
+  gap: var(--espacio-xs);
+  font-size: var(--fuente-size-xs);
+  color: var(--texto-muted);
+  margin-bottom: var(--espacio-sm);
+}
+
+.partido-card__equipos {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--espacio-sm);
+}
+
+.partido-card__equipo {
+  text-align: center;
+  flex: 1;
+}
+
+.partido-card__equipo-nombre {
+  font-size: var(--fuente-size-sm);
+  font-weight: 500;
+  color: var(--texto-principal);
+}
+
+.partido-card__marcador {
+  display: flex;
+  align-items: center;
+  gap: var(--espacio-sm);
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--texto-principal);
+  flex-shrink: 0;
+}
+
+.partido-card__vs {
+  font-size: var(--fuente-size-xs);
+  color: var(--texto-muted);
+  font-weight: 400;
+}
+
+.partido-card__footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--espacio-sm);
+  margin-top: var(--espacio-sm);
+}
+
+/* Badges */
+.badge-partido {
+  display: inline-block;
+  padding: 2px var(--espacio-sm);
+  border-radius: var(--radio-pill);
+  font-size: 10px;
+  font-weight: 500;
+}
+
+.badge-partido--finalizado {
+  background: var(--badge-finalizado-fondo);
+  color: var(--badge-finalizado-texto);
+}
+
+.badge-partido--pendiente {
+  background: var(--badge-pendiente-fondo);
+  color: var(--badge-pendiente-texto);
+}
+
+.badge-partido--grupo {
+  background: var(--badge-grupo-fondo);
+  color: var(--badge-grupo-texto);
+}
+
+/* ------------------------------------------------------------
+   Mensajes de estado — error, vacío, sin partidos
+   ------------------------------------------------------------ */
+.mensaje-estado {
+  text-align: center;
+  padding: var(--espacio-xl);
+  color: var(--texto-muted);
+  font-size: var(--fuente-size-sm);
+}
+
+.mensaje-estado__icono {
+  font-size: 32px;
+  display: block;
+  margin-bottom: var(--espacio-sm);
+}
+
+.mensaje-estado__texto {
+  display: block;
+  margin-bottom: var(--espacio-md);
+}
+
+.mensaje-estado__btn {
+  background: var(--color-primario);
+  color: var(--texto-inverso);
+  border: none;
+  border-radius: var(--radio-md);
+  padding: var(--espacio-sm) var(--espacio-lg);
+  font-size: var(--fuente-size-sm);
+  cursor: pointer;
+  transition: background var(--transicion-rapida);
+}
+
+.mensaje-estado__btn:hover {
+  background: var(--color-dorado);
+  color: var(--color-primario);
+}
+
+/*Footer */
+.footer {
+  background: var(--color-primario);
+  color: var(--header-texto-muted);
+  padding: var(--espacio-md) var(--espacio-lg);
+  font-size: var(--fuente-size-xs);
+  text-align: center;
+  margin-top: auto;
+}
+
+.footer__link {
+  color: var(--color-dorado);
+  text-decoration: none;
+  transition: opacity var(--transicion-rapida);
+}
+
+.footer__link:hover {
+  opacity: 0.8;
+}
+
+/*Accesibilidad flotante*/
+.accesibilidad {
+  position: fixed;
+  bottom: var(--accesibilidad-bottom);
+  right: var(--accesibilidad-right);
+  z-index: 500;
+}
+
+.accesibilidad__boton {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--color-primario);
+  border: 2px solid var(--accesibilidad-color);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--transicion-rapida);
+}
+
+.accesibilidad__boton:hover {
+  background: var(--accesibilidad-color);
+}
+
+.accesibilidad__icono {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+}
+
+.accesibilidad__panel {
+  position: absolute;
+  bottom: 60px;
+  right: 0;
+  background: var(--superficie-panel);
+  border: 1px solid var(--superficie-borde);
+  border-radius: var(--radio-lg);
+  padding: var(--espacio-md);
+  min-width: 160px;
+}
+
+.accesibilidad__titulo {
+  font-size: var(--fuente-size-xs);
+  color: var(--texto-muted);
+  font-weight: 500;
+  margin-bottom: var(--espacio-sm);
+}
+
+.accesibilidad__controles {
+  display: flex;
+  gap: var(--espacio-sm);
+}
+
+.accesibilidad__btn {
+  flex: 1;
+  padding: var(--espacio-sm);
+  border: 1px solid var(--superficie-borde);
+  border-radius: var(--radio-md);
+  background: var(--superficie-panel-alt);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  color: var(--texto-principal);
+  transition: all var(--transicion-rapida);
+}
+
+.accesibilidad__btn:hover {
+  border-color: var(--color-dorado);
+  background: var(--color-primario);
+  color: var(--texto-inverso);
+}
+
+/*Responsive — tablet y móvil*/
+@media (max-width: 1024px) {
+  :root {
+    --panel-sedes-ancho: 320px;
+  }
+
+  .tour__layout {
+    grid-template-columns: 320px 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .header__links {
+    display: none;
+    position: absolute;
+    top: var(--header-altura);
+    left: 0;
+    right: 0;
+    background: var(--header-fondo);
+    flex-direction: column;
+    padding: var(--espacio-md);
+    border-bottom: 1px solid var(--color-dorado);
+    z-index: 99;
+  }
+
+  .header__links.abierto {
+    display: flex;
+  }
+
+  .header__btn-tema span,
+  .header__idioma-texto {
+    display: none;
+  }
+
+  .header__menu-movil {
+    display: flex;
+  }
+
+  .tour__layout {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr;
+  }
+
+  .panel-sedes {
+    position: static;
+    max-height: none;
+    border-right: none;
+    border-bottom: 1px solid var(--superficie-borde);
+  }
+
+  .sedes-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .header__nav {
+    padding: 0 var(--espacio-md);
+  }
+
+  .header__logo-nombre {
+    display: none;
+  }
+
+  .sedes-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .sedes-grid--dos-col {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
