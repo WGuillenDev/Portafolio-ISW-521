@@ -1,0 +1,128 @@
+/*Animaciones y efectos visuales del proyecto*/
+/*Keyframes base*/
+@keyframes skeleton-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slide-down {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes pulse-borde {
+  0%, 100% { border-color: var(--color-dorado); }
+  50% { border-color: transparent; }
+}
+
+/*Skeleton loading — tarjetas de sedes mientras cargan*/
+.skeleton {
+  background: var(--superficie-borde);
+  border-radius: var(--radio-lg);
+  animation: skeleton-pulse 1.5s ease-in-out infinite;
+  min-height: 70px;
+}
+
+.skeleton--sede {
+  min-height: 70px;
+  border-radius: var(--radio-lg);
+}
+
+.skeleton--partido {
+  min-height: 100px;
+  border-radius: var(--radio-lg);
+  margin-bottom: var(--espacio-sm);
+}
+
+.skeleton--texto {
+  height: 14px;
+  border-radius: var(--radio-sm);
+  margin-bottom: var(--espacio-xs);
+}
+
+.skeleton--texto-corto {
+  width: 60%;
+  height: 12px;
+  border-radius: var(--radio-sm);
+}
+
+/*Fade in — elementos que aparecen en pantalla*/
+.fade-in {
+  animation: fade-in 0.3s ease forwards;
+}
+
+/*Slide down — banners y modales*/
+.slide-down {
+  animation: slide-down 0.3s ease forwards;
+}
+
+/*Slide up — tarjetas de partidos al renderizar*/
+.slide-up {
+  animation: slide-up 0.3s ease forwards;
+}
+
+/*Spinner — indicador de carga general*/
+.spinner {
+  width: 24px;
+  height: 24px;
+  border: 3px solid var(--superficie-borde);
+  border-top-color: var(--color-dorado);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  display: inline-block;
+}
+
+/*Animación del modal al aparecer*/
+.modal-overlay.visible .modal__contenido {
+  animation: slide-down 0.3s ease forwards;
+}
+
+/*Animación de sede activa — pulso en el borde dorado*/
+.sede-btn.activa {
+  animation: pulse-borde 2s ease-in-out infinite;
+}
+
+/*Delays para renderizado escalonado de partidos*/
+.partido-card:nth-child(1) { animation-delay: 0.05s; }
+.partido-card:nth-child(2) { animation-delay: 0.10s; }
+.partido-card:nth-child(3) { animation-delay: 0.15s; }
+.partido-card:nth-child(4) { animation-delay: 0.20s; }
+.partido-card:nth-child(5) { animation-delay: 0.25s; }
+
+/*Reducir movimiento — accesibilidad*/
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
