@@ -12,7 +12,7 @@ const AUTH = {
   },
 
   async iniciarSesion() {
-    const { username, password } = CONFIG.CREDENTIALS;
+    const { username, password } = CONFIG.CREDENCIALES;
 
     if (!username || !password) {
       throw new Error("Credenciales no configuradas");

@@ -38,7 +38,7 @@ const EVENTOS = {
 
         try {
           const resultado = await API.obtenerPartidos();
-          this._partidosCargados = resultado.datos;
+          this._partidosCargados = resultado.datos.games;
 
           if (resultado.desdeCache) {
             UI.mostrarBannerCache();

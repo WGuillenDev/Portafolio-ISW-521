@@ -60,7 +60,7 @@ const UI = {
     const grupos = {
       Mexico: sedes.filter((s) => s.country_en === "Mexico"),
       USA: sedes.filter(
-        (s) => s.country !== "Mexico" && s.country_en !== "Canada"
+        (s) => s.country_en !== "Mexico" && s.country_en !== "Canada"
       ),
       Canada: sedes.filter((s) => s.country_en === "Canada"),
     };
@@ -130,16 +130,16 @@ const UI = {
       tarjeta.innerHTML = `
         <div class="partido-tarjeta__fecha">
           <i class="bi bi-calendar-event" aria-hidden="true"></i>
-          ${UTILS.formatearFecha(partido.local_date)}
+          ${partido.local_date}
         </div>
         <div class="partido-tarjeta__equipos">
-          <span class="partido-tarjeta__equipo">${partido.home_team_country || "—"}</span>
+          <span class="partido-tarjeta__equipo">${partido.home_team_name_en || "—"}</span>
           <span class="partido-tarjeta__vs" aria-label="versus">VS</span>
-          <span class="partido-tarjeta__equipo">${partido.away_team_country || "—"}</span>
+          <span class="partido-tarjeta__equipo">${partido.away_team_name_en || "—"}</span>
         </div>
         <div class="partido-tarjeta__resultado">
           ${
-            partido.home_score !== null && partido.away_score !== null
+            partido.finished === "TRUE"
               ? `<span class="partido-tarjeta__marcador">${partido.home_score} — ${partido.away_score}</span>`
               : `<span class="partido-tarjeta__pendiente">
                   <i class="bi bi-clock" aria-hidden="true"></i>
