@@ -1,0 +1,294 @@
+<!doctype html>
+<html lang="es-CR" data-tema="claro" data-idioma="ES">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description"
+    content="Tour Virtual de Sedes — Copa Mundial de la FIFA 2026. Explorá los 16 estadios y sus partidos.">
+  <title>Tour Virtual de Sedes | Copa Mundial de la FIFA 2026</title>
+  <meta name="author" content="WGuillenDev">
+
+  <!-- Open Graph / SEO Social -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Tour Virtual de Sedes | Copa Mundial de la FIFA 2026">
+  <meta property="og:description"
+    content="Explorá los 16 estadios y sus partidos de la Copa Mundial de la FIFA 2026.">
+  <meta property="og:locale" content="es_CR">
+  <meta property="og:site_name" content="Copa Mundial de la FIFA 2026">
+
+  <!-- Bootstrap 5 — solo CSS, sin JS -->
+  <link rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+  <!-- CSS propio -->
+  <link rel="stylesheet" href="css/tokens.css">
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/animations.css">
+</head>
+
+<body>
+
+  <!-- Saltar al contenido principal — accesibilidad por teclado -->
+  <a href="#contenido-principal" class="skip-link">
+    Saltar al contenido principal
+  </a>
+
+  <!-- Header — Flexbox: logo, navegación, idioma y tema en una sola fila -->
+  <header class="header">
+    <nav class="header__nav" aria-label="Menú principal">
+
+      <!-- Logo -->
+      <div class="header__logo">
+        <img src="assets/icons/logo-mundial.webp"
+          alt="Logo Copa Mundial de la FIFA 2026"
+          class="header__logo-imagen"
+          width="44"
+          height="44">
+        <span class="header__logo-nombre">Copa Mundial de la FIFA 2026™</span>
+      </div>
+
+      <!-- Links de navegación -->
+      <ul class="header__links" id="menuLinks" role="list">
+        <li>
+          <a href="#sedes" class="header__link" data-i18n="sedes">Sedes</a>
+        </li>
+        <li>
+          <a href="#partidos" class="header__link" data-i18n="partidos">Partidos</a>
+        </li>
+      </ul>
+
+      <!-- Controles: idioma, tema y menú móvil -->
+      <div class="header__controles">
+
+        <button class="header__btn-idioma" id="btnIdioma"
+          aria-label="Cambiar idioma">
+          <i class="bi bi-globe" aria-hidden="true"></i>
+          <span class="header__idioma-texto" data-i18n="cambiarIdioma">Español</span>
+          <i class="bi bi-chevron-down" aria-hidden="true"></i>
+        </button>
+
+        <button class="header__btn-tema" id="btnTema"
+          aria-label="Cambiar tema claro u oscuro">
+          <i class="bi bi-moon-fill header__tema-icono" aria-hidden="true"></i>
+          <span class="header__tema-texto" data-i18n="modoOscuro">Modo oscuro</span>
+        </button>
+
+        <button class="header__menu-movil" id="menuMovil"
+          aria-label="Abrir menú de navegación"
+          aria-controls="menuLinks"
+          aria-expanded="false">
+          <i class="bi bi-list" aria-hidden="true"></i>
+        </button>
+
+      </div>
+    </nav>
+  </header>
+
+  <!-- Modal sesión expirada — visible únicamente ante error 401 -->
+  <div class="modal-overlay" id="modalSesion"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="modalSesionTitulo"
+    aria-hidden="true">
+    <div class="modal__contenido">
+      <i class="bi bi-lock-fill modal__icono" aria-hidden="true"></i>
+      <p class="modal__titulo" id="modalSesionTitulo"
+        role="heading"
+        aria-level="2"
+        data-i18n="sesionExpirada">
+        Sesión expirada
+      </p>
+      <p class="modal__texto" data-i18n="sesionExpiradaDesc">
+        Tu sesión ha expirado. Por favor iniciá sesión nuevamente.
+      </p>
+      <button class="modal__btn" id="btnReautenticar" data-i18n="reintentar">
+        Reintentar
+      </button>
+    </div>
+  </div>
+
+  <!-- Banner datos no actualizados — visible cuando se usan datos del caché -->
+  <div class="banner banner--cache" id="bannerCache"
+    role="alert"
+    aria-live="polite"
+    hidden>
+    <i class="bi bi-exclamation-triangle-fill banner__icono" aria-hidden="true"></i>
+    <span class="banner__texto" data-i18n="datosNoActualizados">
+      Datos no actualizados
+    </span>
+  </div>
+
+  <!-- Banner countdown — visible únicamente ante error 429 -->
+  <div class="banner banner--countdown" id="bannerCountdown"
+    role="status"
+    aria-live="polite"
+    hidden>
+    <i class="bi bi-hourglass-split banner__icono" aria-hidden="true"></i>
+    <span class="banner__texto">
+      <span data-i18n="reintentandoEn">Reintentando en</span>
+      <strong id="contadorSegundos">8</strong>
+      <span data-i18n="segundos">segundos</span>
+    </span>
+  </div>
+
+  <!-- Contenido principal -->
+  <main id="contenido-principal" tabindex="-1">
+
+    <!-- h1 invisible visualmente pero accesible para lectores de pantalla y SEO -->
+    <h1 class="sr-only">Tour Virtual de Sedes — Copa Mundial de la FIFA 2026</h1>
+
+    <div class="tour__layout">
+
+      <!-- Panel izquierdo — Grid de sedes agrupadas por país -->
+      <aside class="panel-sedes" id="sedes"
+        aria-label="Sedes de la Copa Mundial de la FIFA 2026">
+
+        <h2 class="panel-sedes__titulo">
+          <i class="bi bi-geo-alt-fill" aria-hidden="true"></i>
+          <span data-i18n="sedes">Sedes</span>
+        </h2>
+
+        <!-- México -->
+        <div class="pais-grupo" id="grupoMexico">
+          <div class="pais-grupo__header">
+            <span aria-hidden="true">🇲🇽</span>
+            <span class="pais-grupo__nombre">México</span>
+            <span class="pais-grupo__cantidad">3 sedes</span>
+          </div>
+          <div class="sedes-grid" id="sedesMexico" role="list">
+            <!-- Sedes de México renderizadas desde ui.js -->
+          </div>
+        </div>
+
+        <!-- Estados Unidos -->
+        <div class="pais-grupo" id="grupoUSA">
+          <div class="pais-grupo__header">
+            <span aria-hidden="true">🇺🇸</span>
+            <span class="pais-grupo__nombre">Estados Unidos</span>
+            <span class="pais-grupo__cantidad">11 sedes</span>
+          </div>
+          <div class="sedes-grid" id="sedesUSA" role="list">
+            <!-- Sedes de USA renderizadas desde ui.js -->
+          </div>
+        </div>
+
+        <!-- Canadá -->
+        <div class="pais-grupo" id="grupoCanada">
+          <div class="pais-grupo__header">
+            <span aria-hidden="true">🇨🇦</span>
+            <span class="pais-grupo__nombre">Canadá</span>
+            <span class="pais-grupo__cantidad">2 sedes</span>
+          </div>
+          <div class="sedes-grid sedes-grid--dos-col" id="sedesCanada" role="list">
+            <!-- Sedes de Canadá renderizadas desde ui.js -->
+          </div>
+        </div>
+
+      </aside>
+
+      <!-- Panel derecho — Partidos de la sede seleccionada -->
+      <section class="panel-partidos" id="partidos"
+        aria-labelledby="tituloPartidos">
+
+        <h2 class="panel-partidos__titulo" id="tituloPartidos"
+          data-i18n="partidos">
+          Partidos
+        </h2>
+
+        <p class="panel-partidos__sede-activa" id="sedeActiva">
+          <i class="bi bi-geo-alt-fill" aria-hidden="true"></i>
+          <span data-i18n="seleccionaSede">Seleccioná una sede</span>
+        </p>
+
+        <div class="panel-partidos__lista" id="listaPartidos" role="list">
+          <!-- Partidos renderizados dinámicamente desde ui.js -->
+        </div>
+
+      </section>
+
+    </div>
+  </main>
+
+  <!-- Footer — información del sitio -->
+  <footer class="footer">
+    <h3 class="sr-only">Información del sitio</h3>
+    <div class="footer__contenido">
+      <p class="footer__creditos">
+        © 2026 Tour Virtual de Sedes — Copa Mundial de la FIFA 2026.
+        Todos los derechos reservados. |
+        Desarrollado por
+        <a href="https://github.com/WGuillenDev"
+          class="footer__link"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Ver perfil de GitHub del desarrollador WGuillenDev">
+          WGuillenDev
+        </a>
+      </p>
+    </div>
+  </footer>
+
+  <!-- Accesibilidad flotante — tamaño de fuente guardado en localStorage -->
+  <div class="accesibilidad">
+    <button class="accesibilidad__boton" id="btnAccesibilidad"
+      aria-label="Abrir opciones de accesibilidad"
+      aria-expanded="false"
+      aria-controls="panelAccesibilidad">
+      <img src="assets/icons/icono-accesibilidad.webp"
+        alt=""
+        aria-hidden="true"
+        class="accesibilidad__icono"
+        width="24"
+        height="24">
+    </button>
+    <div class="accesibilidad__panel" id="panelAccesibilidad"
+      role="group"
+      aria-label="Ajustar tamaño de texto"
+      hidden>
+      <p class="accesibilidad__titulo" data-i18n="tamanoTexto">
+        Tamaño de texto
+      </p>
+      <div class="accesibilidad__controles">
+        <button class="accesibilidad__btn" id="fuenteMenos"
+          aria-label="Reducir tamaño de texto">A−</button>
+        <button class="accesibilidad__btn" id="fuenteMas"
+          aria-label="Aumentar tamaño de texto">A+</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Script: aplica tema, idioma y fuente antes de renderizar -->
+  <script>
+    (function () {
+      var tema = localStorage.getItem("wc26_tema");
+      if (tema === "oscuro") {
+        document.documentElement.setAttribute("data-tema", "oscuro");
+      }
+      var fuente = localStorage.getItem("wc26_fuente");
+      if (fuente) {
+        document.documentElement.style.fontSize = fuente + "%";
+      }
+      var idioma = localStorage.getItem("wc26_idioma");
+      if (idioma) {
+        document.documentElement.setAttribute("data-idioma", idioma);
+      }
+    })();
+  </script>
+
+  <!-- Scripts — orden de carga obligatorio -->
+  <script src="js/config.js"></script>
+  <script src="js/storage.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/utils.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/events.js"></script>
+  <script src="js/main.js"></script>
+
+</body>
+</html>
