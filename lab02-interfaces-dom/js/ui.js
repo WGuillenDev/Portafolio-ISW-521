@@ -37,26 +37,32 @@ const UI = {
   },
 
   //Skeleton loading 
-  mostrarCargando() {
-    const listaSedes = document.getElementById("listaSedes");
-    listaSedes.innerHTML = "";
+ mostrarCargando() {
+  const contenedores = [
+    document.getElementById("sedesMexico"),
+    document.getElementById("sedesUSA"),
+    document.getElementById("sedesCanada"),
+  ];
 
-    for (let i = 0; i < 16; i++) {
+  for (const contenedor of contenedores) {
+    contenedor.innerHTML = "";
+    for (let i = 0; i < 4; i++) {
       const esqueleto = document.createElement("div");
       esqueleto.className = "sede-esqueleto";
       esqueleto.setAttribute("aria-hidden", "true");
-      listaSedes.appendChild(esqueleto);
+      contenedor.appendChild(esqueleto);
     }
-  },
+  }
+},
 
   //Render de sedes
   mostrarSedes(sedes) {
     const grupos = {
-      Mexico: sedes.filter((s) => s.country === "Mexico"),
+      Mexico: sedes.filter((s) => s.country_en === "Mexico"),
       USA: sedes.filter(
-        (s) => s.country !== "Mexico" && s.country !== "Canada"
+        (s) => s.country !== "Mexico" && s.country_en !== "Canada"
       ),
-      Canada: sedes.filter((s) => s.country === "Canada"),
+      Canada: sedes.filter((s) => s.country_en === "Canada"),
     };
 
     const contenedores = {
@@ -76,14 +82,14 @@ const UI = {
         tarjeta.setAttribute("data-sede-id", sede.id);
         tarjeta.setAttribute(
           "aria-label",
-          `Ver partidos de ${sede.name}, ${sede.city}`
+          `Ver partidos de ${sede.name_en}, ${sede.city_en}`
         );
 
         tarjeta.innerHTML = `
-          <span class="sede-tarjeta__nombre">${sede.name}</span>
+          <span class="sede-tarjeta__nombre">${sede.name_en}</span>
           <span class="sede-tarjeta__ciudad">
             <i class="bi bi-geo-alt-fill" aria-hidden="true"></i>
-            ${sede.city}
+            ${sede.city_en}
           </span>
           <span class="sede-tarjeta__capacidad">
             <i class="bi bi-people-fill" aria-hidden="true"></i>

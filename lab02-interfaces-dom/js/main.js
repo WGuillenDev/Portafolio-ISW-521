@@ -17,7 +17,7 @@ const MAIN = {
         UI.ocultarBannerCache();
       }
 
-      UI.mostrarSedes(resultado.datos);
+      UI.mostrarSedes(resultado.datos.stadiums);
     } catch (error) {
       if (error.message !== "Sesión expirada") {
         UI.mostrarErrorPartidos();

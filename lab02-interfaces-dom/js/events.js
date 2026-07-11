@@ -16,7 +16,7 @@ const EVENTOS = {
 
   //Clic en sede
   _eventoSedes() {
-    const listaSedes = document.getElementById("listaSedes");
+    const listaSedes = document.getElementById("sedes");
 
     listaSedes.addEventListener("click", async (evento) => {
       const tarjeta = evento.target.closest(".sede-tarjeta");

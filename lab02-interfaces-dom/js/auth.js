@@ -19,12 +19,12 @@ const AUTH = {
     }
 
     const token = this.generarToken(username);
-    localStorage.setItem(CONFIG.STORAGE_KEYS.TOKEN, token);
+    localStorage.setItem(CONFIG.CLAVES_STORAGE.TOKEN, token);
     return token;
   },
 
   obtenerToken() {
-    return localStorage.getItem(CONFIG.STORAGE_KEYS.TOKEN);
+    return localStorage.getItem(CONFIG.CLAVES_STORAGE.TOKEN);
   },
 
   tokenEsValido() {
@@ -40,6 +40,6 @@ const AUTH = {
   },
 
   limpiarSesion() {
-    localStorage.removeItem(CONFIG.STORAGE_KEYS.TOKEN);
+    localStorage.removeItem(CONFIG.CLAVES_STORAGE.TOKEN);
   },
 };

@@ -15,6 +15,9 @@ const CONFIG = {
     TOKEN: "wc26_token",
     SEDES: "wc26_sedes",
     PARTIDOS: "wc26_partidos",
+    IDIOMA: "wc26_idioma",
+    TEMA: "wc26_tema",
+    FUENTE: "wc26_fuente",
   },
 
   CREDENCIALES: {
