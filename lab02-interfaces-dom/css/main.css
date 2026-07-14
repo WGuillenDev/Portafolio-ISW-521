@@ -403,6 +403,51 @@ body {
   margin-bottom: var(--espacio-sm);
 }
 
+.sede-hero {
+  position: relative;
+  border-radius: var(--radio-lg);
+  overflow: hidden;
+  margin-bottom: var(--espacio-xs);
+  min-height: 200px;
+  background: var(--color-primario);
+}
+
+.sede-hero__imagen {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  display: block;
+}
+
+.sede-hero__overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: var(--espacio-lg);
+  background: linear-gradient(to top, rgba(10, 10, 10, 0.9), rgba(10, 10, 10, 0.1) 60%);
+}
+
+.sede-hero__nombre {
+  color: var(--texto-inverso);
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.sede-hero__ciudad,
+.sede-hero__capacidad {
+  color: var(--color-dorado);
+  font-size: var(--fuente-size-sm);
+}
+
+.sede-hero__credito {
+  font-size: 10px;
+  color: var(--texto-muted);
+  text-align: right;
+  margin-bottom: var(--espacio-lg);
+}
+
 .panel-partidos__sede-activa {
   display: inline-flex;
   align-items: center;

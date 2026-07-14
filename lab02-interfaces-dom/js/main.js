@@ -18,6 +18,7 @@ const MAIN = {
       }
 
       UI.mostrarSedes(resultado.datos.stadiums);
+      EVENTOS._sedesCargadas = resultado.datos.stadiums;
     } catch (error) {
       if (error.message !== "Sesión expirada") {
         UI.mostrarErrorPartidos();

@@ -3,6 +3,7 @@ const EVENTOS = {
   //Estado interno
   _partidosCargados: null,
   _cargandoPartidos: false,
+   _sedesCargadas: [],
 
   //Inicializar todos los eventos
   inicializar() {
@@ -19,12 +20,15 @@ const EVENTOS = {
     const listaSedes = document.getElementById("sedes");
 
     listaSedes.addEventListener("click", async (evento) => {
-      const tarjeta = evento.target.closest(".sede-tarjeta");
+      const tarjeta = evento.target.closest(".sede-btn");
       if (!tarjeta) return;
       if (this._cargandoPartidos) return;
 
       const sedeId = tarjeta.getAttribute("data-sede-id");
-      const nombreSede = tarjeta.querySelector(".sede-tarjeta__nombre").textContent;
+      const nombreSede = tarjeta.querySelector(".sede-btn__nombre").textContent;
+
+      const sedeData = this._sedesCargadas.find((s) => String(s.id) === sedeId);
+      if (sedeData) UI.mostrarHeroSede(sedeData);
 
       UI.actualizarSedeActiva(sedeId);
 

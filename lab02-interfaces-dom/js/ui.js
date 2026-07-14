@@ -102,6 +102,33 @@ const UI = {
       }
     }
   },
+   //Hero de sede seleccionada
+  mostrarHeroSede(sede) {
+    document.getElementById("sedeActiva").hidden = true;
+
+    const hero = document.getElementById("sedeHero");
+    const imagenInfo = UTILS.obtenerImagenSede(sede.id);
+
+    document.getElementById("sedeHeroNombre").textContent = sede.name_en;
+    document.getElementById("sedeHeroCiudad").textContent = sede.city_en;
+    document.getElementById("sedeHeroCapacidad").textContent =
+      sede.capacity ? `${sede.capacity.toLocaleString("es-CR")} espectadores` : "";
+
+    const imagen = document.getElementById("sedeHeroImagen");
+    const credito = document.getElementById("sedeHeroCredito");
+
+    if (imagenInfo) {
+      imagen.src = imagenInfo.url;
+      imagen.alt = `Vista del ${sede.name_en}`;
+      imagen.hidden = false;
+      credito.textContent = `Fuente: Wikimedia Commons (${imagenInfo.licencia})`;
+    } else {
+      imagen.hidden = true;
+      credito.textContent = "";
+    }
+
+    hero.hidden = false;
+  },
 
   //Render de partidos
   mostrarPartidos(partidos, nombreSede) {
@@ -193,9 +220,9 @@ const UI = {
 
   //Estado sede activa
   actualizarSedeActiva(sedeId) {
-    document.querySelectorAll(".sede-tarjeta").forEach((tarjeta) => {
+    document.querySelectorAll(".sede-btn").forEach((tarjeta) => {
       const esActiva = tarjeta.getAttribute("data-sede-id") === String(sedeId);
-      tarjeta.classList.toggle("sede-tarjeta--activa", esActiva);
+      tarjeta.classList.toggle("activa", esActiva);
       tarjeta.setAttribute("aria-pressed", String(esActiva));
     });
   },
