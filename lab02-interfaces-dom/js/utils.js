@@ -43,4 +43,18 @@ const UTILS = {
       day: "numeric",
     });
   },
+
+  normalizarClaveCiudad(paisEn, ciudadEn) {
+    const codigoPais = paisEn === "Mexico" ? "mx"
+      : paisEn === "Canada" ? "ca"
+      : "us";
+
+    const ciudadNormalizada = ciudadEn
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .replace(/[^a-zA-Z0-9]/g, "")
+      .toLowerCase();
+
+    return `sede-${codigoPais}-${ciudadNormalizada}`;
+  },
 };

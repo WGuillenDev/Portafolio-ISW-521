@@ -48,7 +48,7 @@ const UI = {
     contenedor.innerHTML = "";
     for (let i = 0; i < 4; i++) {
       const esqueleto = document.createElement("div");
-      esqueleto.className = "sede-esqueleto";
+      esqueleto.className = "skeleton skeleton--sede";
       esqueleto.setAttribute("aria-hidden", "true");
       contenedor.appendChild(esqueleto);
     }
@@ -77,7 +77,8 @@ const UI = {
 
       for (const sede of grupos[pais]) {
         const tarjeta = document.createElement("button");
-        tarjeta.className = "sede-tarjeta";
+       const claveColor = UTILS.normalizarClaveCiudad(sede.country_en, sede.city_en);
+       tarjeta.className = `sede-btn ${claveColor}`;
         tarjeta.setAttribute("role", "listitem");
         tarjeta.setAttribute("data-sede-id", sede.id);
         tarjeta.setAttribute(
@@ -86,12 +87,12 @@ const UI = {
         );
 
         tarjeta.innerHTML = `
-          <span class="sede-tarjeta__nombre">${sede.name_en}</span>
-          <span class="sede-tarjeta__ciudad">
+          <span class="sede-btn__nombre">${sede.name_en}</span>
+          <span class="sede-btn__ciudad">
             <i class="bi bi-geo-alt-fill" aria-hidden="true"></i>
             ${sede.city_en}
           </span>
-          <span class="sede-tarjeta__capacidad">
+          <span class="sede-btn__capacidad">
             <i class="bi bi-people-fill" aria-hidden="true"></i>
             ${sede.capacity ? sede.capacity.toLocaleString("es-CR") : "—"}
           </span>

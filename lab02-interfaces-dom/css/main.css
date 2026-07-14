@@ -361,6 +361,14 @@ body {
   margin-top: 2px;
 }
 
+.sede-btn__capacidad {
+  display: block;
+  font-weight: 400;
+  font-size: 10px;
+  opacity: 0.85;
+  margin-top: 2px;
+}
+
 /* Colores oficiales de sedes */
 .sede-mx-guadalajara { background: var(--sede-mx-guadalajara); }
 .sede-mx-ciudaddemexico { background: var(--sede-mx-ciudaddemexico); }
