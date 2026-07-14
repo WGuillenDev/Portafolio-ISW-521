@@ -155,37 +155,52 @@ const UI = {
 
     if (partidos.length === 0) {
       lista.innerHTML = `
-        <p class="panel-partidos__vacio">${textos.sinPartidos}</p>
+        <div class="mensaje-estado">
+          <i class="bi bi-calendar-x mensaje-estado__icono" aria-hidden="true"></i>
+          <span class="mensaje-estado__texto">${textos.sinPartidos}</span>
+        </div>
       `;
       return;
     }
 
     for (const partido of partidos) {
       const tarjeta = document.createElement("article");
-      tarjeta.className = "partido-tarjeta";
+      tarjeta.className = "partido-card";
       tarjeta.setAttribute("role", "listitem");
 
+      const banderaLocal = UTILS.obtenerBandera(partido.home_team_name_en);
+      const banderaVisita = UTILS.obtenerBandera(partido.away_team_name_en);
+
       tarjeta.innerHTML = `
-        <div class="partido-tarjeta__fecha">
+       <div class="partido-card__fecha">
           <i class="bi bi-calendar-event" aria-hidden="true"></i>
           ${partido.local_date}
         </div>
-        <div class="partido-tarjeta__equipos">
-          <span class="partido-tarjeta__equipo">${partido.home_team_name_en || "—"}</span>
-          <span class="partido-tarjeta__vs" aria-label="versus">VS</span>
-          <span class="partido-tarjeta__equipo">${partido.away_team_name_en || "—"}</span>
+        <div class="partido-card__equipos">
+          <span class="partido-card__equipo">
+            ${banderaLocal ? `<img class="partido-card__bandera" src="${banderaLocal}" alt="">` : ""}
+            <span class="partido-card__equipo-nombre">${partido.home_team_name_en || "—"}</span>
+          </span>
+          <span class="partido-card__vs" aria-label="versus">VS</span>
+          <span class="partido-card__equipo">
+            ${banderaVisita ? `<img class="partido-card__bandera" src="${banderaVisita}" alt="">` : ""}
+            <span class="partido-card__equipo-nombre">${partido.away_team_name_en || "—"}</span>
+          </span>
         </div>
-        <div class="partido-tarjeta__resultado">
+        <div class="partido-card__footer">
           ${
             partido.finished === "TRUE"
-              ? `<span class="partido-tarjeta__marcador">${partido.home_score} — ${partido.away_score}</span>`
-              : `<span class="partido-tarjeta__pendiente">
-                  <i class="bi bi-clock" aria-hidden="true"></i>
-                  Pendiente
-                </span>`
+              ? `<span class="partido-card__marcador">${partido.home_score} — ${partido.away_score}</span>`
+              : `<span class="badge-partido badge-partido--pendiente">
+                   <i class="bi bi-clock" aria-hidden="true"></i> Pendiente
+                 </span>`
           }
         </div>
       `;
+
+      tarjeta.querySelectorAll(".partido-card__bandera").forEach((img) => {
+        img.addEventListener("error", () => { img.hidden = true; }, { once: true });
+      });
 
       lista.appendChild(tarjeta);
     }

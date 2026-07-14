@@ -546,6 +546,18 @@ body {
 .partido-card__equipo {
   text-align: center;
   flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.partido-card__bandera {
+  width: 28px;
+  height: 20px;
+  object-fit: cover;
+  border-radius: 2px;
+  box-shadow: 0 0 0 1px var(--superficie-borde);
 }
 
 .partido-card__equipo-nombre {
