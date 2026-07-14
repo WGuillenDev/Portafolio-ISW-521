@@ -78,6 +78,8 @@
   --panel-sedes-ancho: 420px;
   --accesibilidad-bottom: 24px;
   --accesibilidad-right: 24px;
+  --accesibilidad-color: #29b6f6;
+  --accesibilidad-color-hover: #1e88e5;
 }
 
 /*Modo oscuro*/

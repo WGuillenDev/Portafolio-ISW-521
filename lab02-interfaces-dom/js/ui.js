@@ -76,8 +76,8 @@ const UI = {
       lista.innerHTML = "";
 
       for (const sede of grupos[pais]) {
-        const tarjeta = document.createElement("button");
-       const claveColor = UTILS.normalizarClaveCiudad(sede.country_en, sede.city_en);
+       const tarjeta = document.createElement("button");
+       const claveColor = UTILS.obtenerClaveColorSede(sede.id);
        tarjeta.className = `sede-btn ${claveColor}`;
         tarjeta.setAttribute("role", "listitem");
         tarjeta.setAttribute("data-sede-id", sede.id);

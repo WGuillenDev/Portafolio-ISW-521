@@ -683,8 +683,8 @@ body {
   width: 48px;
   height: 48px;
   border-radius: 50%;
-  background: var(--color-primario);
-  border: 2px solid var(--accesibilidad-color);
+  background: var(--accesibilidad-color);
+  border: none;
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -693,7 +693,7 @@ body {
 }
 
 .accesibilidad__boton:hover {
-  background: var(--accesibilidad-color);
+  background: var(--accesibilidad-color-hover);
 }
 
 .accesibilidad__icono {

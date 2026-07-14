@@ -44,18 +44,27 @@ const UTILS = {
     });
   },
 
-  normalizarClaveCiudad(paisEn, ciudadEn) {
-    const codigoPais = paisEn === "Mexico" ? "mx"
-      : paisEn === "Canada" ? "ca"
-      : "us";
+  MAPA_COLOR_SEDE: {
+    "1": "sede-mx-ciudaddemexico",
+    "2": "sede-mx-guadalajara",
+    "3": "sede-mx-monterrey",
+    "4": "sede-us-dallas",
+    "5": "sede-us-houston",
+    "6": "sede-us-kansascity",
+    "7": "sede-us-atlanta",
+    "8": "sede-us-miami",
+    "9": "sede-us-boston",
+    "10": "sede-us-filadelfia",
+    "11": "sede-us-nuevayork",
+    "12": "sede-ca-toronto",
+    "13": "sede-ca-vancouver",
+    "14": "sede-us-seattle",
+    "15": "sede-us-sanfrancisco",
+    "16": "sede-us-losangeles",
+  },
 
-    const ciudadNormalizada = ciudadEn
-      .normalize("NFD")
-      .replace(/[\u0300-\u036f]/g, "")
-      .replace(/[^a-zA-Z0-9]/g, "")
-      .toLowerCase();
-
-    return `sede-${codigoPais}-${ciudadNormalizada}`;
+  obtenerClaveColorSede(sedeId) {
+    return this.MAPA_COLOR_SEDE[String(sedeId)] || "";
   },
 
    MAPA_IMAGEN_SEDE: {
