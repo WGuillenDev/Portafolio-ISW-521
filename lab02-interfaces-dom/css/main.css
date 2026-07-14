@@ -403,34 +403,37 @@ body {
   margin-bottom: var(--espacio-sm);
 }
 
+/*Hero de sede seleccionada — foto, nombre, ciudad y capacidad*/
 .sede-hero {
-  position: relative;
+  display: grid;
+  grid-template-columns: 1.3fr 1fr;
   border-radius: var(--radio-lg);
   overflow: hidden;
   margin-bottom: var(--espacio-xs);
-  min-height: 200px;
+  min-height: 260px;
   background: var(--color-primario);
 }
 
 .sede-hero__imagen {
   width: 100%;
-  height: 200px;
+  height: 100%;
+  min-height: 260px;
   object-fit: cover;
+  object-position: center 65%;
   display: block;
 }
 
 .sede-hero__overlay {
-  position: absolute;
-  inset: 0;
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
-  padding: var(--espacio-lg);
-  background: linear-gradient(to top, rgba(10, 10, 10, 0.9), rgba(10, 10, 10, 0.1) 60%);
+  justify-content: center;
+  gap: var(--espacio-xs);
+  padding: var(--espacio-xl);
+  background: var(--color-primario);
 }
 
 .sede-hero__nombre {
-  color: var(--texto-inverso);
+  color: var(--color-blanco);
   font-size: 22px;
   font-weight: 700;
 }
@@ -446,6 +449,23 @@ body {
   color: var(--texto-muted);
   text-align: right;
   margin-bottom: var(--espacio-lg);
+}
+
+/*Hero — apilado en pantallas angostas*/
+@media (max-width: 768px) {
+  .sede-hero {
+    grid-template-columns: 1fr;
+    min-height: 0;
+  }
+
+  .sede-hero__imagen {
+    min-height: 180px;
+    height: 180px;
+  }
+
+  .sede-hero__overlay {
+    padding: var(--espacio-lg);
+  }
 }
 
 .panel-partidos__sede-activa {

@@ -117,18 +117,28 @@ const UI = {
     const imagen = document.getElementById("sedeHeroImagen");
     const credito = document.getElementById("sedeHeroCredito");
 
+    imagen.hidden = true;
+    imagen.removeAttribute("src");
+
     if (imagenInfo) {
-      imagen.src = imagenInfo.url;
+    credito.textContent = `Fuente: Wikimedia Commons (${imagenInfo.licencia})`;
+
+    const imagenNueva = new Image();
+    imagenNueva.onload = () => {
+      imagen.src = imagenNueva.src;
       imagen.alt = `Vista del ${sede.name_en}`;
       imagen.hidden = false;
-      credito.textContent = `Fuente: Wikimedia Commons (${imagenInfo.licencia})`;
-    } else {
+    };
+    imagenNueva.onerror = () => {
       imagen.hidden = true;
-      credito.textContent = "";
-    }
+    };
+    imagenNueva.src = imagenInfo.url;
+  } else {
+    credito.textContent = "";
+  }
 
-    hero.hidden = false;
-  },
+  hero.hidden = false;
+},
 
   //Render de partidos
   mostrarPartidos(partidos, nombreSede) {
