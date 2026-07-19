@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Asistente Frankenstein</title>
+  <!-- Asistente Frankenstein — Arquitectura Hexagonal. Ver README.md -->
+  <!-- src/core: dominio | src/adapters: driven/driving | src/infraestructure: DI -->
+  <!-- src/main.js: composition root -->
+  <link rel="stylesheet" href="src/css/styles.css" />
+</head>
+<body>
+  <main class="app">
+    <header class="app__header">
+      <h1>🤖 Asistente Frankenstein</h1>
+      <p>Chat con memoria a largo plazo (localStorage) + API de respuestas</p>
+    </header>
+
+    <ul id="chat" aria-live="polite" aria-label="Historial de la conversación"></ul>
+
+    <p id="estado" role="status"></p>
+
+    <footer class="app__footer">
+      <label for="entrada" class="visually-hidden">Escribe tu mensaje</label>
+      <input
+        id="entrada"
+        type="text"
+        placeholder="Escribe tu mensaje..."
+        autocomplete="off"
+      />
+      <button id="btnEnviar" type="button">Enviar</button>
+    </footer>
+  </main>
+
+  <script type="module" src="src/main.js"></script>
+</body>
+</html>
