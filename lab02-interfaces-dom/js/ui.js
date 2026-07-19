@@ -4,6 +4,15 @@ const UI = {
   aplicarTema() {
     const tema = localStorage.getItem(CONFIG.CLAVES_STORAGE.TEMA) || "claro";
     document.documentElement.setAttribute("data-tema", tema);
+    this.actualizarTextoTema(tema);
+  },
+
+  actualizarTextoTema(tema) {
+    const idioma = document.documentElement.getAttribute("data-idioma") || "ES";
+    const textos = CONFIG.IDIOMAS[idioma];
+    const span = document.getElementById("btnTemaTexto");
+    if (!span) return;
+    span.textContent = tema === "oscuro" ? textos.modoClaro : textos.modoOscuro;
   },
 
   aplicarIdioma() {
@@ -95,9 +104,11 @@ const UI = {
       lista.innerHTML = "";
 
       for (const sede of grupos[pais]) {
-       const tarjeta = document.createElement("button");
-       const claveColor = UTILS.obtenerClaveColorSede(sede.id);
-       tarjeta.className = `sede-btn ${claveColor}`;
+        const tarjeta = document.createElement("button");
+        const claveColor = UTILS.obtenerClaveColorSede(sede.id);
+        const rutaImagen = UTILS.obtenerImagenSede(sede.id);
+
+        tarjeta.className = `sede-card ${claveColor}`;
         tarjeta.setAttribute("role", "listitem");
         tarjeta.setAttribute("data-sede-id", sede.id);
         tarjeta.setAttribute(
@@ -106,27 +117,36 @@ const UI = {
         );
 
         tarjeta.innerHTML = `
-          <span class="sede-btn__nombre">${sede.name_en}</span>
-          <span class="sede-btn__ciudad">
-            <i class="bi bi-geo-alt-fill" aria-hidden="true"></i>
-            ${sede.city_en}
-          </span>
-          <span class="sede-btn__capacidad">
-            <i class="bi bi-people-fill" aria-hidden="true"></i>
-            ${sede.capacity ? sede.capacity.toLocaleString("es-CR") : "—"}
-          </span>
+          <div class="sede-card__imagen-wrap">
+            ${rutaImagen ? `<img class="sede-card__imagen" src="${rutaImagen}" alt="" loading="lazy">` : ""}
+          </div>
+          <div class="sede-card__cuerpo">
+            <span class="sede-card__nombre">${sede.name_en}</span>
+            <span class="sede-card__ciudad">
+              <i class="bi bi-geo-alt-fill" aria-hidden="true"></i>
+              ${sede.city_en}
+            </span>
+            <span class="sede-card__capacidad">
+              <i class="bi bi-people-fill" aria-hidden="true"></i>
+              ${sede.capacity ? sede.capacity.toLocaleString("es-CR") : "—"}
+            </span>
+          </div>
         `;
 
+        const img = tarjeta.querySelector(".sede-card__imagen");
+        if (img) {
+          img.addEventListener("error", () => { img.remove(); }, { once: true });
+        }
         lista.appendChild(tarjeta);
       }
     }
   },
-   //Hero de sede seleccionada
+  //Hero de sede seleccionada
   mostrarHeroSede(sede) {
     document.getElementById("sedeActiva").hidden = true;
 
     const hero = document.getElementById("sedeHero");
-    const imagenInfo = UTILS.obtenerImagenSede(sede.id);
+    const rutaImagen = UTILS.obtenerImagenSede(sede.id);
 
     document.getElementById("sedeHeroNombre").textContent = sede.name_en;
     document.getElementById("sedeHeroCiudad").textContent = sede.city_en;
@@ -134,30 +154,24 @@ const UI = {
       sede.capacity ? `${sede.capacity.toLocaleString("es-CR")} espectadores` : "";
 
     const imagen = document.getElementById("sedeHeroImagen");
-    const credito = document.getElementById("sedeHeroCredito");
-
     imagen.hidden = true;
     imagen.removeAttribute("src");
 
-    if (imagenInfo) {
-    credito.textContent = `Fuente: Wikimedia Commons (${imagenInfo.licencia})`;
+    if (rutaImagen) {
+      const imagenNueva = new Image();
+      imagenNueva.onload = () => {
+        imagen.src = imagenNueva.src;
+        imagen.alt = `Vista del ${sede.name_en}`;
+        imagen.hidden = false;
+      };
+      imagenNueva.onerror = () => {
+        imagen.hidden = true;
+      };
+      imagenNueva.src = rutaImagen;
+    }
 
-    const imagenNueva = new Image();
-    imagenNueva.onload = () => {
-      imagen.src = imagenNueva.src;
-      imagen.alt = `Vista del ${sede.name_en}`;
-      imagen.hidden = false;
-    };
-    imagenNueva.onerror = () => {
-      imagen.hidden = true;
-    };
-    imagenNueva.src = imagenInfo.url;
-  } else {
-    credito.textContent = "";
-  }
-
-  hero.hidden = false;
-},
+    hero.hidden = false;
+  },
 
   //Render de partidos
   mostrarPartidos(partidos, nombreSede) {
@@ -187,9 +201,6 @@ const UI = {
       tarjeta.className = "partido-card";
       tarjeta.setAttribute("role", "listitem");
 
-      const banderaLocal = UTILS.obtenerBandera(partido.home_team_name_en);
-      const banderaVisita = UTILS.obtenerBandera(partido.away_team_name_en);
-
       tarjeta.innerHTML = `
        <div class="partido-card__fecha">
           <i class="bi bi-calendar-event" aria-hidden="true"></i>
@@ -197,12 +208,12 @@ const UI = {
         </div>
         <div class="partido-card__equipos">
           <span class="partido-card__equipo">
-            ${banderaLocal ? `<img class="partido-card__bandera" src="${banderaLocal}" alt="">` : ""}
+            ${UTILS.obtenerBanderaEquipo()}
             <span class="partido-card__equipo-nombre">${partido.home_team_name_en || "—"}</span>
           </span>
           <span class="partido-card__vs" aria-label="versus">VS</span>
           <span class="partido-card__equipo">
-            ${banderaVisita ? `<img class="partido-card__bandera" src="${banderaVisita}" alt="">` : ""}
+            ${UTILS.obtenerBanderaEquipo()}
             <span class="partido-card__equipo-nombre">${partido.away_team_name_en || "—"}</span>
           </span>
         </div>
@@ -216,10 +227,6 @@ const UI = {
           }
         </div>
       `;
-
-      tarjeta.querySelectorAll(".partido-card__bandera").forEach((img) => {
-        img.addEventListener("error", () => { img.hidden = true; }, { once: true });
-      });
 
       lista.appendChild(tarjeta);
     }
@@ -262,9 +269,9 @@ const UI = {
     document.getElementById("bannerCache").hidden = true;
   },
 
-  //Estado sede activa
+//Estado sede activa
   actualizarSedeActiva(sedeId) {
-    document.querySelectorAll(".sede-btn").forEach((tarjeta) => {
+    document.querySelectorAll(".sede-card").forEach((tarjeta) => {
       const esActiva = tarjeta.getAttribute("data-sede-id") === String(sedeId);
       tarjeta.classList.toggle("activa", esActiva);
       tarjeta.setAttribute("aria-pressed", String(esActiva));

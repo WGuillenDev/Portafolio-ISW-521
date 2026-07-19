@@ -41,108 +41,6 @@ body {
   top: var(--espacio-md);
 }
 
-/*Header — Flexbox: logo, nav, controles en una sola fila*/
-.header {
-  background: var(--header-fondo);
-  height: var(--header-altura);
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  border-bottom: 1px solid var(--color-dorado);
-}
-
-.header__nav {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  height: 100%;
-  padding: 0 var(--espacio-lg);
-  gap: var(--espacio-md);
-}
-
-.header__logo {
-  display: flex;
-  align-items: center;
-  gap: var(--espacio-sm);
-  flex-shrink: 0;
-}
-
-.header__logo-imagen {
-  width: 44px;
-  height: 44px;
-  object-fit: contain;
-}
-
-.header__logo-nombre {
-  font-size: var(--fuente-size-sm);
-  font-weight: 600;
-  color: var(--header-texto);
-  white-space: nowrap;
-}
-
-.header__links {
-  display: flex;
-  gap: var(--espacio-xs);
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.header__link {
-  color: var(--header-texto-muted);
-  text-decoration: none;
-  font-size: var(--fuente-size-sm);
-  padding: var(--espacio-sm) var(--espacio-md);
-  border-radius: var(--radio-md);
-  transition: all var(--transicion-rapida);
-}
-
-.header__link:hover {
-  color: var(--header-texto);
-  background: var(--header-btn-fondo);
-}
-
-.header__controles {
-  display: flex;
-  align-items: center;
-  gap: var(--espacio-sm);
-  flex-shrink: 0;
-}
-
-.header__btn-idioma,
-.header__btn-tema {
-  display: flex;
-  align-items: center;
-  gap: var(--espacio-xs);
-  background: var(--header-btn-fondo);
-  color: var(--header-texto);
-  border: 1px solid var(--header-btn-borde);
-  border-radius: var(--radio-md);
-  padding: var(--espacio-xs) var(--espacio-md);
-  font-size: var(--fuente-size-sm);
-  cursor: pointer;
-  transition: all var(--transicion-rapida);
-  white-space: nowrap;
-}
-
-.header__btn-idioma:hover,
-.header__btn-tema:hover {
-  background: rgba(255, 255, 255, 0.15);
-  border-color: var(--color-dorado);
-}
-
-.header__menu-movil {
-  display: none;
-  background: var(--header-btn-fondo);
-  color: var(--header-texto);
-  border: 1px solid var(--header-btn-borde);
-  border-radius: var(--radio-md);
-  padding: var(--espacio-xs) var(--espacio-sm);
-  font-size: 20px;
-  cursor: pointer;
-  transition: all var(--transicion-rapida);
-}
-
 /*Banners — cache y countdown */
 .banner {
   display: flex;
@@ -238,36 +136,6 @@ body {
   color: var(--color-primario);
 }
 
-/*Layout principal — CSS Grid: dos columnas */
-.tour__layout {
-  display: grid;
-  grid-template-columns: var(--panel-sedes-ancho) 1fr;
-  min-height: calc(100vh - var(--header-altura));
-}
-
-/*Panel izquierdo — sedes*/
-.panel-sedes {
-  background: var(--superficie-panel);
-  border-right: 1px solid var(--superficie-borde);
-  padding: var(--espacio-lg);
-  overflow-y: auto;
-  max-height: calc(100vh - var(--header-altura));
-  position: sticky;
-  top: var(--header-altura);
-}
-
-.panel-sedes__titulo {
-  display: flex;
-  align-items: center;
-  gap: var(--espacio-sm);
-  font-size: 15px;
-  font-weight: 600;
-  color: var(--texto-principal);
-  margin-bottom: var(--espacio-md);
-  padding-bottom: var(--espacio-sm);
-  border-bottom: 2px solid var(--color-dorado);
-}
-
 /*Grupos de países*/
 .pais-grupo {
   margin-bottom: var(--espacio-lg);
@@ -294,100 +162,25 @@ body {
   margin-left: auto;
 }
 
-/*Grid de tarjetas de sedes*/
-.sedes-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: var(--espacio-sm);
-}
+/* Colores oficiales de sedes — como acento superior de la tarjeta */
+.sede-mx-guadalajara { border-top-color: var(--sede-mx-guadalajara); }
+.sede-mx-ciudaddemexico { border-top-color: var(--sede-mx-ciudaddemexico); }
+.sede-mx-monterrey { border-top-color: var(--sede-mx-monterrey); }
 
-.sedes-grid--dos-col {
-  grid-template-columns: repeat(2, 1fr);
-}
+.sede-us-atlanta { border-top-color: var(--sede-us-atlanta); }
+.sede-us-boston { border-top-color: var(--sede-us-boston); }
+.sede-us-dallas { border-top-color: var(--sede-us-dallas); }
+.sede-us-houston { border-top-color: var(--sede-us-houston); }
+.sede-us-kansascity { border-top-color: var(--sede-us-kansascity); }
+.sede-us-losangeles { border-top-color: var(--sede-us-losangeles); }
+.sede-us-miami { border-top-color: var(--sede-us-miami); }
+.sede-us-nuevayork { border-top-color: var(--sede-us-nuevayork); }
+.sede-us-filadelfia { border-top-color: var(--sede-us-filadelfia); }
+.sede-us-sanfrancisco { border-top-color: var(--sede-us-sanfrancisco); }
+.sede-us-seattle { border-top-color: var(--sede-us-seattle); }
 
-/*Tarjetas de sedes — botones clicables*/
-.sede-btn {
-  border: none;
-  border-radius: var(--radio-lg);
-  padding: var(--espacio-md) var(--espacio-sm);
-  cursor: pointer;
-  color: var(--texto-inverso);
-  font-size: var(--fuente-size-xs);
-  font-weight: 600;
-  text-align: center;
-  line-height: 1.3;
-  transition: all var(--transicion-rapida);
-  position: relative;
-  width: 100%;
-  min-height: 70px;
-}
-
-.sede-btn:hover {
-  transform: translateY(-2px);
-  filter: brightness(1.1);
-}
-
-.sede-btn:focus-visible {
-  outline: 3px solid var(--color-dorado);
-  outline-offset: 2px;
-}
-
-.sede-btn.activa {
-  outline: 3px solid var(--color-dorado);
-  outline-offset: 2px;
-  transform: translateY(-2px);
-}
-
-.sede-btn.activa::after {
-  content: "✓";
-  position: absolute;
-  top: 6px;
-  right: 8px;
-  font-size: 11px;
-  color: var(--color-dorado);
-}
-
-.sede-btn__nombre {
-  display: block;
-  font-weight: 600;
-  font-size: var(--fuente-size-xs);
-}
-
-.sede-btn__ciudad {
-  display: block;
-  font-weight: 400;
-  font-size: 10px;
-  opacity: 0.85;
-  margin-top: 2px;
-}
-
-.sede-btn__capacidad {
-  display: block;
-  font-weight: 400;
-  font-size: 10px;
-  opacity: 0.85;
-  margin-top: 2px;
-}
-
-/* Colores oficiales de sedes */
-.sede-mx-guadalajara { background: var(--sede-mx-guadalajara); }
-.sede-mx-ciudaddemexico { background: var(--sede-mx-ciudaddemexico); }
-.sede-mx-monterrey { background: var(--sede-mx-monterrey); }
-
-.sede-us-atlanta { background: var(--sede-us-atlanta); }
-.sede-us-boston { background: var(--sede-us-boston); }
-.sede-us-dallas { background: var(--sede-us-dallas); }
-.sede-us-houston { background: var(--sede-us-houston); }
-.sede-us-kansascity { background: var(--sede-us-kansascity); }
-.sede-us-losangeles { background: var(--sede-us-losangeles); }
-.sede-us-miami { background: var(--sede-us-miami); }
-.sede-us-nuevayork { background: var(--sede-us-nuevayork); }
-.sede-us-filadelfia { background: var(--sede-us-filadelfia); }
-.sede-us-sanfrancisco { background: var(--sede-us-sanfrancisco); }
-.sede-us-seattle { background: var(--sede-us-seattle); }
-
-.sede-ca-toronto { background: var(--sede-ca-toronto); }
-.sede-ca-vancouver { background: var(--sede-ca-vancouver); }
+.sede-ca-toronto { border-top-color: var(--sede-ca-toronto); }
+.sede-ca-vancouver { border-top-color: var(--sede-ca-vancouver); }
 
 /*Panel derecho — partidos */
 .panel-partidos {
@@ -550,14 +343,6 @@ body {
   flex-direction: column;
   align-items: center;
   gap: 4px;
-}
-
-.partido-card__bandera {
-  width: 28px;
-  height: 20px;
-  object-fit: cover;
-  border-radius: 2px;
-  box-shadow: 0 0 0 1px var(--superficie-borde);
 }
 
 .partido-card__equipo-nombre {
@@ -742,79 +527,6 @@ body {
   border-color: var(--color-dorado);
   background: var(--color-primario);
   color: var(--texto-inverso);
-}
-
-/*Responsive — tablet y móvil*/
-@media (max-width: 1024px) {
-  :root {
-    --panel-sedes-ancho: 320px;
-  }
-
-  .tour__layout {
-    grid-template-columns: 320px 1fr;
-  }
-}
-
-@media (max-width: 768px) {
-  .header__links {
-    display: none;
-    position: absolute;
-    top: var(--header-altura);
-    left: 0;
-    right: 0;
-    background: var(--header-fondo);
-    flex-direction: column;
-    padding: var(--espacio-md);
-    border-bottom: 1px solid var(--color-dorado);
-    z-index: 99;
-  }
-
-  .header__links.abierto {
-    display: flex;
-  }
-
-  .header__btn-tema span,
-  .header__idioma-texto {
-    display: none;
-  }
-
-  .header__menu-movil {
-    display: flex;
-  }
-
-  .tour__layout {
-    grid-template-columns: 1fr;
-    grid-template-rows: auto 1fr;
-  }
-
-  .panel-sedes {
-    position: static;
-    max-height: none;
-    border-right: none;
-    border-bottom: 1px solid var(--superficie-borde);
-  }
-
-  .sedes-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media (max-width: 480px) {
-  .header__nav {
-    padding: 0 var(--espacio-md);
-  }
-
-  .header__logo-nombre {
-    display: none;
-  }
-
-  .sedes-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  .sedes-grid--dos-col {
-    grid-template-columns: repeat(2, 1fr);
-  }
 }
 
 /* Pantalla de login */
@@ -1035,5 +747,241 @@ body {
 
   .login__titulo {
     font-size: 18px;
+  }
+}
+
+/* Sidebar — navegación principal fija*/
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: var(--sidebar-ancho);
+  background: var(--sidebar-fondo);
+  display: flex;
+  flex-direction: column;
+  padding: var(--espacio-lg) 0;
+  z-index: 200;
+  border-right: 1px solid var(--color-dorado);
+}
+
+.sidebar__marca {
+  display: flex;
+  align-items: center;
+  gap: var(--espacio-sm);
+  padding: 0 var(--espacio-lg);
+  margin-bottom: var(--espacio-xl);
+}
+
+.sidebar__logo {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.sidebar__marca-texto {
+  min-width: 0;
+}
+
+.sidebar__titulo {
+  color: var(--color-dorado);
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1.3;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.sidebar__subtitulo {
+  color: var(--sidebar-texto-muted);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.sidebar__nav {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espacio-xs);
+  padding: 0 var(--espacio-sm);
+}
+
+.sidebar__link {
+  display: flex;
+  align-items: center;
+  gap: var(--espacio-sm);
+  padding: var(--espacio-sm) var(--espacio-md);
+  border-radius: var(--radio-md);
+  color: var(--sidebar-texto-muted);
+  text-decoration: none;
+  font-size: var(--fuente-size-sm);
+  font-weight: 600;
+  transition: all var(--transicion-rapida);
+}
+
+.sidebar__link:hover {
+  color: var(--sidebar-texto);
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.sidebar__link--activo {
+  color: var(--color-dorado);
+  background: var(--sidebar-link-fondo-activo);
+  border-left: 3px solid var(--color-dorado);
+}
+
+/*Contenido — columna a la derecha del sidebar*/
+.contenido {
+  margin-left: var(--sidebar-ancho);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: var(--superficie-fondo);
+}
+
+.topbar {
+  height: var(--topbar-altura);
+  display: flex;
+  align-items: center;
+  padding: 0 var(--espacio-xl);
+  background: var(--superficie-panel);
+  border-bottom: 1px solid var(--superficie-borde);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.topbar__titulo {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--texto-principal);
+}
+
+.contenido__principal {
+  flex: 1;
+  padding: var(--espacio-xl);
+}
+
+/*Sedes — secciones por país y tarjetas con imagen*/
+.sedes-secciones {
+  margin-bottom: var(--espacio-xl);
+}
+
+.sedes-secciones .pais-grupo {
+  margin-bottom: var(--espacio-lg);
+}
+
+.sedes-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: var(--espacio-md);
+}
+
+.sede-card {
+  background: var(--superficie-panel);
+  border: 1px solid var(--superficie-borde);
+  border-top: 4px solid transparent;
+  border-radius: var(--radio-lg);
+  overflow: hidden;
+  cursor: pointer;
+  text-align: left;
+  padding: 0;
+  transition: all var(--transicion-rapida);
+}
+
+.sede-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.sede-card:focus-visible {
+  outline: 3px solid var(--color-dorado);
+  outline-offset: 2px;
+}
+
+.sede-card.activa {
+  outline: 2px solid var(--color-dorado);
+}
+
+.sede-card__imagen-wrap {
+  width: 100%;
+  height: 110px;
+  overflow: hidden;
+  background: var(--superficie-panel-alt);
+}
+
+.sede-card__imagen {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.sede-card__cuerpo {
+  padding: var(--espacio-sm) var(--espacio-md) var(--espacio-md);
+}
+
+.sede-card__nombre {
+  display: block;
+  font-size: var(--fuente-size-sm);
+  font-weight: 700;
+  color: var(--texto-principal);
+  margin-bottom: 2px;
+}
+
+.sede-card__ciudad,
+.sede-card__capacidad {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 11px;
+  color: var(--texto-muted);
+}
+
+/*Panel de accesibilidad — (tema/idioma)*/
+.accesibilidad__titulo--separado {
+  margin-top: var(--espacio-md);
+}
+
+.accesibilidad__btn--ancho {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: var(--espacio-sm);
+  justify-content: flex-start;
+}
+
+/*Responsive — sidebar colapsa a rail de íconos en pantallas pequeñas*/
+@media (max-width: 900px) {
+  :root {
+    --sidebar-ancho: 72px;
+  }
+
+  .sidebar__marca-texto,
+  .sidebar__link span {
+    display: none;
+  }
+
+  .sidebar__marca {
+    justify-content: center;
+    padding: 0 var(--espacio-sm);
+  }
+
+  .sidebar__link {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 600px) {
+  .contenido__principal,
+  .topbar {
+    padding-left: var(--espacio-md);
+    padding-right: var(--espacio-md);
+  }
+
+  .sedes-grid {
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
   }
 }

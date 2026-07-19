@@ -105,7 +105,7 @@
 }
 
 /*Animación de sede activa — pulso en el borde dorado*/
-.sede-btn.activa {
+.sede-card.activa {
   animation: pulse-borde 2s ease-in-out infinite;
 }
 
@@ -125,4 +125,18 @@
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
+}
+
+/*Zoom lento en el hero — capta la atención sin ser invasivo*/
+@keyframes hero-zoom-lento {
+  from {
+    transform: scale(1) translate(0, 0);
+  }
+  to {
+    transform: scale(1.08) translate(-1%, -1%);
+  }
+}
+
+.sede-hero__imagen {
+  animation: hero-zoom-lento 14s ease-in-out infinite alternate;
 }

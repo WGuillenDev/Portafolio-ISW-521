@@ -84,6 +84,14 @@
   --accesibilidad-right: 24px;
   --accesibilidad-color: #29b6f6;
   --accesibilidad-color-hover: #1e88e5;
+
+  /* Sidebar y topbar — layout del Tour de Sedes */
+  --sidebar-ancho: 240px;
+  --sidebar-fondo: #0a0a0a;
+  --sidebar-texto: #ffffff;
+  --sidebar-texto-muted: #a0aec0;
+  --sidebar-link-fondo-activo: rgba(200, 169, 81, 0.15);
+  --topbar-altura: 72px;
 }
 
 /*Modo oscuro*/

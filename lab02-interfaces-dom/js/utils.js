@@ -68,93 +68,29 @@ const UTILS = {
   },
 
    MAPA_IMAGEN_SEDE: {
-    "1": { archivo: "Estadio Azteca y sus alrededores 20.jpg", licencia: "CC BY 4.0" },
-    "2": { archivo: "EstadioAkronGDL.jpg", licencia: "Commons" },
-    "3": { archivo: "Mexico Guadalupe Monterrey Estadio BBVA Bancomer fifa world cup 2026 1.JPG", licencia: "CC BY-SA 3.0 de" },
-    "4": { archivo: "AT&T Stadium 2022-08-24.jpg", licencia: "Dominio público" },
-    "5": { archivo: "NRG Stadium SBLI.jpg", licencia: "Dominio público" },
-    "6": { archivo: "Arrowhead Stadium 2010.JPG", licencia: "CC BY 3.0" },
-    "7": { archivo: "Mercedes-Benz Stadium Interior in 2024.jpg", licencia: "CC BY 4.0" },
-    "8": { archivo: "Hard Rock Stadium.jpg", licencia: "CC BY-SA 4.0" },
-    "9": { archivo: "Gillette Stadium entrance and lighthouse.jpg", licencia: "CC BY-SA 4.0" },
-    "10": { archivo: "Lincoln Financial Field, Philadelphia, 2024.jpg", licencia: "CC BY-SA 4.0" },
-    "11": { archivo: "MetLife Stadium, East Rutherford NJ.jpg", licencia: "CC BY-SA 4.0" },
-    "12": { archivo: "BMO Field, Toronto, Ontario (29969149766).jpg", licencia: "CC BY-SA 2.0" },
-    "13": { archivo: "BCPLACESTADIUM.jpg", licencia: "Dominio público" },
-    "14": { archivo: "Sounder and CenturyLink Field (14441428905).jpg", licencia: "Por confirmar" },
-    "15": { archivo: "Levi's Stadium from air.jpg", licencia: "CC BY-SA 3.0" },
-    "16": { archivo: "SoFi Stadium.jpg", licencia: "CC BY 2.0" },
+    "1": "assets/img/stadium-azteca-mexico-city.webp",
+    "2": "assets/img/stadium-akron-guadalajara.webp",
+    "3": "assets/img/stadium-bbva-monterrey.webp",
+    "4": "assets/img/stadium-at_t-dallas.webp",
+    "5": "assets/img/stadium-nrg-houston.webp",
+    "6": "assets/img/stadium-geha-field-kansas-city.webp",
+    "7": "assets/img/stadium-mercedes-benz-atlanta.webp",
+    "8": "assets/img/stadium-hard-rock-miami.webp",
+    "9": "assets/img/stadium-gillette-boston.webp",
+    "10": "assets/img/stadium-lincoln-financial-philadelphia.webp",
+    "11": "assets/img/stadium-metlife-new-york-new-jersey.webp",
+    "12": "assets/img/stadium-bmo-field-toronto.webp",
+    "13": "assets/img/stadium-bc-place-vancouver.webp",
+    "14": "assets/img/stadium-lumen-field-seattle.webp",
+    "15": "assets/img/stadium-levis-santa-clara.webp",
+    "16": "assets/img/stadium-sofi-los-angeles.webp",
   },
 
   obtenerImagenSede(sedeId) {
-    const datos = this.MAPA_IMAGEN_SEDE[String(sedeId)];
-    if (!datos) return null;
-
-    const nombreCodificado = encodeURIComponent(datos.archivo);
-    return {
-      url: `https://commons.wikimedia.org/wiki/Special:FilePath/${nombreCodificado}`,
-      licencia: datos.licencia,
-    };
+    return this.MAPA_IMAGEN_SEDE[String(sedeId)] || null;
   },
 
-  BANDERAS_PAISES: {
-    "Mexico": "mx",
-    "South Africa": "za",
-    "South Korea": "kr",
-    "Czech Republic": "cz",
-    "Canada": "ca",
-    "Switzerland": "ch",
-    "Qatar": "qa",
-    "Bosnia and Herzegovina": "ba",
-    "Brazil": "br",
-    "Morocco": "ma",
-    "Haiti": "ht",
-    "Scotland": "gb-sct",
-    "United States": "us",
-    "USA": "us",
-    "Paraguay": "py",
-    "Australia": "au",
-    "Turkiye": "tr",
-    "Turkey": "tr",
-    "Germany": "de",
-    "Curacao": "cw",
-    "Curaçao": "cw",
-    "Ivory Coast": "ci",
-    "Ecuador": "ec",
-    "Netherlands": "nl",
-    "Japan": "jp",
-    "Tunisia": "tn",
-    "Sweden": "se",
-    "Belgium": "be",
-    "Egypt": "eg",
-    "Iran": "ir",
-    "New Zealand": "nz",
-    "Spain": "es",
-    "Cape Verde": "cv",
-    "Saudi Arabia": "sa",
-    "Uruguay": "uy",
-    "France": "fr",
-    "Senegal": "sn",
-    "Norway": "no",
-    "Iraq": "iq",
-    "Argentina": "ar",
-    "Algeria": "dz",
-    "Austria": "at",
-    "Jordan": "jo",
-    "Portugal": "pt",
-    "Colombia": "co",
-    "Uzbekistan": "uz",
-    "Democratic Republic of the Congo": "cd",
-    "Congo DR": "cd",
-    "England": "gb-eng",
-    "Croatia": "hr",
-    "Ghana": "gh",
-    "Panama": "pa",
-  },
-
-  obtenerBandera(nombreEquipo) {
-    const codigo = this.BANDERAS_PAISES[nombreEquipo];
-    if (!codigo) return null;
-    return `https://flagcdn.com/w40/${codigo}.png`;
+  obtenerBanderaEquipo() {
+    return '<i class="bi bi-flag-fill" aria-hidden="true"></i>';
   },
 };

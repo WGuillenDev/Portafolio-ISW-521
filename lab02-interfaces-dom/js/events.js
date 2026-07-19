@@ -90,12 +90,12 @@ const EVENTOS = {
     const listaSedes = document.getElementById("sedes");
 
     listaSedes.addEventListener("click", async (evento) => {
-      const tarjeta = evento.target.closest(".sede-btn");
+      const tarjeta = evento.target.closest(".sede-card");
       if (!tarjeta) return;
       if (this._cargandoPartidos) return;
 
       const sedeId = tarjeta.getAttribute("data-sede-id");
-      const nombreSede = tarjeta.querySelector(".sede-btn__nombre").textContent;
+      const nombreSede = tarjeta.querySelector(".sede-card__nombre").textContent;
 
       const sedeData = this._sedesCargadas.find((s) => String(s.id) === sedeId);
       if (sedeData) UI.mostrarHeroSede(sedeData);
@@ -144,6 +144,7 @@ const EVENTOS = {
 
       document.documentElement.setAttribute("data-tema", nuevo);
       localStorage.setItem(CONFIG.CLAVES_STORAGE.TEMA, nuevo);
+      UI.actualizarTextoTema(nuevo);
     });
   },
 
