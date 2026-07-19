@@ -4,6 +4,7 @@ const CONFIG = {
   ENDPOINTS: {
     SEDES: "/get/stadiums",
     PARTIDOS: "/get/games",
+    EQUIPOS: "/get/teams",
   },
 
   REINTENTO: {
@@ -15,6 +16,7 @@ const CONFIG = {
     TOKEN: "wc26_token",
     SEDES: "wc26_sedes",
     PARTIDOS: "wc26_partidos",
+    EQUIPOS: "wc26_equipos",
     IDIOMA: "wc26_idioma",
     TEMA: "wc26_tema",
     FUENTE: "wc26_fuente",

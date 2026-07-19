@@ -3,8 +3,12 @@ const EVENTOS = {
   //Estado interno
   _partidosCargados: null,
   _cargandoPartidos: false,
-   _sedesCargadas: [],
-   _autenticando: false,
+  _sedesCargadas: [],
+  _equiposCargados: [],
+  _autenticando: false,
+  _agendaInicializada: false,
+  _fechasSimultaneas: [],
+  _indiceFechaActual: 0,
 
   //Eventos que deben existir ANTES del login (formulario de acceso)
   inicializarLogin() {
@@ -15,7 +19,9 @@ const EVENTOS = {
 
   //Eventos que solo tienen sentido DESPUÉS de un login exitoso
   inicializar() {
+    this._eventoSidebar();
     this._eventoSedes();
+    this._eventoNavegacionFecha();
     this._eventoTema();
     this._eventoIdioma();
     this._eventoFuente();
@@ -85,7 +91,7 @@ const EVENTOS = {
     });
   },
 
-  //Clic en sede
+//Clic en sede
   _eventoSedes() {
     const listaSedes = document.getElementById("sedes");
 
@@ -107,33 +113,70 @@ const EVENTOS = {
         block: "start",
       });
 
-      if (this._partidosCargados === null) {
-        this._cargandoPartidos = true;
+      this._cargandoPartidos = true;
+      const exito = await MAIN.asegurarPartidosCargados();
+      this._cargandoPartidos = false;
 
-        try {
-          const resultado = await API.obtenerPartidos();
-          this._partidosCargados = resultado.datos.games;
-
-          if (resultado.desdeCache) {
-            UI.mostrarBannerCache();
-          } else {
-            UI.ocultarBannerCache();
-          }
-        } catch {
-          UI.mostrarErrorPartidos();
-          this._cargandoPartidos = false;
-          return;
-        }
-
-        this._cargandoPartidos = false;
+      if (!exito) {
+        UI.mostrarErrorPartidos();
+        return;
       }
 
       const partidosDeSede = this._partidosCargados.filter(
         (p) => String(p.stadium_id) === String(sedeId)
       );
 
-      UI.mostrarPartidos(partidosDeSede, nombreSede);
+      UI.mostrarPartidos(partidosDeSede, nombreSede, this._equiposCargados);
     });
+  },
+
+  //Clic en los ítems del sidebar — cambia de vista
+  _eventoSidebar() {
+    const nav = document.querySelector(".sidebar__nav");
+
+    nav.addEventListener("click", async (evento) => {
+      const boton = evento.target.closest(".sidebar__link[data-vista]");
+      if (!boton || boton.disabled) return;
+
+      const vista = boton.getAttribute("data-vista");
+      UI.actualizarLinkActivo(vista);
+      await MAIN.cambiarVista(vista);
+    });
+  },
+
+  //Navegación de fecha en Agenda Simultánea — flechas y pestañas
+  _eventoNavegacionFecha() {
+    document.getElementById("fechaAnterior").addEventListener("click", () => {
+      this._cambiarFechaAgenda(this._indiceFechaActual - 1);
+    });
+
+    document.getElementById("fechaSiguiente").addEventListener("click", () => {
+      this._cambiarFechaAgenda(this._indiceFechaActual + 1);
+    });
+
+    document.getElementById("pestanasFecha").addEventListener("click", (evento) => {
+      const pestana = evento.target.closest(".pestana-fecha");
+      if (!pestana) return;
+
+      const indice = Number(pestana.getAttribute("data-indice"));
+      this._cambiarFechaAgenda(indice);
+    });
+  },
+
+  _cambiarFechaAgenda(nuevoIndice) {
+    if (nuevoIndice < 0 || nuevoIndice >= this._fechasSimultaneas.length) return;
+
+    this._indiceFechaActual = nuevoIndice;
+    const fecha = this._fechasSimultaneas[nuevoIndice];
+
+    UI.mostrarFechaAgenda(
+      fecha,
+      nuevoIndice,
+      this._fechasSimultaneas,
+      this._partidosCargados,
+      this._equiposCargados,
+      this._sedesCargadas
+    );
   },
 
   //Tema oscuro / claro

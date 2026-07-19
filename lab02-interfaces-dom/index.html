@@ -116,11 +116,41 @@
         </div>
       </div>
 
-      <nav class="sidebar__nav" aria-label="Secciones del tour">
-        <a href="#sedes" class="sidebar__link sidebar__link--activo">
-          <i class="bi bi-buildings-fill" aria-hidden="true"></i>
-          <span data-i18n="tourDeSedes">Tour de Sedes</span>
-        </a>
+      <nav class="sidebar__nav" aria-label="Secciones del proyecto">
+        <ul class="sidebar__lista" role="list">
+          <li>
+            <button class="sidebar__link sidebar__link--activo" id="linkTourSedes"
+              data-vista="tour-sedes" aria-current="page">
+              <i class="bi bi-buildings-fill" aria-hidden="true"></i>
+              <span data-i18n="tourDeSedes">Tour de Sedes</span>
+            </button>
+          </li>
+          <li>
+            <button class="sidebar__link" id="linkAgendaSimultanea"
+              data-vista="agenda-simultanea">
+              <i class="bi bi-calendar3-week" aria-hidden="true"></i>
+              <span>Agenda Simultánea</span>
+            </button>
+          </li>
+          <li>
+            <button class="sidebar__link" disabled aria-disabled="true" title="Próximamente">
+              <i class="bi bi-hourglass-split" aria-hidden="true"></i>
+              <span>Timeline Infinito</span>
+            </button>
+          </li>
+          <li>
+            <button class="sidebar__link" disabled aria-disabled="true" title="Próximamente">
+              <i class="bi bi-person-badge-fill" aria-hidden="true"></i>
+              <span>Dashboard del Fanático</span>
+            </button>
+          </li>
+          <li>
+            <button class="sidebar__link" disabled aria-disabled="true" title="Próximamente">
+              <i class="bi bi-grid-3x3-gap-fill" aria-hidden="true"></i>
+              <span>Matriz de Enfrentamientos</span>
+            </button>
+          </li>
+        </ul>
       </nav>
     </aside>
 
@@ -152,7 +182,7 @@
 
       <!-- Topbar — solo título, sin buscador/notificaciones/avatar -->
       <header class="topbar">
-        <h2 class="topbar__titulo" data-i18n="tituloApp">Tour Virtual de Sedes</h2>
+        <h2 class="topbar__titulo" id="topbarTitulo">Tour Virtual de Sedes</h2>
       </header>
 
       <!-- Banner datos no actualizados — visible cuando se usan datos del caché -->
@@ -184,6 +214,7 @@
 
         <!-- h1 invisible visualmente pero accesible para lectores de pantalla y SEO -->
         <h1 class="sr-only">Tour Virtual de Sedes — Copa Mundial de la FIFA 2026</h1>
+        <div class="vista" id="vistaTourSedes">
 
         <!-- Hero de la sede seleccionada -->
         <div class="sede-hero" id="sedeHero" hidden>
@@ -252,6 +283,38 @@
             <!-- Partidos renderizados dinámicamente desde ui.js -->
           </div>
         </section>
+
+        </div>
+        
+        <!-- VISTA: Agenda Simultánea -->
+        <div class="vista" id="vistaAgendaSimultanea" hidden>
+          <h2 class="sr-only">Agenda Simultánea</h2>
+
+          <div class="selector-fecha">
+            <button class="selector-fecha__flecha" id="fechaAnterior" aria-label="Fecha anterior">
+              <i class="bi bi-chevron-left" aria-hidden="true"></i>
+            </button>
+
+            <div class="selector-fecha__actual">
+              <span class="selector-fecha__dia-semana" id="fechaDiaSemana">—</span>
+              <p class="selector-fecha__fecha" id="fechaCompleta">Cargando fechas...</p>
+              <span class="selector-fecha__cantidad" id="fechaCantidad"></span>
+            </div>
+
+            <button class="selector-fecha__flecha" id="fechaSiguiente" aria-label="Fecha siguiente">
+              <i class="bi bi-chevron-right" aria-hidden="true"></i>
+            </button>
+          </div>
+
+          <div class="pestanas-fecha" id="pestanasFecha" role="list" aria-label="Fechas con partidos">
+            <!-- Pestañas renderizadas dinámicamente desde ui.js -->
+          </div>
+
+          <div class="agenda-grid" id="agendaGrid" role="list">
+            <!-- Columnas de partidos simultáneos renderizadas desde ui.js -->
+          </div>
+        </div>
+        <!-- /#vistaAgendaSimultanea -->
 
       </main>
 

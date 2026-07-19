@@ -44,6 +44,66 @@ const UTILS = {
     });
   },
 
+  obtenerFechaSolo(fechaString) {
+    if (!fechaString) return "";
+    return fechaString.split(" ")[0];
+  },
+
+  parsearFechaSolo(fechaSolo) {
+    const partes = fechaSolo.split("/");
+    if (partes.length !== 3) return null;
+
+    const [mes, dia, anio] = partes.map(Number);
+    return new Date(anio, mes - 1, dia);
+  },
+
+  agruparPartidosPorFecha(partidos) {
+    const grupos = {};
+
+    for (const partido of partidos) {
+      const fecha = this.obtenerFechaSolo(partido.local_date);
+      if (!grupos[fecha]) grupos[fecha] = [];
+      grupos[fecha].push(partido);
+    }
+
+    return grupos;
+  },
+
+ obtenerFechasSimultaneas(partidos) {
+    const grupos = this.agruparPartidosPorFecha(partidos);
+
+    return Object.keys(grupos)
+      .filter((fecha) => grupos[fecha].length >= 2)
+      .sort((a, b) => this.parsearFechaSolo(a) - this.parsearFechaSolo(b));
+  },
+
+  obtenerDiaSemanaCorto(fechaSolo) {
+    const fecha = this.parsearFechaSolo(fechaSolo);
+    if (!fecha) return "—";
+    return fecha
+      .toLocaleDateString("es-CR", { weekday: "short" })
+      .replace(".", "")
+      .toUpperCase();
+  },
+
+  formatearFechaCorta(fechaSolo) {
+    const fecha = this.parsearFechaSolo(fechaSolo);
+    if (!fecha) return fechaSolo;
+    return fecha
+      .toLocaleDateString("es-CR", { day: "2-digit", month: "short" })
+      .replace(".", "");
+  },
+
+  formatearFechaCompleta(fechaSolo) {
+    const fecha = this.parsearFechaSolo(fechaSolo);
+    if (!fecha) return fechaSolo;
+    return fecha.toLocaleDateString("es-CR", {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    });
+  },
+
   MAPA_COLOR_SEDE: {
     "1": "sede-mx-ciudaddemexico",
     "2": "sede-mx-guadalajara",
@@ -92,5 +152,30 @@ const UTILS = {
 
   obtenerBanderaEquipo() {
     return '<i class="bi bi-flag-fill" aria-hidden="true"></i>';
+  },
+
+  buscarEquipoPorNombre(nombreEquipoEn, listaEquipos) {
+    if (!listaEquipos || !nombreEquipoEn) return null;
+    return listaEquipos.find((equipo) => equipo.name_en === nombreEquipoEn) || null;
+  },
+
+  obtenerBanderaHTML(nombreEquipoEn, listaEquipos) {
+    const equipo = this.buscarEquipoPorNombre(nombreEquipoEn, listaEquipos);
+
+    if (equipo && equipo.flag) {
+      return `<img class="bandera-equipo" src="${equipo.flag}" alt="" loading="lazy">`;
+    }
+
+    return this.obtenerBanderaEquipo();
+  },
+
+  buscarSedePorId(sedeId, listaSedes) {
+    if (!listaSedes || !sedeId) return null;
+    return listaSedes.find((sede) => String(sede.id) === String(sedeId)) || null;
+  },
+
+  obtenerNombreSede(sedeId, listaSedes) {
+    const sede = this.buscarSedePorId(sedeId, listaSedes);
+    return sede ? sede.name_en : `Sede ${sedeId}`;
   },
 };

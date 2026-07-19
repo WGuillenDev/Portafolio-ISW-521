@@ -8,12 +8,48 @@ const MAIN = {
     EVENTOS.inicializarLogin();
   },
 
-  //Se ejecuta SOLO después de un login exitoso (ver events.js)
+  //Se ejecuta SOLO después de un login exitoso 
   async iniciarApp() {
     UI.mostrarCargando();
+    let hayDatosDeCache = false;
 
     try {
-      const resultado = await API.obtenerSedes();
+      const resultadoSedes = await API.obtenerSedes();
+      if (resultadoSedes.desdeCache) hayDatosDeCache = true;
+
+      UI.mostrarSedes(resultadoSedes.datos.stadiums);
+      EVENTOS._sedesCargadas = resultadoSedes.datos.stadiums;
+    } catch (error) {
+      if (error.message !== "Sesión expirada") {
+        UI.mostrarErrorPartidos();
+      }
+    }
+
+    try {
+      const resultadoEquipos = await API.obtenerEquipos();
+      if (resultadoEquipos.desdeCache) hayDatosDeCache = true;
+
+      EVENTOS._equiposCargados = resultadoEquipos.datos.teams;
+    } catch {
+      EVENTOS._equiposCargados = [];
+    }
+
+    if (hayDatosDeCache) {
+      UI.mostrarBannerCache();
+    } else {
+      UI.ocultarBannerCache();
+    }
+
+    EVENTOS.inicializar();
+  },
+
+  //Carga de partidos compartida entre Tour de Sedes y Agenda Simultánea
+  async asegurarPartidosCargados() {
+    if (EVENTOS._partidosCargados !== null) return true;
+
+    try {
+      const resultado = await API.obtenerPartidos();
+      EVENTOS._partidosCargados = resultado.datos.games;
 
       if (resultado.desdeCache) {
         UI.mostrarBannerCache();
@@ -21,15 +57,27 @@ const MAIN = {
         UI.ocultarBannerCache();
       }
 
-      UI.mostrarSedes(resultado.datos.stadiums);
-      EVENTOS._sedesCargadas = resultado.datos.stadiums;
-    } catch (error) {
-      if (error.message !== "Sesión expirada") {
-        UI.mostrarErrorPartidos();
+      return true;
+    } catch {
+      return false;
+    }
+  },
+
+  //Cambia entre vistas del sidebar (Tour de Sedes / Agenda Simultánea / etc.)
+  async cambiarVista(vista) {
+    UI.mostrarVista(vista);
+
+    if (vista === "agenda-simultanea" && !EVENTOS._agendaInicializada) {
+      EVENTOS._agendaInicializada = true;
+
+      const exito = await this.asegurarPartidosCargados();
+
+      if (exito) {
+        UI.iniciarVistaAgenda(EVENTOS._partidosCargados, EVENTOS._equiposCargados, EVENTOS._sedesCargadas);
+      } else {
+        UI.mostrarErrorAgenda();
       }
     }
-
-    EVENTOS.inicializar();
   },
 };
 
