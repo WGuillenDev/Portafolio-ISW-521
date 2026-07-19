@@ -4,15 +4,85 @@ const EVENTOS = {
   _partidosCargados: null,
   _cargandoPartidos: false,
    _sedesCargadas: [],
+   _autenticando: false,
 
-  //Inicializar todos los eventos
+  //Eventos que deben existir ANTES del login (formulario de acceso)
+  inicializarLogin() {
+    this._eventoLogin();
+    this._eventoToggleClave();
+    this._eventoReautenticar();
+  },
+
+  //Eventos que solo tienen sentido DESPUÉS de un login exitoso
   inicializar() {
     this._eventoSedes();
-    this._eventoReautenticar();
     this._eventoTema();
     this._eventoIdioma();
     this._eventoFuente();
     this._eventoAccesibilidad();
+  },
+
+ //Envío del formulario de login
+  _eventoLogin() {
+    const formulario = document.getElementById("formularioLogin");
+
+    formulario.addEventListener("submit", async (evento) => {
+      evento.preventDefault();
+      if (this._autenticando) return;
+
+      const usuario = document.getElementById("loginUsuario").value.trim();
+      const contrasena = document.getElementById("loginContrasena").value;
+      const error = document.getElementById("loginError");
+      const boton = document.getElementById("btnLogin");
+      const botonTexto = document.getElementById("btnLoginTexto");
+
+      error.hidden = true;
+      error.textContent = "";
+      this._autenticando = true;
+      boton.disabled = true;
+      botonTexto.textContent = "Verificando...";
+
+      try {
+        await AUTH.iniciarSesion(usuario, contrasena);
+        UI.ocultarLogin();
+        UI.mostrarApp();
+        await MAIN.iniciarApp();
+      } catch {
+        error.textContent = "Usuario o contraseña incorrectos.";
+        error.hidden = false;
+        document.getElementById("loginContrasena").focus();
+      } finally {
+        this._autenticando = false;
+        boton.disabled = false;
+        botonTexto.textContent = "Iniciar sesión";
+      }
+    });
+  },
+
+  //Mostrar/ocultar contraseña en el login
+  _eventoToggleClave() {
+    const boton = document.getElementById("btnMostrarClave");
+    const input = document.getElementById("loginContrasena");
+    const icono = boton.querySelector("i");
+
+    boton.addEventListener("click", () => {
+      const mostrando = input.type === "text";
+      input.type = mostrando ? "password" : "text";
+      boton.setAttribute("aria-pressed", String(!mostrando));
+      icono.classList.toggle("bi-eye", mostrando);
+      icono.classList.toggle("bi-eye-slash", !mostrando);
+    });
+  },
+
+  //Reautenticar tras 401 — vuelve a mostrar el login de pantalla completa
+  _eventoReautenticar() {
+    document.getElementById("btnReautenticar").addEventListener("click", () => {
+      UI.ocultarModal();
+      UI.ocultarApp();
+      UI.mostrarLogin();
+      document.getElementById("loginContrasena").value = "";
+      document.getElementById("loginUsuario").focus();
+    });
   },
 
   //Clic en sede
@@ -66,20 +136,7 @@ const EVENTOS = {
     });
   },
 
-  //Reautenticar tras 401 
-  _eventoReautenticar() {
-    document.getElementById("btnReautenticar").addEventListener("click", async () => {
-      UI.ocultarModal();
-
-      try {
-        await AUTH.iniciarSesion();
-      } catch {
-        UI.mostrarSesionExpirada();
-      }
-    });
-  },
-
-  //Tema oscuro / claro 
+  //Tema oscuro / claro
   _eventoTema() {
     document.getElementById("btnTema").addEventListener("click", () => {
       const actual = document.documentElement.getAttribute("data-tema");
@@ -90,7 +147,7 @@ const EVENTOS = {
     });
   },
 
-  //Idioma ES / EN 
+   //Idioma ES / EN
   _eventoIdioma() {
     document.getElementById("btnIdioma").addEventListener("click", () => {
       const actual = document.documentElement.getAttribute("data-idioma");
@@ -102,7 +159,7 @@ const EVENTOS = {
     });
   },
 
-  //Tamaño de fuente 
+  //Tamaño de fuente
   _eventoFuente() {
     document.getElementById("fuenteMas").addEventListener("click", () => {
       this._cambiarFuente(2);
@@ -123,7 +180,7 @@ const EVENTOS = {
     localStorage.setItem(CONFIG.CLAVES_STORAGE.FUENTE, nuevo + "px");
   },
 
-  //Panel de accesibilidad 
+  //Panel de accesibilidad
   _eventoAccesibilidad() {
     const boton = document.getElementById("btnAccesibilidad");
     const panel = document.getElementById("panelAccesibilidad");

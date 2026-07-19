@@ -21,18 +21,37 @@ const UI = {
     const fuente = localStorage.getItem(CONFIG.CLAVES_STORAGE.FUENTE);
     if (fuente) document.documentElement.style.fontSize = fuente;
   },
+  
+  //Control de pantallas — login vs. aplicación
+  mostrarLogin() {
+    const login = document.getElementById("pantallaLogin");
+    login.hidden = false;
+    document.getElementById("loginUsuario").focus();
+  },
+
+  ocultarLogin() {
+    document.getElementById("pantallaLogin").hidden = true;
+  },
+
+  mostrarApp() {
+    document.getElementById("appRaiz").hidden = false;
+  },
+
+  ocultarApp() {
+    document.getElementById("appRaiz").hidden = true;
+  },
 
   //Modal sesión expirada (401) 
-  mostrarSesionExpirada() {
+ mostrarSesionExpirada() {
     const modal = document.getElementById("modalSesion");
-    modal.hidden = false;
+    modal.classList.add("visible");
     modal.setAttribute("aria-hidden", "false");
     document.getElementById("btnReautenticar").focus();
   },
 
   ocultarModal() {
     const modal = document.getElementById("modalSesion");
-    modal.hidden = true;
+    modal.classList.remove("visible");
     modal.setAttribute("aria-hidden", "true");
   },
 

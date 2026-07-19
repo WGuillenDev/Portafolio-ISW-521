@@ -50,6 +50,10 @@
   --badge-grupo-fondo: #e8f0fe;
   --badge-grupo-texto: #1a56db;
 
+  /* Estados de error */
+  --color-error-fondo: #f8d7da;
+  --color-error-texto: #842029;
+
   /* Tipografía */
   --fuente-principal: system-ui, -apple-system, "Segoe UI", sans-serif;
   --fuente-size-base: 16px;
@@ -124,6 +128,10 @@
   --badge-pendiente-texto: #ffc107;
   --badge-grupo-fondo: #1a2a52;
   --badge-grupo-texto: #7ba7f5;
+
+  /* Estados de error */
+  --color-error-fondo: #3d1418;
+  --color-error-texto: #ff8a94;
 }
 
 /*Colores de tarjetas de sedes por país */

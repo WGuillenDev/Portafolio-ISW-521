@@ -11,14 +11,16 @@ const AUTH = {
     return `${header}.${payload}.${firma}`;
   },
 
-  async iniciarSesion() {
-    const { username, password } = CONFIG.CREDENCIALES;
+  async iniciarSesion(usuario, contrasena) {
+    const credencialesValidas =
+      usuario === CONFIG.CREDENCIALES.username &&
+      contrasena === CONFIG.CREDENCIALES.password;
 
-    if (!username || !password) {
-      throw new Error("Credenciales no configuradas");
+    if (!credencialesValidas) {
+      throw new Error("CREDENCIALES_INVALIDAS");
     }
 
-    const token = this.generarToken(username);
+    const token = this.generarToken(usuario);
     localStorage.setItem(CONFIG.CLAVES_STORAGE.TOKEN, token);
     return token;
   },

@@ -33,6 +33,70 @@
 
 <body>
 
+   <!-- Pantalla de login — bloquea el acceso hasta autenticarse -->
+  <div class="login" id="pantallaLogin" role="dialog" aria-modal="true" aria-labelledby="loginTitulo">
+    <div class="login__fondo" aria-hidden="true"></div>
+
+    <main class="login__contenedor">
+
+      <div class="login__marca">
+        <img src="assets/icons/logo-mundial.webp"
+          alt="Logo Copa Mundial de la FIFA 2026"
+          class="login__logo"
+          width="64"
+          height="64">
+        <h1 class="login__titulo" id="loginTitulo">Copa Mundial de la FIFA 2026™</h1>
+        <p class="login__marca-subtitulo">Tour Virtual de Sedes</p>
+      </div>
+
+      <div class="login__tarjeta">
+        <h2 class="login__bienvenida">Bienvenido de nuevo</h2>
+        <p class="login__descripcion">
+          Ingresá tus credenciales para acceder al tour virtual de sedes.
+        </p>
+
+        <form class="login__formulario" id="formularioLogin" novalidate>
+
+          <div class="login__campo">
+            <label class="login__etiqueta" for="loginUsuario">Usuario</label>
+            <div class="login__input-grupo">
+              <i class="bi bi-person login__icono" aria-hidden="true"></i>
+              <input class="login__input" id="loginUsuario" name="usuario"
+                type="text" autocomplete="username" placeholder="estudiante"
+                required>
+            </div>
+          </div>
+
+          <div class="login__campo">
+            <label class="login__etiqueta" for="loginContrasena">Contraseña</label>
+            <div class="login__input-grupo">
+              <i class="bi bi-lock-fill login__icono" aria-hidden="true"></i>
+              <input class="login__input" id="loginContrasena" name="contrasena"
+                type="password" autocomplete="current-password" placeholder="••••••••"
+                required>
+              <button class="login__toggle-clave" id="btnMostrarClave" type="button"
+                aria-label="Mostrar contraseña" aria-pressed="false">
+                <i class="bi bi-eye" aria-hidden="true"></i>
+              </button>
+            </div>
+          </div>
+
+          <p class="login__error" id="loginError" role="alert" hidden></p>
+
+          <button class="login__btn" type="submit" id="btnLogin">
+            <span id="btnLoginTexto">Iniciar sesión</span>
+            <i class="bi bi-arrow-right" aria-hidden="true"></i>
+          </button>
+
+        </form>
+      </div>
+
+    </main>
+  </div>
+
+  <!-- Contenedor de la aplicación — oculto hasta completar el login -->
+  <div id="appRaiz" hidden>
+
   <!-- Saltar al contenido principal — accesibilidad por teclado -->
   <a href="#contenido-principal" class="skip-link">
     Saltar al contenido principal

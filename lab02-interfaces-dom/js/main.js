@@ -1,14 +1,18 @@
 const MAIN = {
 
-  async iniciar() {
+  //Se ejecuta siempre al cargar la página, ANTES del login
+  iniciar() {
     UI.aplicarTema();
     UI.aplicarIdioma();
     UI.aplicarFuente();
+    EVENTOS.inicializarLogin();
+  },
+
+  //Se ejecuta SOLO después de un login exitoso (ver events.js)
+  async iniciarApp() {
     UI.mostrarCargando();
 
     try {
-      await AUTH.iniciarSesion();
-
       const resultado = await API.obtenerSedes();
 
       if (resultado.desdeCache) {
