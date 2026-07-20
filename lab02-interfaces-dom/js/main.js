@@ -78,6 +78,18 @@ const MAIN = {
         UI.mostrarErrorAgenda();
       }
     }
+
+    if (vista === "timeline-infinito" && !EVENTOS._timelineInicializada) {
+      EVENTOS._timelineInicializada = true;
+
+      const exito = await this.asegurarPartidosCargados();
+
+      if (exito) {
+        UI.iniciarVistaTimeline(EVENTOS._partidosCargados, EVENTOS._equiposCargados, EVENTOS._sedesCargadas);
+      } else {
+        UI.mostrarErrorTimeline();
+      }
+    }
   },
 };
 

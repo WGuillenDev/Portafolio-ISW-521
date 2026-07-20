@@ -293,10 +293,12 @@ const UI = {
     const mapaIds = {
       "tour-sedes": "vistaTourSedes",
       "agenda-simultanea": "vistaAgendaSimultanea",
+      "timeline-infinito": "vistaTimelineInfinito",
     };
     const mapaTitulos = {
       "tour-sedes": "Tour Virtual de Sedes",
       "agenda-simultanea": "Agenda Simultánea",
+      "timeline-infinito": "Timeline Infinito",
     };
 
     const idVista = mapaIds[vista];
@@ -481,5 +483,115 @@ const UI = {
 
       grid.appendChild(columna);
     }
+  },
+
+  //Primera vez que se visita Timeline Infinito
+  iniciarVistaTimeline(partidos) {
+    const ordenados = UTILS.ordenarPartidosCronologicamente(partidos);
+    EVENTOS._timelinePartidosOrdenados = ordenados;
+    EVENTOS._timelineIndiceBloque = 0;
+
+    document.getElementById("timelineLista").innerHTML = "";
+    document.getElementById("timelineError").hidden = true;
+    this._actualizarContadorTimeline(0, ordenados.length);
+
+    EVENTOS._cargarSiguienteBloqueTimeline();
+    EVENTOS.configurarObserverTimeline();
+  },
+
+  //Reto de resiliencia: /get/games falla y no hay caché disponible
+  mostrarErrorTimeline() {
+    document.getElementById("timelineLista").innerHTML = "";
+    document.getElementById("timelineCargando").hidden = true;
+    document.getElementById("timelineError").hidden = false;
+    this._actualizarContadorTimeline(0, 0);
+  },
+
+  //Inserta un bloque de 10 partidos, agrupando por fecha sin duplicar encabezados
+  agregarBloqueTimeline(bloque, equipos, sedes) {
+    const lista = document.getElementById("timelineLista");
+
+    for (const partido of bloque) {
+      const fecha = UTILS.obtenerFechaSolo(partido.local_date);
+      const ultimoGrupo = lista.lastElementChild;
+      let contenedorPartidos;
+
+      if (ultimoGrupo && ultimoGrupo.getAttribute("data-fecha") === fecha) {
+        contenedorPartidos = ultimoGrupo.querySelector(".timeline-fecha-partidos");
+      } else {
+        const nuevoGrupo = document.createElement("div");
+        nuevoGrupo.className = "timeline-fecha-grupo";
+        nuevoGrupo.setAttribute("data-fecha", fecha);
+        nuevoGrupo.innerHTML = `
+          <div class="timeline-fecha-punto" aria-hidden="true"></div>
+          <h3 class="timeline-fecha-titulo">${UTILS.formatearFechaCompleta(fecha)}</h3>
+          <div class="timeline-fecha-partidos" role="list"></div>
+        `;
+        lista.appendChild(nuevoGrupo);
+        contenedorPartidos = nuevoGrupo.querySelector(".timeline-fecha-partidos");
+      }
+
+      contenedorPartidos.appendChild(this._crearTarjetaTimeline(partido, equipos, sedes));
+    }
+
+    const totalMostrados = lista.querySelectorAll(".timeline-partido").length;
+    this._actualizarContadorTimeline(totalMostrados, EVENTOS._timelinePartidosOrdenados.length);
+  },
+
+  _crearTarjetaTimeline(partido, equipos, sedes) {
+    const tarjeta = document.createElement("article");
+    tarjeta.className = "timeline-partido";
+    tarjeta.setAttribute("role", "listitem");
+
+    const nombreSede = UTILS.obtenerNombreSede(partido.stadium_id, sedes);
+    const horaSolo = (partido.local_date || "").split(" ")[1];
+
+    tarjeta.innerHTML = `
+      <div class="timeline-partido__header">
+        <span class="timeline-partido__hora">
+          <i class="bi bi-clock" aria-hidden="true"></i>
+          ${horaSolo || "—"}
+        </span>
+        <span class="timeline-partido__grupo">Grupo ${partido.group || "—"}</span>
+      </div>
+      <div class="timeline-partido__cuerpo">
+        <div class="agenda-columna__equipos">
+          <div class="agenda-columna__equipo">
+            ${UTILS.obtenerBanderaHTML(partido.home_team_name_en, equipos)}
+            <span class="partido-card__equipo-nombre">${partido.home_team_name_en || "—"}</span>
+          </div>
+          <span class="partido-card__vs" aria-label="versus">VS</span>
+          <div class="agenda-columna__equipo">
+            ${UTILS.obtenerBanderaHTML(partido.away_team_name_en, equipos)}
+            <span class="partido-card__equipo-nombre">${partido.away_team_name_en || "—"}</span>
+          </div>
+        </div>
+        <div class="agenda-columna__resultado">
+          ${
+            partido.finished === "TRUE"
+              ? `<span class="partido-card__marcador">${partido.home_score} — ${partido.away_score}</span>`
+              : `<span class="badge-partido badge-partido--pendiente">
+                   <i class="bi bi-clock" aria-hidden="true"></i> Pendiente
+                 </span>`
+          }
+        </div>
+      </div>
+      <div class="timeline-partido__footer">
+        <i class="bi bi-building" aria-hidden="true"></i> ${nombreSede}
+      </div>
+    `;
+
+    tarjeta.querySelectorAll(".bandera-equipo").forEach((img) => {
+      img.addEventListener("error", () => {
+        img.outerHTML = UTILS.obtenerBanderaEquipo();
+      }, { once: true });
+    });
+
+    return tarjeta;
+  },
+
+  _actualizarContadorTimeline(mostrados, total) {
+    document.getElementById("timelineContador").textContent =
+      `${mostrados} de ${total} partidos mostrados`;
   },
 };

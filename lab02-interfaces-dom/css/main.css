@@ -362,17 +362,6 @@ body {
   gap: 4px;
 }
 
-.partido-card__codigo-fifa {
-  font-size: 9px;
-  font-weight: 700;
-  color: var(--texto-muted);
-  background: var(--superficie-panel-alt);
-  border: 1px solid var(--superficie-borde);
-  padding: 1px 4px;
-  border-radius: var(--radio-sm);
-  letter-spacing: 0.03em;
-}
-
 .partido-card__marcador {
   display: inline-flex;
   align-items: center;
@@ -421,9 +410,7 @@ body {
   color: var(--badge-grupo-texto);
 }
 
-/* ------------------------------------------------------------
-   Mensajes de estado — error, vacío, sin partidos
-   ------------------------------------------------------------ */
+/*Mensajes de estado — error, vacío, sin partidos*/
 .mensaje-estado {
   text-align: center;
   padding: var(--espacio-xl);
@@ -1216,5 +1203,190 @@ body {
 
   .agenda-grid {
     grid-template-columns: 1fr;
+  }
+}
+/*Timeline Infinito — línea vertical, marcadores de fecha, tarjetas*/
+.timeline-resumen {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--espacio-md);
+  background: var(--timeline-resumen-fondo);
+  color: var(--timeline-resumen-texto);
+  border-radius: var(--radio-lg);
+  padding: var(--espacio-lg);
+  margin-bottom: var(--espacio-xl);
+}
+
+.timeline-resumen__titulo {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.timeline-resumen__contador {
+  font-size: var(--fuente-size-sm);
+  opacity: 0.75;
+}
+
+/*Contenedor principal — línea vertical de fondo*/
+.timeline {
+  position: relative;
+  padding-left: 40px;
+}
+
+.timeline::before {
+  content: "";
+  position: absolute;
+  left: 15px;
+  top: 6px;
+  bottom: 0;
+  width: 2px;
+  background: var(--timeline-linea-color);
+  opacity: 0.3;
+}
+
+/*Cada grupo de fecha — punto en la línea + tarjetas de ese día*/
+.timeline-fecha-grupo {
+  position: relative;
+  margin-bottom: var(--espacio-xl);
+}
+
+.timeline-fecha-punto {
+  position: absolute;
+  left: -33px;
+  top: 4px;
+  width: var(--timeline-punto-tamano);
+  height: var(--timeline-punto-tamano);
+  border-radius: 50%;
+  background: var(--color-dorado);
+  border: 3px solid var(--superficie-fondo);
+}
+
+.timeline-fecha-titulo {
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--texto-principal);
+  margin-bottom: var(--espacio-md);
+}
+
+.timeline-fecha-partidos {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: var(--espacio-md);
+}
+
+/*Tarjeta de partido dentro del timeline*/
+.timeline-partido {
+  background: var(--superficie-panel);
+  border: 1px solid var(--superficie-borde);
+  border-radius: var(--radio-lg);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: border-color var(--transicion-rapida);
+}
+
+.timeline-partido:hover {
+  border-color: var(--color-dorado);
+}
+
+.timeline-partido__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--espacio-sm);
+  padding: var(--espacio-sm) var(--espacio-md);
+  background: var(--superficie-panel-alt);
+  border-bottom: 1px solid var(--superficie-borde);
+  font-size: var(--fuente-size-xs);
+  color: var(--texto-muted);
+}
+
+.timeline-partido__hora {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.timeline-partido__grupo {
+  background: var(--badge-grupo-fondo);
+  color: var(--badge-grupo-texto);
+  font-size: 10px;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: var(--radio-pill);
+}
+
+.timeline-partido__cuerpo {
+  padding: var(--espacio-lg) var(--espacio-md);
+  flex: 1;
+}
+
+.timeline-partido__footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  padding: var(--espacio-sm) var(--espacio-md);
+  background: var(--superficie-panel-alt);
+  border-top: 1px solid var(--superficie-borde);
+  font-size: 10px;
+  color: var(--texto-muted);
+  text-align: center;
+  margin-top: auto;
+}
+
+/*Centinela — invisible, sin tamaño visual propio*/
+.timeline__centinela {
+  height: 1px;
+}
+
+/*Estado de carga progresiva*/
+.timeline__cargando {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--espacio-sm);
+  padding: var(--espacio-xl) 0;
+  color: var(--color-dorado);
+  font-size: var(--fuente-size-sm);
+  font-weight: 600;
+}
+
+/*Reto de resiliencia — error de carga inicial*/
+.timeline__error {
+  text-align: center;
+  padding: var(--espacio-xl);
+  color: var(--texto-muted);
+}
+
+.timeline__error i {
+  font-size: 32px;
+  color: var(--color-dorado);
+  display: block;
+  margin-bottom: var(--espacio-sm);
+}
+
+.timeline__error p {
+  margin-bottom: var(--espacio-md);
+}
+
+@media (max-width: 600px) {
+  .timeline {
+    padding-left: 28px;
+  }
+
+  .timeline::before {
+    left: 9px;
+  }
+
+  .timeline-fecha-punto {
+    left: -21px;
+  }
+
+  .timeline-resumen {
+    flex-direction: column;
+    align-items: flex-start;
   }
 }

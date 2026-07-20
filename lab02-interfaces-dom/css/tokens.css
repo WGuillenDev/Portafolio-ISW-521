@@ -96,6 +96,12 @@
   /* Agenda Simultánea */
   --pestana-fondo-activa: var(--color-dorado);
   --pestana-texto-activa: var(--color-primario);
+
+  /* Timeline Infinito */
+  --timeline-linea-color: var(--color-dorado);
+  --timeline-punto-tamano: 14px;
+  --timeline-resumen-fondo: var(--color-primario);
+  --timeline-resumen-texto: var(--color-blanco);
 }
 
 /*Modo oscuro*/

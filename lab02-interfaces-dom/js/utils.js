@@ -103,6 +103,37 @@ const UTILS = {
       day: "numeric",
     });
   },
+  parsearFechaHora(fechaHoraString) {
+    if (!fechaHoraString) return null;
+
+    const [fechaParte, horaParte] = fechaHoraString.split(" ");
+    const fecha = this.parsearFechaSolo(fechaParte);
+    if (!fecha) return null;
+
+    if (horaParte) {
+      const [horas, minutos] = horaParte.split(":").map(Number);
+      fecha.setHours(horas || 0, minutos || 0, 0, 0);
+    }
+
+    return fecha;
+  },
+
+  ordenarPartidosCronologicamente(partidos) {
+    return [...partidos].sort((a, b) => {
+      const fechaA = this.parsearFechaHora(a.local_date);
+      const fechaB = this.parsearFechaHora(b.local_date);
+      return fechaA - fechaB;
+    });
+  },
+
+  obtenerBloque(partidosOrdenados, indiceBloque, tamanoBloque = 10) {
+    const inicio = indiceBloque * tamanoBloque;
+    return partidosOrdenados.slice(inicio, inicio + tamanoBloque);
+  },
+
+  hayMasBloques(partidosOrdenados, indiceBloque, tamanoBloque = 10) {
+    return indiceBloque * tamanoBloque < partidosOrdenados.length;
+  },
 
   MAPA_COLOR_SEDE: {
     "1": "sede-mx-ciudaddemexico",

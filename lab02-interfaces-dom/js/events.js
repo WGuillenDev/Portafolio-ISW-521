@@ -9,6 +9,10 @@ const EVENTOS = {
   _agendaInicializada: false,
   _fechasSimultaneas: [],
   _indiceFechaActual: 0,
+  _timelineInicializada: false,
+  _timelinePartidosOrdenados: [],
+  _timelineIndiceBloque: 0,
+  _timelineObserver: null,
 
   //Eventos que deben existir ANTES del login (formulario de acceso)
   inicializarLogin() {
@@ -22,6 +26,7 @@ const EVENTOS = {
     this._eventoSidebar();
     this._eventoSedes();
     this._eventoNavegacionFecha();
+    this._eventoReintentarTimeline();
     this._eventoTema();
     this._eventoIdioma();
     this._eventoFuente();
@@ -177,6 +182,53 @@ const EVENTOS = {
       this._equiposCargados,
       this._sedesCargadas
     );
+  },
+
+  //Reto de resiliencia: botón de reintento manual de Timeline Infinito
+  _eventoReintentarTimeline() {
+    document.getElementById("btnReintentarTimeline").addEventListener("click", async () => {
+      this._timelineInicializada = false;
+      await MAIN.cambiarVista("timeline-infinito");
+    });
+  },
+
+  //Configura el IntersectionObserver sobre el centinela — se llama una sola vez
+  configurarObserverTimeline() {
+    if (this._timelineObserver) return;
+
+    const centinela = document.getElementById("timelineCentinela");
+
+    this._timelineObserver = new IntersectionObserver((entradas) => {
+      const [entrada] = entradas;
+      if (entrada.isIntersecting) {
+        this._cargarSiguienteBloqueTimeline();
+      }
+    }, {
+      root: null,
+      rootMargin: "200px",
+      threshold: 0,
+    });
+
+    this._timelineObserver.observe(centinela);
+  },
+
+  _cargarSiguienteBloqueTimeline() {
+    const hayMas = UTILS.hayMasBloques(this._timelinePartidosOrdenados, this._timelineIndiceBloque);
+    if (!hayMas) return;
+
+    document.getElementById("timelineCargando").hidden = false;
+
+    const bloque = UTILS.obtenerBloque(this._timelinePartidosOrdenados, this._timelineIndiceBloque);
+    UI.agregarBloqueTimeline(bloque, this._equiposCargados, this._sedesCargadas);
+
+    this._timelineIndiceBloque++;
+    document.getElementById("timelineCargando").hidden = true;
+
+    const quedaMas = UTILS.hayMasBloques(this._timelinePartidosOrdenados, this._timelineIndiceBloque);
+    if (!quedaMas && this._timelineObserver) {
+      this._timelineObserver.disconnect();
+      this._timelineObserver = null;
+    }
   },
 
   //Tema oscuro / claro

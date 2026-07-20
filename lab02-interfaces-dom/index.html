@@ -133,8 +133,9 @@
             </button>
           </li>
           <li>
-            <button class="sidebar__link" disabled aria-disabled="true" title="Próximamente">
-              <i class="bi bi-hourglass-split" aria-hidden="true"></i>
+            <button class="sidebar__link" id="linkTimelineInfinito"
+              data-vista="timeline-infinito">
+              <i class="bi bi-clock-history" aria-hidden="true"></i>
               <span>Timeline Infinito</span>
             </button>
           </li>
@@ -285,7 +286,7 @@
         </section>
 
         </div>
-        
+
         <!-- VISTA: Agenda Simultánea -->
         <div class="vista" id="vistaAgendaSimultanea" hidden>
           <h2 class="sr-only">Agenda Simultánea</h2>
@@ -314,7 +315,37 @@
             <!-- Columnas de partidos simultáneos renderizadas desde ui.js -->
           </div>
         </div>
-        <!-- /#vistaAgendaSimultanea -->
+        <!-- VISTA: Timeline Infinito -->
+        <div class="vista" id="vistaTimelineInfinito" hidden>
+          <h2 class="sr-only">Timeline Infinito</h2>
+
+          <div class="timeline-resumen">
+            <div>
+              <h3 class="timeline-resumen__titulo">Cronología del Mundial 2026</h3>
+              <p class="timeline-resumen__contador" id="timelineContador">
+                Cargando partidos...
+              </p>
+            </div>
+          </div>
+
+          <div class="timeline" id="timelineLista" role="list" aria-label="Cronología de partidos">
+            <!-- Bloques de partidos insertados progresivamente desde ui.js -->
+          </div>
+
+          <div class="timeline__centinela" id="timelineCentinela" aria-hidden="true"></div>
+
+          <div class="timeline__cargando" id="timelineCargando" role="status" aria-live="polite" hidden>
+            <span class="spinner" aria-hidden="true"></span>
+            <span>Cargando más partidos...</span>
+          </div>
+
+          <div class="timeline__error" id="timelineError" role="alert" hidden>
+            <i class="bi bi-exclamation-triangle-fill" aria-hidden="true"></i>
+            <p>No se pudieron cargar los partidos.</p>
+            <button class="mensaje-estado__btn" id="btnReintentarTimeline">Reintentar</button>
+          </div>
+        </div>
+        <!-- /#vistaTimelineInfinito -->
 
       </main>
 
