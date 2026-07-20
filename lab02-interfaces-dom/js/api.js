@@ -102,4 +102,28 @@ const API = {
       throw error;
     }
   },
+
+  async obtenerGrupos() {
+    const clave = CONFIG.CLAVES_STORAGE.GRUPOS;
+
+    try {
+      const datos = await UTILS.ejecutarConBackoff(() =>
+        this.peticion(CONFIG.ENDPOINTS.GRUPOS)
+      );
+      STORAGE.guardar(clave, datos);
+      return { datos, desdeCache: false };
+    } catch (error) {
+      if (error.message === "LIMITE_ALCANZADO") {
+        await UI.mostrarCountdown(8);
+        return this.obtenerGrupos();
+      }
+
+      const cache = STORAGE.obtener(clave);
+      if (cache) {
+        return { datos: cache.datos, desdeCache: true };
+      }
+
+      throw error;
+    }
+  },
 };

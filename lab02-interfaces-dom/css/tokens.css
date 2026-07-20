@@ -102,6 +102,11 @@
   --timeline-punto-tamano: 14px;
   --timeline-resumen-fondo: var(--color-primario);
   --timeline-resumen-texto: var(--color-blanco);
+
+  /* Dashboard del Fanático */
+  --favorito-acento-default: var(--color-dorado);
+  --tabla-header-fondo: var(--superficie-panel-alt);
+  --tabla-fila-hover: rgba(200, 169, 81, 0.06);
 }
 
 /*Modo oscuro*/

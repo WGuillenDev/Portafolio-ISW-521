@@ -181,6 +181,65 @@ const UTILS = {
     return this.MAPA_IMAGEN_SEDE[String(sedeId)] || null;
   },
 
+  MAPA_COLOR_EQUIPO: {
+    "Mexico": "#006341",
+    "South Africa": "#007A4D",
+    "South Korea": "#CD2E3A",
+    "Czech Republic": "#D7141A",
+    "Canada": "#FF0000",
+    "Switzerland": "#D52B1E",
+    "Qatar": "#8D1B3D",
+    "Bosnia and Herzegovina": "#002395",
+    "Brazil": "#009739",
+    "Morocco": "#C1272D",
+    "Haiti": "#00209F",
+    "Scotland": "#005EB8",
+    "United States": "#B22234",
+    "USA": "#B22234",
+    "Paraguay": "#D52B1E",
+    "Australia": "#00843D",
+    "Turkiye": "#E30A17",
+    "Turkey": "#E30A17",
+    "Germany": "#DD0000",
+    "Curacao": "#002B7F",
+    "Curaçao": "#002B7F",
+    "Ivory Coast": "#F77F00",
+    "Ecuador": "#FFDD00",
+    "Netherlands": "#FF4F00",
+    "Japan": "#BC002D",
+    "Tunisia": "#E70013",
+    "Sweden": "#006AA7",
+    "Belgium": "#ED2939",
+    "Egypt": "#CE1126",
+    "Iran": "#239F40",
+    "New Zealand": "#000000",
+    "Spain": "#AA151B",
+    "Cape Verde": "#003893",
+    "Saudi Arabia": "#006C35",
+    "Uruguay": "#0038A8",
+    "France": "#0055A4",
+    "Senegal": "#00853F",
+    "Norway": "#EF2B2D",
+    "Iraq": "#CE1126",
+    "Argentina": "#75AADB",
+    "Algeria": "#006233",
+    "Austria": "#ED2939",
+    "Jordan": "#CE1126",
+    "Portugal": "#FF0000",
+    "Colombia": "#FCD116",
+    "Uzbekistan": "#0099B5",
+    "Democratic Republic of the Congo": "#007FFF",
+    "Congo DR": "#007FFF",
+    "England": "#CE1124",
+    "Croatia": "#FF0000",
+    "Ghana": "#FCD116",
+    "Panama": "#DA121A",
+  },
+
+  obtenerColorEquipo(nombreEquipoEn) {
+    return this.MAPA_COLOR_EQUIPO[nombreEquipoEn] || "var(--favorito-acento-default)";
+  },
+
   obtenerBanderaEquipo() {
     return '<i class="bi bi-flag-fill" aria-hidden="true"></i>';
   },
@@ -208,5 +267,57 @@ const UTILS = {
   obtenerNombreSede(sedeId, listaSedes) {
     const sede = this.buscarSedePorId(sedeId, listaSedes);
     return sede ? sede.name_en : `Sede ${sedeId}`;
+  },
+
+  // Dashboard del Fanático — favorito, colores y cruces
+
+  //Persistencia del equipo favorito — sobrevive a un refresco completo
+  guardarFavorito(equipoId) {
+    localStorage.setItem(CONFIG.CLAVES_STORAGE.FAVORITO, equipoId);
+  },
+
+  obtenerFavoritoGuardado() {
+    return localStorage.getItem(CONFIG.CLAVES_STORAGE.FAVORITO);
+  },
+
+  buscarEquipoPorId(equipoId, listaEquipos) {
+    if (!listaEquipos || !equipoId) return null;
+    return listaEquipos.find((equipo) => String(equipo.id) === String(equipoId)) || null;
+  },
+
+  //Cruce equipo → grupo real (pts, gf, ga, gd, posición)
+  obtenerEstadisticasGrupo(equipoId, listaEquipos, listaGrupos) {
+    const equipo = this.buscarEquipoPorId(equipoId, listaEquipos);
+    if (!equipo || !equipo.groups) return null;
+
+    const grupo = listaGrupos.find((g) => g.name === equipo.groups);
+    if (!grupo) return null;
+
+    const equiposOrdenados = [...grupo.teams].sort((a, b) => {
+      if (Number(b.pts) !== Number(a.pts)) return Number(b.pts) - Number(a.pts);
+      return Number(b.gd) - Number(a.gd);
+    });
+
+    const posicion = equiposOrdenados.findIndex((t) => String(t.team_id) === String(equipoId)) + 1;
+    const stats = grupo.teams.find((t) => String(t.team_id) === String(equipoId));
+
+    if (!stats) return null;
+
+    return {
+      nombreGrupo: grupo.name,
+      posicion,
+      pts: stats.pts,
+      gf: stats.gf,
+      ga: stats.ga,
+      gd: stats.gd,
+      mp: stats.mp,
+    };
+  },
+
+  //Filtrar partidos donde participa un equipo (local o visitante)
+  filtrarPartidosPorEquipo(nombreEquipoEn, partidos) {
+    return partidos.filter(
+      (p) => p.home_team_name_en === nombreEquipoEn || p.away_team_name_en === nombreEquipoEn
+    );
   },
 };

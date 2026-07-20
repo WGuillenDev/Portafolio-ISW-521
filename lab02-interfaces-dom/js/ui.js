@@ -294,11 +294,13 @@ const UI = {
       "tour-sedes": "vistaTourSedes",
       "agenda-simultanea": "vistaAgendaSimultanea",
       "timeline-infinito": "vistaTimelineInfinito",
+      "dashboard-fanatico": "vistaDashboardFanatico",
     };
     const mapaTitulos = {
       "tour-sedes": "Tour Virtual de Sedes",
       "agenda-simultanea": "Agenda Simultánea",
       "timeline-infinito": "Timeline Infinito",
+      "dashboard-fanatico": "Dashboard del Fanático",
     };
 
     const idVista = mapaIds[vista];
@@ -594,4 +596,162 @@ const UI = {
     document.getElementById("timelineContador").textContent =
       `${mostrados} de ${total} partidos mostrados`;
   },
+
+//Primera vez que se visita Dashboard del Fanático
+  iniciarVistaDashboard() {
+    this.mostrarOpcionesFavoritos(EVENTOS._equiposCargados);
+
+    const favoritoGuardado = UTILS.obtenerFavoritoGuardado();
+    if (favoritoGuardado) {
+      EVENTOS._favoritoActualId = favoritoGuardado;
+      this.mostrarDashboardDeEquipo(favoritoGuardado);
+    }
+  },
+
+  //Reto de resiliencia: /get/games o /get/groups fallan sin caché disponible
+  mostrarErrorDashboard() {
+    document.getElementById("dashboardContenido").hidden = true;
+
+    const vacio = document.getElementById("dashboardVacio");
+    vacio.hidden = false;
+    vacio.innerHTML = `
+      <i class="bi bi-exclamation-triangle-fill mensaje-estado__icono" aria-hidden="true"></i>
+      <span class="mensaje-estado__texto">No se pudieron cargar los datos de las selecciones.</span>
+    `;
+  },
+
+  //Lista filtrable de equipos dentro del panel desplegable
+  mostrarOpcionesFavoritos(equipos) {
+    const lista = document.getElementById("listaEquiposFavoritos");
+    lista.innerHTML = "";
+
+    if (equipos.length === 0) {
+      lista.innerHTML = `<p class="mensaje-estado__texto" style="padding: var(--espacio-md);">No se encontraron selecciones.</p>`;
+      return;
+    }
+
+    for (const equipo of equipos) {
+      const opcion = document.createElement("button");
+      opcion.className = "selector-favorito__opcion";
+      opcion.setAttribute("role", "listitem");
+      opcion.setAttribute("data-equipo-id", equipo.id);
+
+      opcion.innerHTML = `
+        ${equipo.flag ? `<img class="bandera-equipo" src="${equipo.flag}" alt="" loading="lazy">` : UTILS.obtenerBanderaEquipo()}
+        <span>${equipo.name_en}</span>
+      `;
+
+      lista.appendChild(opcion);
+    }
+  },
+
+  //Renderiza banner, stats y tabla del equipo elegido
+  mostrarDashboardDeEquipo(equipoId) {
+    const equipo = UTILS.buscarEquipoPorId(equipoId, EVENTOS._equiposCargados);
+    if (!equipo) return;
+
+    document.getElementById("dashboardVacio").hidden = true;
+    document.getElementById("dashboardContenido").hidden = false;
+    document.getElementById("favoritoActualTexto").textContent = equipo.name_en;
+
+    const color = UTILS.obtenerColorEquipo(equipo.name_en);
+    document.getElementById("favoritoBanner").style.setProperty("--favorito-acento", color);
+
+    const banderaWrap = document.getElementById("favoritoBannerBandera");
+    banderaWrap.innerHTML = equipo.flag
+      ? `<img src="${equipo.flag}" alt="" loading="lazy">`
+      : UTILS.obtenerBanderaEquipo();
+
+    document.getElementById("favoritoBannerNombre").textContent = equipo.name_en;
+
+    const stats = UTILS.obtenerEstadisticasGrupo(equipoId, EVENTOS._equiposCargados, EVENTOS._gruposCargados);
+    const badges = document.getElementById("favoritoBannerBadges");
+
+    if (stats) {
+      badges.innerHTML = `
+        <span class="favorito-banner__badge">Grupo ${stats.nombreGrupo}</span>
+        <span class="favorito-banner__badge">${stats.posicion}º lugar</span>
+        <span class="favorito-banner__badge">${equipo.fifa_code || ""}</span>
+      `;
+      document.getElementById("statPuntos").textContent = stats.pts;
+      document.getElementById("statGolesFavor").textContent = stats.gf;
+      document.getElementById("statGolesContra").textContent = stats.ga;
+      document.getElementById("statPosicion").textContent = `${stats.posicion}º lugar`;
+    } else {
+      badges.innerHTML = "";
+      ["statPuntos", "statGolesFavor", "statGolesContra", "statPosicion"].forEach((id) => {
+        document.getElementById(id).textContent = "—";
+      });
+    }
+
+    const partidos = UTILS.filtrarPartidosPorEquipo(equipo.name_en, EVENTOS._partidosCargados || []);
+    this._renderTablaFavorito(partidos, EVENTOS._equiposCargados, EVENTOS._sedesCargadas);
+  },
+
+  _renderTablaFavorito(partidos, equipos, sedes) {
+    const cuerpo = document.getElementById("favoritoTablaCuerpo");
+    cuerpo.innerHTML = "";
+
+    if (partidos.length === 0) {
+      cuerpo.innerHTML = `
+        <tr><td colspan="4" class="mensaje-estado__texto" style="text-align:center;">
+          Sin partidos programados todavía.
+        </td></tr>
+      `;
+      return;
+    }
+
+    const ordenados = UTILS.ordenarPartidosCronologicamente(partidos);
+
+    for (const partido of ordenados) {
+      const fila = document.createElement("tr");
+      const nombreSede = UTILS.obtenerNombreSede(partido.stadium_id, sedes);
+
+      const equipoLocal = UTILS.buscarEquipoPorNombre(partido.home_team_name_en, equipos);
+      const equipoVisita = UTILS.buscarEquipoPorNombre(partido.away_team_name_en, equipos);
+      const codigoLocal = (equipoLocal && equipoLocal.fifa_code) || (partido.home_team_name_en || "—").slice(0, 3).toUpperCase();
+      const codigoVisita = (equipoVisita && equipoVisita.fifa_code) || (partido.away_team_name_en || "—").slice(0, 3).toUpperCase();
+
+      fila.innerHTML = `
+        <td>
+          ${partido.local_date || "—"}
+          <br><span class="favorito-tabla__sede">${nombreSede}</span>
+        </td>
+        <td>
+          <div class="favorito-tabla__equipos">
+            <span class="favorito-tabla__equipo" title="${partido.home_team_name_en || ""}">
+              ${UTILS.obtenerBanderaHTML(partido.home_team_name_en, equipos)}
+              ${codigoLocal}
+            </span>
+            <span class="partido-card__vs" aria-label="versus">VS</span>
+            <span class="favorito-tabla__equipo" title="${partido.away_team_name_en || ""}">
+              ${UTILS.obtenerBanderaHTML(partido.away_team_name_en, equipos)}
+              ${codigoVisita}
+            </span>
+          </div>
+        </td>
+        <td class="favorito-tabla__marcador">
+          ${partido.finished === "TRUE" ? `${partido.home_score} — ${partido.away_score}` : "—"}
+        </td>
+        <td>
+          ${
+            partido.finished === "TRUE"
+              ? `<span class="badge-partido badge-partido--finalizado">Finalizado</span>`
+              : `<span class="badge-partido badge-partido--pendiente">Pendiente</span>`
+          }
+        </td>
+      `;
+
+      fila.querySelectorAll(".bandera-equipo").forEach((img) => {
+        img.addEventListener("error", () => {
+          img.outerHTML = UTILS.obtenerBanderaEquipo();
+        }, { once: true });
+      });
+
+      cuerpo.appendChild(fila);
+    }
+  },
+
+
+
 };

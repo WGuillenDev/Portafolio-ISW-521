@@ -13,6 +13,9 @@ const EVENTOS = {
   _timelinePartidosOrdenados: [],
   _timelineIndiceBloque: 0,
   _timelineObserver: null,
+  _dashboardInicializado: false,
+  _gruposCargados: null,
+  _favoritoActualId: null,
 
   //Eventos que deben existir ANTES del login (formulario de acceso)
   inicializarLogin() {
@@ -27,6 +30,7 @@ const EVENTOS = {
     this._eventoSedes();
     this._eventoNavegacionFecha();
     this._eventoReintentarTimeline();
+    this._eventoSelectorFavorito();
     this._eventoTema();
     this._eventoIdioma();
     this._eventoFuente();
@@ -190,6 +194,64 @@ const EVENTOS = {
       this._timelineInicializada = false;
       await MAIN.cambiarVista("timeline-infinito");
     });
+  },
+
+  //Selector de equipo favorito — abrir/cerrar, buscar, elegir
+  _eventoSelectorFavorito() {
+    const boton = document.getElementById("btnSeleccionarFavorito");
+    const panel = document.getElementById("panelFavoritos");
+    const buscador = document.getElementById("buscarEquipoFavorito");
+    const lista = document.getElementById("listaEquiposFavoritos");
+
+    //Abrir/cerrar el panel
+    boton.addEventListener("click", () => {
+      const abierto = boton.getAttribute("aria-expanded") === "true";
+      const nuevoEstado = !abierto;
+
+      boton.setAttribute("aria-expanded", String(nuevoEstado));
+      panel.hidden = !nuevoEstado;
+
+      if (nuevoEstado) buscador.focus();
+    });
+
+    //Cerrar al hacer clic fuera del selector
+    document.addEventListener("click", (evento) => {
+      const dentroDelSelector = evento.target.closest(".selector-favorito");
+      if (dentroDelSelector) return;
+
+      boton.setAttribute("aria-expanded", "false");
+      panel.hidden = true;
+    });
+
+    //Filtrar equipos en tiempo real mientras se escribe
+    buscador.addEventListener("input", () => {
+      const texto = buscador.value.trim().toLowerCase();
+
+      const equiposFiltrados = this._equiposCargados.filter((equipo) =>
+        equipo.name_en.toLowerCase().includes(texto)
+      );
+
+      UI.mostrarOpcionesFavoritos(equiposFiltrados);
+    });
+
+    //Elegir un equipo — delegación de eventos sobre la lista
+    lista.addEventListener("click", async (evento) => {
+      const opcion = evento.target.closest(".selector-favorito__opcion");
+      if (!opcion) return;
+
+      const equipoId = opcion.getAttribute("data-equipo-id");
+      await this._elegirFavorito(equipoId);
+
+      boton.setAttribute("aria-expanded", "false");
+      panel.hidden = true;
+      buscador.value = "";
+    });
+  },
+
+  async _elegirFavorito(equipoId) {
+    this._favoritoActualId = equipoId;
+    UTILS.guardarFavorito(equipoId);
+    UI.mostrarDashboardDeEquipo(equipoId);
   },
 
   //Configura el IntersectionObserver sobre el centinela — se llama una sola vez

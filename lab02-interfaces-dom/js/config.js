@@ -5,6 +5,7 @@ const CONFIG = {
     SEDES: "/get/stadiums",
     PARTIDOS: "/get/games",
     EQUIPOS: "/get/teams",
+    GRUPOS: "/get/groups",
   },
 
   REINTENTO: {
@@ -17,6 +18,8 @@ const CONFIG = {
     SEDES: "wc26_sedes",
     PARTIDOS: "wc26_partidos",
     EQUIPOS: "wc26_equipos",
+    GRUPOS: "wc26_grupos",
+    FAVORITO: "wc26_favorito",
     IDIOMA: "wc26_idioma",
     TEMA: "wc26_tema",
     FUENTE: "wc26_fuente",

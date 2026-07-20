@@ -140,7 +140,8 @@
             </button>
           </li>
           <li>
-            <button class="sidebar__link" disabled aria-disabled="true" title="Próximamente">
+            <button class="sidebar__link" id="linkDashboardFanatico"
+              data-vista="dashboard-fanatico">
               <i class="bi bi-person-badge-fill" aria-hidden="true"></i>
               <span>Dashboard del Fanático</span>
             </button>
@@ -281,7 +282,7 @@
           </p>
 
           <div class="panel-partidos__lista" id="listaPartidos" role="list">
-            <!-- Partidos renderizados dinámicamente desde ui.js -->
+            <!-- Partidos renderizados dinámicamente desde desde ui.js-->
           </div>
         </section>
 
@@ -347,6 +348,109 @@
         </div>
         <!-- /#vistaTimelineInfinito -->
 
+        <!-- VISTA: Dashboard del Fanático -->
+        <div class="vista" id="vistaDashboardFanatico" hidden>
+          <h2 class="sr-only">Dashboard del Fanático</h2>
+
+          <!-- Selector de equipo favorito — patrón de disclosure con búsqueda -->
+          <div class="selector-favorito">
+            <button class="selector-favorito__boton" id="btnSeleccionarFavorito"
+              aria-expanded="false" aria-controls="panelFavoritos">
+              <span id="favoritoActualTexto">Seleccioná tu equipo favorito</span>
+              <i class="bi bi-chevron-down selector-favorito__flecha" aria-hidden="true"></i>
+            </button>
+
+            <div class="selector-favorito__panel" id="panelFavoritos" hidden>
+              <label class="sr-only" for="buscarEquipoFavorito">Buscar selección</label>
+              <div class="selector-favorito__buscador">
+                <i class="bi bi-search" aria-hidden="true"></i>
+                <input type="text" id="buscarEquipoFavorito"
+                  placeholder="Buscar selección..." autocomplete="off">
+              </div>
+              <div class="selector-favorito__lista" id="listaEquiposFavoritos" role="list"
+                aria-label="Selecciones disponibles">
+                <!-- Opciones renderizadas dinámicamente desde ui.js-->
+              </div>
+            </div>
+          </div>
+
+          <!-- Estado vacío — sin equipo favorito elegido todavía -->
+          <div class="mensaje-estado" id="dashboardVacio">
+            <i class="bi bi-star mensaje-estado__icono" aria-hidden="true"></i>
+            <span class="mensaje-estado__texto">
+              Elegí tu equipo favorito para ver su información en el Mundial.
+            </span>
+          </div>
+
+          <!-- Contenido del equipo favorito — oculto hasta elegir uno -->
+          <div id="dashboardContenido" hidden>
+
+            <!-- Banner destacado del equipo -->
+           <section class="favorito-banner" id="favoritoBanner" aria-labelledby="favoritoBannerNombre">
+              <div class="favorito-banner__marca">
+                <div class="favorito-banner__bandera-wrap" id="favoritoBannerBandera"></div>
+                <div>
+                  <span class="favorito-banner__etiqueta">Tu selección</span>
+                  <h3 class="favorito-banner__nombre" id="favoritoBannerNombre"></h3>
+                  <div class="favorito-banner__badges" id="favoritoBannerBadges"></div>
+                </div>
+              </div>
+              <div class="favorito-banner__corazon" aria-hidden="true">
+                <i class="bi bi-heart-fill"></i>
+              </div>
+            </section>
+
+            <!-- Estadísticas del grupo -->
+            <section class="favorito-stats" id="favoritoStats" aria-label="Estadísticas del grupo">
+              <div class="favorito-stats__card">
+                <span class="favorito-stats__etiqueta">Puntos</span>
+                <span class="favorito-stats__valor" id="statPuntos">—</span>
+              </div>
+              <div class="favorito-stats__card">
+                <span class="favorito-stats__etiqueta">Goles a favor</span>
+                <span class="favorito-stats__valor" id="statGolesFavor">—</span>
+              </div>
+              <div class="favorito-stats__card">
+                <span class="favorito-stats__etiqueta">Goles en contra</span>
+                <span class="favorito-stats__valor" id="statGolesContra">—</span>
+              </div>
+              <div class="favorito-stats__card">
+                <span class="favorito-stats__etiqueta">Posición en grupo</span>
+                <span class="favorito-stats__valor" id="statPosicion">—</span>
+              </div>
+            </section>
+
+            <!-- Tabla de partidos del equipo -->
+            <section class="favorito-partidos" aria-labelledby="favoritoPartidosTitulo">
+              <div class="favorito-partidos__header">
+                <h3 class="favorito-partidos__titulo" id="favoritoPartidosTitulo">
+                  Partidos de la selección
+                </h3>
+              </div>
+
+              <table class="favorito-tabla">
+                <caption class="sr-only">
+                  Lista de partidos jugados y pendientes del equipo favorito
+                </caption>
+                <thead>
+                  <tr>
+                    <th scope="col">Fecha y hora</th>
+                    <th scope="col">Enfrentamiento</th>
+                    <th scope="col">Marcador</th>
+                    <th scope="col">Estado</th>
+                  </tr>
+                </thead>
+                <tbody id="favoritoTablaCuerpo">
+                  <!-- Filas renderizadas dinámicamente desde ui.js -->
+                </tbody>
+              </table>
+            </section>
+
+          </div>
+          <!-- /#dashboardContenido -->
+
+        </div>
+        <!-- /#vistaDashboardFanatico -->
       </main>
 
       <!-- Footer — información del sitio -->

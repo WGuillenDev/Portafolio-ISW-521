@@ -90,6 +90,39 @@ const MAIN = {
         UI.mostrarErrorTimeline();
       }
     }
+
+    if (vista === "dashboard-fanatico" && !EVENTOS._dashboardInicializado) {
+      EVENTOS._dashboardInicializado = true;
+
+      const exitoPartidos = await this.asegurarPartidosCargados();
+      const exitoGrupos = await this.asegurarGruposCargados();
+
+      if (exitoPartidos && exitoGrupos) {
+        UI.iniciarVistaDashboard();
+      } else {
+        UI.mostrarErrorDashboard();
+      }
+    }
+  },
+
+  //Carga de grupos — igual que el patrón asegurarPartidosCargados()
+  async asegurarGruposCargados() {
+    if (EVENTOS._gruposCargados !== null) return true;
+
+    try {
+      const resultado = await API.obtenerGrupos();
+      EVENTOS._gruposCargados = resultado.datos.groups;
+
+      if (resultado.desdeCache) {
+        UI.mostrarBannerCache();
+      } else {
+        UI.ocultarBannerCache();
+      }
+
+      return true;
+    } catch {
+      return false;
+    }
   },
 };
 
