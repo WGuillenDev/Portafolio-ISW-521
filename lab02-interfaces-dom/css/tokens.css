@@ -107,6 +107,10 @@
   --favorito-acento-default: var(--color-dorado);
   --tabla-header-fondo: var(--superficie-panel-alt);
   --tabla-fila-hover: rgba(200, 169, 81, 0.06);
+
+  /* Matriz de Enfrentamientos */
+  --matriz-diagonal-fondo: var(--superficie-panel-alt);
+  --matriz-celda-hover: rgba(200, 169, 81, 0.06);
 }
 
 /*Modo oscuro*/

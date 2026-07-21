@@ -147,10 +147,11 @@
             </button>
           </li>
           <li>
-            <button class="sidebar__link" disabled aria-disabled="true" title="Próximamente">
-              <i class="bi bi-grid-3x3-gap-fill" aria-hidden="true"></i>
-              <span>Matriz de Enfrentamientos</span>
-            </button>
+            <button class = "sidebar__link" id = "linkMatrizEnfrentamientos"
+            data-vista = "matriz-enfrentamientos">
+            <i class = "bi bi-grid-3x3-gap-fill" aria-hidden="true"></i>
+            <span>Matriz de Enfrentamientos</span>
+          </button>
           </li>
         </ul>
       </nav>
@@ -451,6 +452,77 @@
 
         </div>
         <!-- /#vistaDashboardFanatico -->
+
+        <!-- VISTA: Matriz de Enfrentamientos -->
+        <div class="vista" id="vistaMatrizEnfrentamientos" hidden>
+          <h2 class="sr-only">Matriz de Enfrentamientos por Grupo</h2>
+
+          <!-- Selector de grupo — 12 botones, mismo patrón que el sidebar -->
+          <nav class="selector-grupos" id="selectorGrupos" aria-label="Seleccionar grupo">
+            <!-- Botones A-L renderizados dinámicamente desde ui.js -->
+          </nav>
+
+          <!-- Reto de resiliencia: visible solo si /get/games falla -->
+          <div class="banner banner--cache" id="matrizBannerError" role="alert" aria-live="polite" hidden>
+            <i class="bi bi-exclamation-triangle-fill banner__icono" aria-hidden="true"></i>
+            <span class="banner__texto">
+              No se pudieron cargar los resultados de los partidos. Mostrando la matriz con celdas pendientes.
+            </span>
+            <button class="mensaje-estado__btn" id="btnReintentarMatriz">Reintentar</button>
+          </div>
+
+          <!-- Tarjeta de la matriz -->
+          <section class="matriz-card" aria-labelledby="matrizGrupoTitulo">
+            <div class="matriz-card__header">
+              <i class="bi bi-grid-3x3-gap-fill" aria-hidden="true"></i>
+              <div>
+                <h3 class="matriz-card__titulo" id="matrizGrupoTitulo">Grupo A</h3>
+                <p class="matriz-card__subtitulo">Estadísticas cruzadas</p>
+              </div>
+            </div>
+
+            <div class="matriz-card__scroll">
+              <table class="matriz-tabla" id="matrizTabla">
+                <caption class="sr-only">
+                  Cruce de resultados entre los 4 equipos del grupo seleccionado
+                </caption>
+                <thead id="matrizTablaHead">
+                  <!-- Encabezados de columna renderizados dinámicamente desde ui.js -->
+                </thead>
+                <tbody id="matrizTablaCuerpo">
+                  <!-- Filas y celdas renderizadas dinámicamente desde ui.js -->
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <!-- Estadísticas reales del grupo -->
+          <section class="matriz-stats" aria-label="Estadísticas del grupo">
+            <div class="matriz-stats__card">
+              <div class="matriz-stats__icono"><i class="bi bi-dribbble" aria-hidden="true"></i></div>
+              <div>
+                <p class="matriz-stats__etiqueta">Goles promedio</p>
+                <p class="matriz-stats__valor" id="matrizGolesPromedio">—</p>
+              </div>
+            </div>
+            <div class="matriz-stats__card">
+              <div class="matriz-stats__icono"><i class="bi bi-flag-fill" aria-hidden="true"></i></div>
+              <div>
+                <p class="matriz-stats__etiqueta">Partidos jugados</p>
+                <p class="matriz-stats__valor" id="matrizPartidosJugados">—</p>
+              </div>
+            </div>
+            <div class="matriz-stats__card">
+              <div class="matriz-stats__icono"><i class="bi bi-trophy-fill" aria-hidden="true"></i></div>
+              <div>
+                <p class="matriz-stats__etiqueta">Líder de grupo</p>
+                <p class="matriz-stats__valor" id="matrizLiderGrupo">—</p>
+              </div>
+            </div>
+          </section>
+
+        </div>
+        <!-- /#vistaMatrizEnfrentamientos -->
       </main>
 
       <!-- Footer — información del sitio -->

@@ -295,12 +295,14 @@ const UI = {
       "agenda-simultanea": "vistaAgendaSimultanea",
       "timeline-infinito": "vistaTimelineInfinito",
       "dashboard-fanatico": "vistaDashboardFanatico",
+      "matriz-enfrentamientos": "vistaMatrizEnfrentamientos",
     };
     const mapaTitulos = {
       "tour-sedes": "Tour Virtual de Sedes",
       "agenda-simultanea": "Agenda Simultánea",
       "timeline-infinito": "Timeline Infinito",
       "dashboard-fanatico": "Dashboard del Fanático",
+      "matriz-enfrentamientos": "Matriz de Enfrentamientos",
     };
 
     const idVista = mapaIds[vista];
@@ -752,6 +754,139 @@ const UI = {
     }
   },
 
+  //Primera vez que se visita Matriz de Enfrentamientos
+  iniciarVistaMatriz(exitoPartidos) {
+    this._renderSelectorGrupos();
 
+    document.getElementById("matrizBannerError").hidden = exitoPartidos;
 
+    const primerGrupo = EVENTOS._gruposCargados[0];
+    if (primerGrupo) {
+      EVENTOS._grupoActualSeleccionado = primerGrupo.name;
+      document.querySelector(`.grupo-boton[data-grupo="${primerGrupo.name}"]`)
+        ?.classList.add("grupo-boton--activo");
+      this.mostrarMatrizDeGrupo(primerGrupo.name);
+    }
+  },
+
+  //Genera los 12 botones de grupo a partir de los datos reales de /get/groups
+  _renderSelectorGrupos() {
+    const contenedor = document.getElementById("selectorGrupos");
+    contenedor.innerHTML = "";
+
+    for (const grupo of EVENTOS._gruposCargados) {
+      const boton = document.createElement("button");
+      boton.className = "grupo-boton";
+      boton.setAttribute("data-grupo", grupo.name);
+      boton.textContent = `Grupo ${grupo.name}`;
+      contenedor.appendChild(boton);
+    }
+  },
+
+  //Construye la matriz 4x4 completa para el grupo elegido (encabezados + filas + celdas)
+  mostrarMatrizDeGrupo(nombreGrupo) {
+    document.getElementById("matrizGrupoTitulo").textContent = `Grupo ${nombreGrupo}`;
+
+    const equipos = UTILS.obtenerEquiposDeGrupo(nombreGrupo, EVENTOS._equiposCargados);
+    const partidos = EVENTOS._partidosCargados || [];
+
+    //Encabezado — celda vacía + 4 columnas de equipo
+    const head = document.getElementById("matrizTablaHead");
+    head.innerHTML = `
+      <tr>
+        <th class="matriz-tabla__esquina" scope="col"></th>
+        ${equipos.map((equipo) => `
+          <th class="matriz-tabla__columna-equipo" scope="col">
+            <div class="matriz-tabla__equipo-cabecera">
+              ${UTILS.obtenerBanderaHTML(equipo.name_en, EVENTOS._equiposCargados)}
+              <span class="matriz-tabla__codigo">${equipo.fifa_code || equipo.name_en}</span>
+            </div>
+          </th>
+        `).join("")}
+      </tr>
+    `;
+
+    //Cuerpo — una fila por equipo, con su encabezado + 4 celdas
+    const cuerpo = document.getElementById("matrizTablaCuerpo");
+    cuerpo.innerHTML = "";
+
+    for (const equipoFila of equipos) {
+      const fila = document.createElement("tr");
+
+      let celdasHTML = `
+        <th class="matriz-tabla__fila-equipo" scope="row">
+          <div class="matriz-tabla__equipo-fila">
+            <span class="matriz-tabla__codigo">${equipoFila.fifa_code || equipoFila.name_en}</span>
+            ${UTILS.obtenerBanderaHTML(equipoFila.name_en, EVENTOS._equiposCargados)}
+          </div>
+        </th>
+      `;
+
+      for (const equipoColumna of equipos) {
+        if (equipoFila.id === equipoColumna.id) {
+          celdasHTML += `<td class="matriz-tabla__diagonal">×</td>`;
+        } else {
+          celdasHTML += `
+            <td class="matriz-tabla__celda"
+              data-fila="${equipoFila.name_en}"
+              data-columna="${equipoColumna.name_en}">
+              ${this._construirContenidoCelda(equipoFila.name_en, equipoColumna.name_en, partidos)}
+            </td>
+          `;
+        }
+      }
+
+      fila.innerHTML = celdasHTML;
+      cuerpo.appendChild(fila);
+    }
+
+    this._actualizarStatsMatriz(nombreGrupo);
+  },
+
+  //Reto de resiliencia: actualiza SOLO el contenido de las celdas, sin tocar la estructura de la tabla
+  actualizarCeldasMatriz(nombreGrupo) {
+    const partidos = EVENTOS._partidosCargados || [];
+    const celdas = document.querySelectorAll(".matriz-tabla__celda[data-fila][data-columna]");
+
+    celdas.forEach((celda) => {
+      const nombreFila = celda.getAttribute("data-fila");
+      const nombreColumna = celda.getAttribute("data-columna");
+      celda.innerHTML = this._construirContenidoCelda(nombreFila, nombreColumna, partidos);
+    });
+
+    this._actualizarStatsMatriz(nombreGrupo);
+  },
+
+  _construirContenidoCelda(nombreEquipoFila, nombreEquipoColumna, partidos) {
+    const resultado = UTILS.obtenerResultadoCelda(nombreEquipoFila, nombreEquipoColumna, partidos);
+
+    if (!resultado) {
+      return `
+        <div class="matriz-tabla__celda-contenido">
+          <span class="badge-partido badge-partido--pendiente">Pendiente</span>
+        </div>
+      `;
+    }
+
+    return `
+      <div class="matriz-tabla__celda-contenido">
+        <span class="matriz-tabla__marcador">${resultado.marcadorFila} — ${resultado.marcadorColumna}</span>
+        <span class="badge-partido badge-partido--finalizado">Finalizado</span>
+      </div>
+    `;
+  },
+
+  _actualizarStatsMatriz(nombreGrupo) {
+    const stats = UTILS.calcularStatsMatriz(
+      nombreGrupo,
+      EVENTOS._equiposCargados,
+      EVENTOS._gruposCargados,
+      EVENTOS._partidosCargados || []
+    );
+
+    document.getElementById("matrizGolesPromedio").textContent = stats.golesPromedio;
+    document.getElementById("matrizPartidosJugados").textContent =
+      `${stats.partidosJugados}/${stats.totalPartidosPosibles}`;
+    document.getElementById("matrizLiderGrupo").textContent = stats.nombreLider;
+  },
 };

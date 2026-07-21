@@ -16,6 +16,8 @@ const EVENTOS = {
   _dashboardInicializado: false,
   _gruposCargados: null,
   _favoritoActualId: null,
+  _matrizInicializada: false,
+  _grupoActualSeleccionado: null,
 
   //Eventos que deben existir ANTES del login (formulario de acceso)
   inicializarLogin() {
@@ -31,6 +33,8 @@ const EVENTOS = {
     this._eventoNavegacionFecha();
     this._eventoReintentarTimeline();
     this._eventoSelectorFavorito();
+    this._eventoSelectorGrupo();
+    this._eventoReintentarMatriz();
     this._eventoTema();
     this._eventoIdioma();
     this._eventoFuente();
@@ -252,6 +256,43 @@ const EVENTOS = {
     this._favoritoActualId = equipoId;
     UTILS.guardarFavorito(equipoId);
     UI.mostrarDashboardDeEquipo(equipoId);
+  },
+
+  //Clic en un botón de grupo — delegación de eventos, mismo patrón que sidebar/pestañas
+  _eventoSelectorGrupo() {
+    const contenedor = document.getElementById("selectorGrupos");
+
+    contenedor.addEventListener("click", (evento) => {
+      const boton = evento.target.closest(".grupo-boton");
+      if (!boton) return;
+
+      const nombreGrupo = boton.getAttribute("data-grupo");
+      this._cambiarGrupoMatriz(nombreGrupo);
+    });
+  },
+
+  //Reto de resiliencia: reintentar carga de partidos y actualizar solo celdas afectadas
+  _eventoReintentarMatriz() {
+    document.getElementById("btnReintentarMatriz").addEventListener("click", async () => {
+      this._partidosCargados = null;
+      const exito = await MAIN.asegurarPartidosCargados();
+
+      if (exito) {
+        document.getElementById("matrizBannerError").hidden = true;
+        UI.actualizarCeldasMatriz(this._grupoActualSeleccionado);
+      }
+    });
+  },
+
+  _cambiarGrupoMatriz(nombreGrupo) {
+    this._grupoActualSeleccionado = nombreGrupo;
+
+    document.querySelectorAll(".grupo-boton").forEach((boton) => {
+      const esActivo = boton.getAttribute("data-grupo") === nombreGrupo;
+      boton.classList.toggle("grupo-boton--activo", esActivo);
+    });
+
+    UI.mostrarMatrizDeGrupo(nombreGrupo);
   },
 
   //Configura el IntersectionObserver sobre el centinela — se llama una sola vez

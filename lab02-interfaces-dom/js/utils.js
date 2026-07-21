@@ -320,4 +320,75 @@ const UTILS = {
       (p) => p.home_team_name_en === nombreEquipoEn || p.away_team_name_en === nombreEquipoEn
     );
   },
+
+  // Matriz de Enfrentamientos — cruce grupo-equipos-partidos
+
+  //Los 4 equipos reales de un grupo, cruzando /get/teams por su campo "groups"
+  obtenerEquiposDeGrupo(nombreGrupo, listaEquipos) {
+    return listaEquipos
+      .filter((equipo) => equipo.groups === nombreGrupo)
+      .sort((a, b) => Number(a.id) - Number(b.id));
+  },
+
+  //Busca si ya existe un partido entre dos equipos, corrigiendo la orientación local/visitante
+  obtenerResultadoCelda(nombreEquipoFila, nombreEquipoColumna, partidos) {
+    const partido = partidos.find(
+      (p) =>
+        (p.home_team_name_en === nombreEquipoFila && p.away_team_name_en === nombreEquipoColumna) ||
+        (p.home_team_name_en === nombreEquipoColumna && p.away_team_name_en === nombreEquipoFila)
+    );
+
+    if (!partido || partido.finished !== "TRUE") return null;
+
+    const filaEsLocal = partido.home_team_name_en === nombreEquipoFila;
+
+    return {
+      marcadorFila: filaEsLocal ? partido.home_score : partido.away_score,
+      marcadorColumna: filaEsLocal ? partido.away_score : partido.home_score,
+    };
+  },
+
+  //Estadísticas reales para las 3 tarjetas del footer de la matriz
+  calcularStatsMatriz(nombreGrupo, listaEquipos, listaGrupos, listaPartidos) {
+    const equipos = this.obtenerEquiposDeGrupo(nombreGrupo, listaEquipos);
+    const nombresEquipos = equipos.map((e) => e.name_en);
+
+    let partidosJugados = 0;
+    let golesTotales = 0;
+
+    for (let i = 0; i < nombresEquipos.length; i++) {
+      for (let j = i + 1; j < nombresEquipos.length; j++) {
+        const resultado = this.obtenerResultadoCelda(nombresEquipos[i], nombresEquipos[j], listaPartidos);
+        if (resultado) {
+          partidosJugados++;
+          golesTotales += Number(resultado.marcadorFila) + Number(resultado.marcadorColumna);
+        }
+      }
+    }
+
+    const totalPartidosPosibles = (nombresEquipos.length * (nombresEquipos.length - 1)) / 2;
+    const golesPromedio = partidosJugados > 0 ? (golesTotales / partidosJugados).toFixed(1) : "—";
+
+    const grupo = listaGrupos.find((g) => g.name === nombreGrupo);
+    let nombreLider = "—";
+
+    if (grupo) {
+      const equipoLiderStats = [...grupo.teams].sort((a, b) => {
+        if (Number(b.pts) !== Number(a.pts)) return Number(b.pts) - Number(a.pts);
+        return Number(b.gd) - Number(a.gd);
+      })[0];
+
+      if (equipoLiderStats) {
+        const equipoLider = this.buscarEquipoPorId(equipoLiderStats.team_id, listaEquipos);
+        nombreLider = equipoLider ? equipoLider.name_en : "—";
+      }
+    }
+
+    return {
+      partidosJugados,
+      totalPartidosPosibles,
+      golesPromedio,
+      nombreLider,
+    };
+  },
 };

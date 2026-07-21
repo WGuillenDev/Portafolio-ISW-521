@@ -103,6 +103,19 @@ const MAIN = {
         UI.mostrarErrorDashboard();
       }
     }
+
+     if (vista === "matriz-enfrentamientos" && !EVENTOS._matrizInicializada) {
+      EVENTOS._matrizInicializada = true;
+
+      const exitoGrupos = await this.asegurarGruposCargados();
+      const exitoPartidos = await this.asegurarPartidosCargados();
+
+      UI.iniciarVistaMatriz(exitoPartidos);
+
+      if (!exitoGrupos) {
+        UI.mostrarErrorDashboard();
+      }
+    }
   },
 
   //Carga de grupos — igual que el patrón asegurarPartidosCargados()
