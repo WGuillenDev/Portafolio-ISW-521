@@ -183,9 +183,26 @@
     <!-- Contenido — desplazado a la derecha del sidebar -->
     <div class="contenido">
 
-      <!-- Topbar — solo título, sin buscador/notificaciones/avatar -->
+      <!-- Topbar — título + perfil de usuario -->
       <header class="topbar">
         <h2 class="topbar__titulo" id="topbarTitulo">Tour Virtual de Sedes</h2>
+
+        <div class="perfil-usuario">
+          <button class="perfil-usuario__boton" id="btnPerfilUsuario"
+            aria-expanded="false" aria-controls="panelPerfilUsuario"
+            aria-label="Ver perfil de usuario">
+            <i class="bi bi-person-fill" aria-hidden="true"></i>
+          </button>
+
+          <div class="perfil-usuario__panel" id="panelPerfilUsuario" hidden>
+            <p class="perfil-usuario__etiqueta">Usuario</p>
+            <p class="perfil-usuario__nombre" id="perfilUsuarioNombre">—</p>
+            <button class="perfil-usuario__salir" id="btnCerrarSesion">
+              <i class="bi bi-box-arrow-right" aria-hidden="true"></i>
+              Cerrar sesión
+            </button>
+          </div>
+        </div>
       </header>
 
       <!-- Banner datos no actualizados — visible cuando se usan datos del caché -->

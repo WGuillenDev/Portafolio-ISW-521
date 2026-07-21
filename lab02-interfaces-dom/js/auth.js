@@ -22,7 +22,12 @@ const AUTH = {
 
     const token = this.generarToken(usuario);
     localStorage.setItem(CONFIG.CLAVES_STORAGE.TOKEN, token);
+    localStorage.setItem(CONFIG.CLAVES_STORAGE.USUARIO, usuario);
     return token;
+  },
+
+  obtenerUsuarioActual() {
+    return localStorage.getItem(CONFIG.CLAVES_STORAGE.USUARIO);
   },
 
   obtenerToken() {
@@ -43,5 +48,6 @@ const AUTH = {
 
   limpiarSesion() {
     localStorage.removeItem(CONFIG.CLAVES_STORAGE.TOKEN);
+    localStorage.removeItem(CONFIG.CLAVES_STORAGE.USUARIO);
   },
 };

@@ -3,6 +3,8 @@ const EVENTOS = {
   //Estado interno
   _partidosCargados: null,
   _cargandoPartidos: false,
+  _sedeActivaId: null,
+  _scrollTimeoutId: null,
   _sedesCargadas: [],
   _equiposCargados: [],
   _autenticando: false,
@@ -18,6 +20,7 @@ const EVENTOS = {
   _favoritoActualId: null,
   _matrizInicializada: false,
   _grupoActualSeleccionado: null,
+  _eventosYaRegistrados: false,
 
   //Eventos que deben existir ANTES del login (formulario de acceso)
   inicializarLogin() {
@@ -26,14 +29,18 @@ const EVENTOS = {
     this._eventoReautenticar();
   },
 
-  //Eventos que solo tienen sentido DESPUÉS de un login exitoso
+ //Eventos que solo tienen sentido DESPUÉS de un login exitoso
   inicializar() {
+    if (this._eventosYaRegistrados) return;
+    this._eventosYaRegistrados = true;
+
     this._eventoSidebar();
     this._eventoSedes();
     this._eventoNavegacionFecha();
     this._eventoReintentarTimeline();
     this._eventoSelectorFavorito();
     this._eventoSelectorGrupo();
+    this._eventoPerfilUsuario();
     this._eventoReintentarMatriz();
     this._eventoTema();
     this._eventoIdioma();
@@ -115,16 +122,21 @@ const EVENTOS = {
 
       const sedeId = tarjeta.getAttribute("data-sede-id");
       const nombreSede = tarjeta.querySelector(".sede-card__nombre").textContent;
+      const esMismaSede = this._sedeActivaId === sedeId;
+      this._sedeActivaId = sedeId;
 
       const sedeData = this._sedesCargadas.find((s) => String(s.id) === sedeId);
-      if (sedeData) UI.mostrarHeroSede(sedeData);
+      if (sedeData && !esMismaSede) UI.mostrarHeroSede(sedeData);
 
       UI.actualizarSedeActiva(sedeId);
 
-      document.getElementById("partidos").scrollIntoView({
-        behavior: "smooth",
-        block: "start",
-      });
+      clearTimeout(this._scrollTimeoutId);
+      this._scrollTimeoutId = setTimeout(() => {
+        document.getElementById("partidos").scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+        });
+      }, 300);
 
       this._cargandoPartidos = true;
       const exito = await MAIN.asegurarPartidosCargados();
@@ -293,6 +305,50 @@ const EVENTOS = {
     });
 
     UI.mostrarMatrizDeGrupo(nombreGrupo);
+  },
+
+  //Perfil de usuario — abrir/cerrar panel, mostrar nombre real, cerrar sesión
+  _eventoPerfilUsuario() {
+    const boton = document.getElementById("btnPerfilUsuario");
+    const panel = document.getElementById("panelPerfilUsuario");
+
+    boton.addEventListener("click", () => {
+      const abierto = boton.getAttribute("aria-expanded") === "true";
+      const nuevoEstado = !abierto;
+
+      boton.setAttribute("aria-expanded", String(nuevoEstado));
+      panel.hidden = !nuevoEstado;
+
+      if (nuevoEstado) {
+        document.getElementById("perfilUsuarioNombre").textContent =
+          AUTH.obtenerUsuarioActual() || "—";
+      }
+    });
+
+    document.addEventListener("click", (evento) => {
+      const dentroDelPerfil = evento.target.closest(".perfil-usuario");
+      if (dentroDelPerfil) return;
+
+      boton.setAttribute("aria-expanded", "false");
+      panel.hidden = true;
+    });
+
+    document.getElementById("btnCerrarSesion").addEventListener("click", () => {
+      AUTH.limpiarSesion();
+      UI.ocultarApp();
+      UI.mostrarLogin();
+      this._reiniciarEstadoApp();
+    });
+  },
+
+  //Limpia el estado en memoria al cerrar sesión manualmente
+  _reiniciarEstadoApp() {
+    this._partidosCargados = null;
+    this._agendaInicializada = false;
+    this._timelineInicializada = false;
+    this._dashboardInicializado = false;
+    this._matrizInicializada = false;
+    this._favoritoActualId = null;
   },
 
   //Configura el IntersectionObserver sobre el centinela — se llama una sola vez

@@ -15,6 +15,7 @@ const CONFIG = {
 
   CLAVES_STORAGE: {
     TOKEN: "wc26_token",
+    USUARIO: "wc26_usuario",
     SEDES: "wc26_sedes",
     PARTIDOS: "wc26_partidos",
     EQUIPOS: "wc26_equipos",

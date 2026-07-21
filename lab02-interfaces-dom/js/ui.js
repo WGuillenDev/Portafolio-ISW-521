@@ -44,6 +44,13 @@ const UI = {
 
   mostrarApp() {
     document.getElementById("appRaiz").hidden = false;
+    this.actualizarNombreUsuario();
+  },
+
+  actualizarNombreUsuario() {
+    const elemento = document.getElementById("perfilUsuarioNombre");
+    if (!elemento) return;
+    elemento.textContent = AUTH.obtenerUsuarioActual() || "—";
   },
 
   ocultarApp() {
