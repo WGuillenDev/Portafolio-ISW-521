@@ -37,7 +37,7 @@
   <div class="login" id="pantallaLogin" role="dialog" aria-modal="true" aria-labelledby="loginTitulo">
     <div class="login__fondo" aria-hidden="true"></div>
 
-    <main class="login__contenedor">
+    <div class="login__contenedor">
 
       <div class="login__marca">
         <img src="assets/icons/logo-mundial.svg"
@@ -91,7 +91,7 @@
         </form>
       </div>
 
-    </main>
+    </div>
   </div>
 
   <!-- Contenedor de la aplicación — oculto hasta completar el login -->
@@ -238,9 +238,9 @@
 
         <!-- Hero de la sede seleccionada -->
         <div class="sede-hero" id="sedeHero" hidden>
-          <img class="sede-hero__imagen" id="sedeHeroImagen" alt="">
+          <img class="sede-hero__imagen" id="sedeHeroImagen" src="data:," alt="">
           <div class="sede-hero__overlay">
-            <h3 class="sede-hero__nombre" id="sedeHeroNombre"></h3>
+            <h2 class="sede-hero__nombre" id="sedeHeroNombre">&nbsp;</h2>
             <p class="sede-hero__ciudad" id="sedeHeroCiudad"></p>
             <p class="sede-hero__capacidad" id="sedeHeroCapacidad"></p>
           </div>
@@ -409,7 +409,7 @@
                 <div class="favorito-banner__bandera-wrap" id="favoritoBannerBandera"></div>
                 <div>
                   <span class="favorito-banner__etiqueta">Tu selección</span>
-                  <h3 class="favorito-banner__nombre" id="favoritoBannerNombre"></h3>
+                  <h3 class="favorito-banner__nombre" id="favoritoBannerNombre">&nbsp;</h3>
                   <div class="favorito-banner__badges" id="favoritoBannerBadges"></div>
                 </div>
               </div>
@@ -446,6 +446,7 @@
                 </h3>
               </div>
 
+              <div class="favorito-partidos__scroll">
               <table class="favorito-tabla">
                 <caption class="sr-only">
                   Lista de partidos jugados y pendientes del equipo favorito
@@ -462,6 +463,7 @@
                   <!-- Filas renderizadas dinámicamente desde ui.js -->
                 </tbody>
               </table>
+              </div>
             </section>
 
           </div>
@@ -606,6 +608,7 @@
       </button>
     </div>
   </div>
+  </div> //appRaiz
 
   <!-- Script: aplica tema, idioma y fuente antes de renderizar -->
   <script>

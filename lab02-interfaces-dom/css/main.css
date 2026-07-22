@@ -133,7 +133,7 @@ body {
 
 .modal__btn {
   width: 100%;
-  background: var(--color-primario);
+  background: var(--color-dorado);
   color: var(--texto-inverso);
   border: none;
   border-radius: var(--radio-md);
@@ -144,9 +144,9 @@ body {
   transition: background var(--transicion-rapida);
 }
 
-.modal__btn:hover {
-  background: var(--color-dorado);
-  color: var(--color-primario);
+.modal__btn:hover,
+.modal__btn:focus-visible {
+  filter: brightness(1.08);
 }
 
 /*Grupos de países*/
@@ -1642,6 +1642,10 @@ body {
   overflow: hidden;
 }
 
+.favorito-partidos__scroll {
+  overflow-x: auto;
+}
+
 .favorito-partidos__header {
   padding: var(--espacio-md) var(--espacio-lg);
   border-bottom: 1px solid var(--superficie-borde);
@@ -1655,6 +1659,7 @@ body {
 
 .favorito-tabla {
   width: 100%;
+  min-width: 500px;
   border-collapse: collapse;
   table-layout: fixed;
 }

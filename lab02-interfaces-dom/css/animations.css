@@ -114,6 +114,11 @@
   animation: slide-down 0.3s ease forwards;
 }
 
+@keyframes pulse-borde {
+  0%, 100% { outline-color: var(--color-dorado); }
+  50% { outline-color: transparent; }
+}
+
 /*Animación de sede activa — pulso en el borde dorado*/
 .sede-card.activa {
   animation: pulse-borde 2s ease-in-out infinite;

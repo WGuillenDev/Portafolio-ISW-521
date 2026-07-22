@@ -41,6 +41,7 @@ const EVENTOS = {
     this._eventoSelectorFavorito();
     this._eventoSelectorGrupo();
     this._eventoPerfilUsuario();
+    this._eventoConectividad();
     this._eventoReintentarMatriz();
     this._eventoTema();
     this._eventoIdioma();
@@ -218,25 +219,25 @@ const EVENTOS = {
     const panel = document.getElementById("panelFavoritos");
     const buscador = document.getElementById("buscarEquipoFavorito");
     const lista = document.getElementById("listaEquiposFavoritos");
+    const gestor = this._gestionarPanelAccesible(boton, panel, () => buscador.focus());
 
     //Abrir/cerrar el panel
     boton.addEventListener("click", () => {
       const abierto = boton.getAttribute("aria-expanded") === "true";
-      const nuevoEstado = !abierto;
-
-      boton.setAttribute("aria-expanded", String(nuevoEstado));
-      panel.hidden = !nuevoEstado;
-
-      if (nuevoEstado) buscador.focus();
+      if (abierto) {
+        gestor.cerrar();
+      } else {
+        gestor.abrir();
+      }
     });
 
     //Cerrar al hacer clic fuera del selector
     document.addEventListener("click", (evento) => {
       const dentroDelSelector = evento.target.closest(".selector-favorito");
       if (dentroDelSelector) return;
+      if (panel.hidden) return;
 
-      boton.setAttribute("aria-expanded", "false");
-      panel.hidden = true;
+      gestor.cerrar();
     });
 
     //Filtrar equipos en tiempo real mientras se escribe
@@ -258,9 +259,8 @@ const EVENTOS = {
       const equipoId = opcion.getAttribute("data-equipo-id");
       await this._elegirFavorito(equipoId);
 
-      boton.setAttribute("aria-expanded", "false");
-      panel.hidden = true;
       buscador.value = "";
+      gestor.cerrar();
     });
   },
 
@@ -311,26 +311,26 @@ const EVENTOS = {
   _eventoPerfilUsuario() {
     const boton = document.getElementById("btnPerfilUsuario");
     const panel = document.getElementById("panelPerfilUsuario");
+    const gestor = this._gestionarPanelAccesible(boton, panel, () => {
+      document.getElementById("perfilUsuarioNombre").textContent =
+        AUTH.obtenerUsuarioActual() || "—";
+    });
 
     boton.addEventListener("click", () => {
       const abierto = boton.getAttribute("aria-expanded") === "true";
-      const nuevoEstado = !abierto;
-
-      boton.setAttribute("aria-expanded", String(nuevoEstado));
-      panel.hidden = !nuevoEstado;
-
-      if (nuevoEstado) {
-        document.getElementById("perfilUsuarioNombre").textContent =
-          AUTH.obtenerUsuarioActual() || "—";
+      if (abierto) {
+        gestor.cerrar();
+      } else {
+        gestor.abrir();
       }
     });
 
     document.addEventListener("click", (evento) => {
       const dentroDelPerfil = evento.target.closest(".perfil-usuario");
       if (dentroDelPerfil) return;
+      if (panel.hidden) return;
 
-      boton.setAttribute("aria-expanded", "false");
-      panel.hidden = true;
+      gestor.cerrar();
     });
 
     document.getElementById("btnCerrarSesion").addEventListener("click", () => {
@@ -349,6 +349,49 @@ const EVENTOS = {
     this._dashboardInicializado = false;
     this._matrizInicializada = false;
     this._favoritoActualId = null;
+  },
+
+  //Detecta cambios reales de conectividad y actualiza el banner en vivo
+  _eventoConectividad() {
+    window.addEventListener("offline", () => {
+      UI.mostrarBannerCache();
+    });
+
+    window.addEventListener("online", () => {
+      UI.ocultarBannerCache();
+    });
+  },
+
+  //Gestiona apertura/cierre accesible de cualquier panel desplegable
+  _gestionarPanelAccesible(boton, panel, alAbrir) {
+    const abrir = () => {
+      boton.setAttribute("aria-expanded", "true");
+      panel.hidden = false;
+      UI._activarFocusTrap(panel);
+      if (alAbrir) alAbrir();
+
+      const escapeHandler = (evento) => {
+        if (evento.key !== "Escape") return;
+        cerrar();
+      };
+      panel._escapeHandler = escapeHandler;
+      document.addEventListener("keydown", escapeHandler);
+    };
+
+    const cerrar = () => {
+      boton.setAttribute("aria-expanded", "false");
+      panel.hidden = true;
+      UI._desactivarFocusTrap();
+
+      if (panel._escapeHandler) {
+        document.removeEventListener("keydown", panel._escapeHandler);
+        panel._escapeHandler = null;
+      }
+
+      boton.focus();
+    };
+
+    return { abrir, cerrar };
   },
 
   //Configura el IntersectionObserver sobre el centinela — se llama una sola vez
@@ -439,11 +482,15 @@ const EVENTOS = {
   _eventoAccesibilidad() {
     const boton = document.getElementById("btnAccesibilidad");
     const panel = document.getElementById("panelAccesibilidad");
+    const gestor = this._gestionarPanelAccesible(boton, panel);
 
     boton.addEventListener("click", () => {
-      const estaAbierto = !panel.hidden;
-      panel.hidden = estaAbierto;
-      boton.setAttribute("aria-expanded", String(!estaAbierto));
+      const estaAbierto = boton.getAttribute("aria-expanded") === "true";
+      if (estaAbierto) {
+        gestor.cerrar();
+      } else {
+        gestor.abrir();
+      }
     });
   },
 };

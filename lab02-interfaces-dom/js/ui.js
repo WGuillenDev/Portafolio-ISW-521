@@ -63,12 +63,46 @@ const UI = {
     modal.classList.add("visible");
     modal.setAttribute("aria-hidden", "false");
     document.getElementById("btnReautenticar").focus();
+    this._activarFocusTrap(modal);
   },
 
   ocultarModal() {
     const modal = document.getElementById("modalSesion");
     modal.classList.remove("visible");
     modal.setAttribute("aria-hidden", "true");
+    this._desactivarFocusTrap();
+  },
+
+  //Focus trap genérico — atrapa el Tab dentro de un contenedor mientras esté activo
+  _activarFocusTrap(contenedor) {
+    this._focusTrapHandler = (evento) => {
+      if (evento.key !== "Tab") return;
+
+      const focables = contenedor.querySelectorAll(
+        'button:not([disabled]), [href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])'
+      );
+      if (focables.length === 0) return;
+
+      const primero = focables[0];
+      const ultimo = focables[focables.length - 1];
+
+      if (evento.shiftKey && document.activeElement === primero) {
+        evento.preventDefault();
+        ultimo.focus();
+      } else if (!evento.shiftKey && document.activeElement === ultimo) {
+        evento.preventDefault();
+        primero.focus();
+      }
+    };
+
+    document.addEventListener("keydown", this._focusTrapHandler);
+  },
+
+  _desactivarFocusTrap() {
+    if (this._focusTrapHandler) {
+      document.removeEventListener("keydown", this._focusTrapHandler);
+      this._focusTrapHandler = null;
+    }
   },
 
   //Skeleton loading 
@@ -120,7 +154,7 @@ const UI = {
         tarjeta.setAttribute("data-sede-id", sede.id);
         tarjeta.setAttribute(
           "aria-label",
-          `Ver partidos de ${sede.name_en}, ${sede.city_en}`
+          `Ver partidos de ${UTILS.escaparHTML(sede.name_en)}, ${UTILS.escaparHTML(sede.city_en)}`
         );
 
         tarjeta.innerHTML = `
@@ -128,10 +162,10 @@ const UI = {
             ${rutaImagen ? `<img class="sede-card__imagen" src="${rutaImagen}" alt="" loading="lazy">` : ""}
           </div>
           <div class="sede-card__cuerpo">
-            <span class="sede-card__nombre">${sede.name_en}</span>
+            <span class="sede-card__nombre">${UTILS.escaparHTML(sede.name_en)}</span>
             <span class="sede-card__ciudad">
               <i class="bi bi-geo-alt-fill" aria-hidden="true"></i>
-              ${sede.city_en}
+              ${UTILS.escaparHTML(sede.city_en)}
             </span>
             <span class="sede-card__capacidad">
               <i class="bi bi-people-fill" aria-hidden="true"></i>
@@ -211,23 +245,23 @@ const UI = {
       tarjeta.innerHTML = `
        <div class="partido-card__fecha">
           <i class="bi bi-calendar-event" aria-hidden="true"></i>
-          ${partido.local_date}
+          ${UTILS.escaparHTML(partido.local_date)}
         </div>
         <div class="partido-card__equipos">
           <span class="partido-card__equipo">
             ${UTILS.obtenerBanderaHTML(partido.home_team_name_en, equipos)}
-            <span class="partido-card__equipo-nombre">${partido.home_team_name_en || "—"}</span>
+            <span class="partido-card__equipo-nombre">${UTILS.escaparHTML(partido.home_team_name_en) || "—"}</span>
           </span>
           <span class="partido-card__vs" aria-label="versus">VS</span>
           <span class="partido-card__equipo">
             ${UTILS.obtenerBanderaHTML(partido.away_team_name_en, equipos)}
-            <span class="partido-card__equipo-nombre">${partido.away_team_name_en || "—"}</span>
+            <span class="partido-card__equipo-nombre">${UTILS.escaparHTML(partido.away_team_name_en) || "—"}</span>
           </span>
         </div>
         <div class="partido-card__footer">
           ${
             partido.finished === "TRUE"
-              ? `<span class="partido-card__marcador">${partido.home_score} — ${partido.away_score}</span>`
+              ? `<span class="partido-card__marcador">${UTILS.escaparHTML(partido.home_score)} — ${UTILS.escaparHTML(partido.away_score)}</span>`
               : `<span class="badge-partido badge-partido--pendiente">
                    <i class="bi bi-clock" aria-hidden="true"></i> Pendiente
                  </span>`
@@ -455,24 +489,24 @@ const UI = {
       columna.innerHTML = `
         <div class="agenda-columna__hora">
           <i class="bi bi-clock" aria-hidden="true"></i>
-          ${partido.local_date}
+          ${UTILS.escaparHTML(partido.local_date)}
         </div>
         <div class="agenda-columna__cuerpo">
           <div class="agenda-columna__equipos">
             <div class="agenda-columna__equipo">
               ${UTILS.obtenerBanderaHTML(partido.home_team_name_en, equipos)}
-              <span class="partido-card__equipo-nombre">${partido.home_team_name_en || "—"}</span>
+              <span class="partido-card__equipo-nombre">${UTILS.escaparHTML(partido.home_team_name_en) || "—"}</span>
             </div>
             <span class="partido-card__vs" aria-label="versus">VS</span>
             <div class="agenda-columna__equipo">
               ${UTILS.obtenerBanderaHTML(partido.away_team_name_en, equipos)}
-              <span class="partido-card__equipo-nombre">${partido.away_team_name_en || "—"}</span>
+              <span class="partido-card__equipo-nombre">${UTILS.escaparHTML(partido.away_team_name_en) || "—"}</span>
             </div>
           </div>
           <div class="agenda-columna__resultado">
             ${
               partido.finished === "TRUE"
-                ? `<span class="partido-card__marcador">${partido.home_score} — ${partido.away_score}</span>`
+                ? `<span class="partido-card__marcador">${UTILS.escaparHTML(partido.home_score)} — ${UTILS.escaparHTML(partido.away_score)}</span>`
                 : `<span class="badge-partido badge-partido--pendiente">
                      <i class="bi bi-clock" aria-hidden="true"></i> Pendiente
                    </span>`
@@ -481,7 +515,7 @@ const UI = {
         </div>
         <div class="agenda-columna__footer">
           <span class="agenda-columna__footer-item">
-            <i class="bi bi-building" aria-hidden="true"></i> ${nombreSede}
+            <i class="bi bi-building" aria-hidden="true"></i> ${UTILS.escaparHTML(nombreSede)}
           </span>
         </div>
       `;
@@ -561,26 +595,26 @@ const UI = {
       <div class="timeline-partido__header">
         <span class="timeline-partido__hora">
           <i class="bi bi-clock" aria-hidden="true"></i>
-          ${horaSolo || "—"}
+          ${UTILS.escaparHTML(horaSolo) || "—"}
         </span>
-        <span class="timeline-partido__grupo">Grupo ${partido.group || "—"}</span>
+        <span class="timeline-partido__grupo">Grupo ${UTILS.escaparHTML(partido.group) || "—"}</span>
       </div>
       <div class="timeline-partido__cuerpo">
         <div class="agenda-columna__equipos">
           <div class="agenda-columna__equipo">
             ${UTILS.obtenerBanderaHTML(partido.home_team_name_en, equipos)}
-            <span class="partido-card__equipo-nombre">${partido.home_team_name_en || "—"}</span>
+            <span class="partido-card__equipo-nombre">${UTILS.escaparHTML(partido.home_team_name_en) || "—"}</span>
           </div>
           <span class="partido-card__vs" aria-label="versus">VS</span>
           <div class="agenda-columna__equipo">
             ${UTILS.obtenerBanderaHTML(partido.away_team_name_en, equipos)}
-            <span class="partido-card__equipo-nombre">${partido.away_team_name_en || "—"}</span>
+            <span class="partido-card__equipo-nombre">${UTILS.escaparHTML(partido.away_team_name_en) || "—"}</span>
           </div>
         </div>
         <div class="agenda-columna__resultado">
           ${
             partido.finished === "TRUE"
-              ? `<span class="partido-card__marcador">${partido.home_score} — ${partido.away_score}</span>`
+              ? `<span class="partido-card__marcador">${UTILS.escaparHTML(partido.home_score)} — ${UTILS.escaparHTML(partido.away_score)}</span>`
               : `<span class="badge-partido badge-partido--pendiente">
                    <i class="bi bi-clock" aria-hidden="true"></i> Pendiente
                  </span>`
@@ -588,7 +622,7 @@ const UI = {
         </div>
       </div>
       <div class="timeline-partido__footer">
-        <i class="bi bi-building" aria-hidden="true"></i> ${nombreSede}
+        <i class="bi bi-building" aria-hidden="true"></i> ${UTILS.escaparHTML(nombreSede)}
       </div>
     `;
 
@@ -647,7 +681,7 @@ const UI = {
 
       opcion.innerHTML = `
         ${equipo.flag ? `<img class="bandera-equipo" src="${equipo.flag}" alt="" loading="lazy">` : UTILS.obtenerBanderaEquipo()}
-        <span>${equipo.name_en}</span>
+        <span>${UTILS.escaparHTML(equipo.name_en)}</span>
       `;
 
       lista.appendChild(opcion);
@@ -678,9 +712,9 @@ const UI = {
 
     if (stats) {
       badges.innerHTML = `
-        <span class="favorito-banner__badge">Grupo ${stats.nombreGrupo}</span>
+        <span class="favorito-banner__badge">Grupo ${UTILS.escaparHTML(stats.nombreGrupo)}</span>
         <span class="favorito-banner__badge">${stats.posicion}º lugar</span>
-        <span class="favorito-banner__badge">${equipo.fifa_code || ""}</span>
+        <span class="favorito-banner__badge">${UTILS.escaparHTML(equipo.fifa_code) || ""}</span>
       `;
       document.getElementById("statPuntos").textContent = stats.pts;
       document.getElementById("statGolesFavor").textContent = stats.gf;
@@ -723,24 +757,24 @@ const UI = {
 
       fila.innerHTML = `
         <td>
-          ${partido.local_date || "—"}
-          <br><span class="favorito-tabla__sede">${nombreSede}</span>
+          ${UTILS.escaparHTML(partido.local_date) || "—"}
+          <br><span class="favorito-tabla__sede">${UTILS.escaparHTML(nombreSede)}</span>
         </td>
         <td>
           <div class="favorito-tabla__equipos">
-            <span class="favorito-tabla__equipo" title="${partido.home_team_name_en || ""}">
+            <span class="favorito-tabla__equipo" title="${UTILS.escaparHTML(partido.home_team_name_en)}">
               ${UTILS.obtenerBanderaHTML(partido.home_team_name_en, equipos)}
-              ${codigoLocal}
+              ${UTILS.escaparHTML(codigoLocal)}
             </span>
             <span class="partido-card__vs" aria-label="versus">VS</span>
-            <span class="favorito-tabla__equipo" title="${partido.away_team_name_en || ""}">
+            <span class="favorito-tabla__equipo" title="${UTILS.escaparHTML(partido.away_team_name_en)}">
               ${UTILS.obtenerBanderaHTML(partido.away_team_name_en, equipos)}
-              ${codigoVisita}
+              ${UTILS.escaparHTML(codigoVisita)}
             </span>
           </div>
         </td>
         <td class="favorito-tabla__marcador">
-          ${partido.finished === "TRUE" ? `${partido.home_score} — ${partido.away_score}` : "—"}
+          ${partido.finished === "TRUE" ? `${UTILS.escaparHTML(partido.home_score)} — ${UTILS.escaparHTML(partido.away_score)}` : "—"}
         </td>
         <td>
           ${
@@ -806,7 +840,7 @@ const UI = {
           <th class="matriz-tabla__columna-equipo" scope="col">
             <div class="matriz-tabla__equipo-cabecera">
               ${UTILS.obtenerBanderaHTML(equipo.name_en, EVENTOS._equiposCargados)}
-              <span class="matriz-tabla__codigo">${equipo.fifa_code || equipo.name_en}</span>
+              <span class="matriz-tabla__codigo">${UTILS.escaparHTML(equipo.fifa_code) || UTILS.escaparHTML(equipo.name_en)}</span>
             </div>
           </th>
         `).join("")}
@@ -823,7 +857,7 @@ const UI = {
       let celdasHTML = `
         <th class="matriz-tabla__fila-equipo" scope="row">
           <div class="matriz-tabla__equipo-fila">
-            <span class="matriz-tabla__codigo">${equipoFila.fifa_code || equipoFila.name_en}</span>
+            <span class="matriz-tabla__codigo">${UTILS.escaparHTML(equipoFila.fifa_code) || UTILS.escaparHTML(equipoFila.name_en)}</span>
             ${UTILS.obtenerBanderaHTML(equipoFila.name_en, EVENTOS._equiposCargados)}
           </div>
         </th>
@@ -877,7 +911,7 @@ const UI = {
 
     return `
       <div class="matriz-tabla__celda-contenido">
-        <span class="matriz-tabla__marcador">${resultado.marcadorFila} — ${resultado.marcadorColumna}</span>
+        <span class="matriz-tabla__marcador">${UTILS.escaparHTML(resultado.marcadorFila)} — ${UTILS.escaparHTML(resultado.marcadorColumna)}</span>
         <span class="badge-partido badge-partido--finalizado">Finalizado</span>
       </div>
     `;

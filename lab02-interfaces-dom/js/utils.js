@@ -1,4 +1,16 @@
 const UTILS = {
+
+  //Escapa caracteres HTML peligrosos para prevenir inyección (XSS)
+  escaparHTML(valor) {
+    if (valor === null || valor === undefined) return "";
+    return String(valor)
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#39;");
+  },
+
   esperar(milisegundos) {
     return new Promise((resolve) => setTimeout(resolve, milisegundos));
   },
@@ -15,6 +27,10 @@ const UTILS = {
         return await funcionFetch();
       } catch (error) {
         ultimoError = error;
+
+        if (error.message === "Sesión expirada") {
+          throw error;
+        }
 
         const esUltimoIntento = intento === CONFIG.REINTENTO.MAX_INTENTOS - 1;
         if (esUltimoIntento) break;
